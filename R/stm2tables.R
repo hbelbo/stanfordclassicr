@@ -115,7 +115,7 @@ loopstring <- stringr::str_sub(string = strng_from_v110_1,  # split string to on
                       start = stringr::str_locate_all(string = strng_from_v110_1, pattern = "~110")[[1]][,1],
                       end = c(stringr::str_locate_all(string = strng_from_v110_1, pattern = "~110")[[1]][-1,1], -1))
 
-present_vars <- # Find all variables and var.types present for each stem
+present_vars <- # Find all variables and var.types present for each stem. Assuming two first trees will have all of tehm
   unlist(stringr::str_split(loopstring[1:2], pattern = "~"))[-1] %>%
   .[nchar(.)>0] %>%
   stringr::str_extract(string = .,  pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}" ) %>%
@@ -136,9 +136,9 @@ grab_varval_per_tree = function(strng){
 # stemdat - one obs per stem
 stemdat = grab_varval_per_tree(loopstring[1])[NULL, ]
   for (i in seq_along(loopstring)){
-    stemdat <- bind_rows(stemdat, grab_varval_per_tree(loopstring[i]))
+    stemdat <- dplyr::bind_rows(stemdat, grab_varval_per_tree(loopstring[i]))
   }
-stemdat$v110t = coalesce(stemdat$v110t1, stemdat$v110t2)
+stemdat$v110t = dplyr::coalesce(stemdat$v110t1, stemdat$v110t2)
 stemvars = names(stemdat)
 
 # stemdat <- stemdat[1:20, ]
@@ -161,25 +161,25 @@ if ("v523t1" %in% stemvars){
   stemdat$latitude = as.numeric(stemdat$v523t1)  # v523t1 COORD Latitude, registered according to var521_t1, var521_t2, var520_t1 and var523_t7
   stemdat$longitude = as.numeric(stemdat$v523t3)  # v523t3 COORD Longitude, registered according to var521_t1, var521_t2, var520_t1 and var523_t7. When var521_t1 = 1 this variable (var523_t3) is recorded as the difference from var522_t3.Variable excluded when no
 
-  stemdat = stemdat %>% mutate(.,
-    stem_coordinate_position = case_when(
+  stemdat = stemdat %>% dplyr::mutate(.,
+    stem_coordinate_position = dplyr::case_when(
      v520t1 == "1" ~ "base_machine_pos",
      v520t1 == "2" ~ "crane_tip_when_felling",
      v520t1 == "3" ~ "crane_tip_when_processing",
      TRUE ~ NA_character_  ),
-    coordinate_reference_system = case_when(
+    coordinate_reference_system = dplyr::case_when(
       v521t2 == "1" ~ "WGS84", # Coordinate system used in stm file: 1=WGS84 (Default)
       TRUE ~ NA_character_ ),
-    latitude_category = case_when(
+    latitude_category = dplyr::case_when(
       v523t2 == "1" ~ "North",
       TRUE  ~ "South"),
-    longitude_category = case_when(
+    longitude_category = dplyr::case_when(
       v523t4 == "1" ~ "East",
       TRUE ~ "West"),
-    latitude  = case_when(
+    latitude  = dplyr::case_when(
       coordinate_reference_system ==  "WGS84" ~ latitude/ 100000,
       TRUE ~ latitude),
-    longitude = case_when(
+    longitude = dplyr::case_when(
       coordinate_reference_system == "WGS84" ~ longitude / 100000,
       TRUE ~ longitude)
     )
@@ -193,7 +193,7 @@ if ("v523t1" %in% stemvars){
 
 } else {
 stemdat = stemdat %>%
-  mutate(.,
+  dplyr::mutate(.,
          latitude = NaN,
          longitude = NaN,
          stem_coordinate_position = NA_character_,
@@ -226,7 +226,7 @@ if ("v273t1" %in% stemvars) {
   stemdat$stemdiav = unlist(lapply(stemdat$v273t3, FUN = diavector_from_diffdia))
 }
 
-stemdat = stemdat %>% select(., -starts_with("v"), starts_with("v"))
+stemdat = stemdat %>% dplyr::select(., -starts_with("v"), starts_with("v"))
 
 #Stem grade breaks
 stemgrades <- tibble(stemnr = rep(stemdat$stem_number,  stemdat$v274t1), # NUMGRADEBR
@@ -236,7 +236,7 @@ stemgrades <- tibble(stemnr = rep(stemdat$stem_number,  stemdat$v274t1), # NUMGR
 
 
 # preparing logs dataset ----
-logs = tibble(
+logs = tibble::tibble(
   stem_key = rep(stemdat$stem_key, as.integer(stemdat$v290t1)),
   log_key = unlist(sapply(as.integer(stemdat$v290t1), FUN = function(x){1:x})),
   v296t1 = unlist(str_split(paste0(stemdat$v296t1, collapse = " "), " ")),  #PRICEMATR, registered price matrix per log; 1...var290t1. 0=Reject, 1... = price matrix number
@@ -254,7 +254,7 @@ logs = tibble(
 
 
   ) %>% rowwise() %>%
-  mutate(.,
+  dplyr::mutate(.,
     product_key = paste0(start_epoch, v296t1, collapse = ""),
     m3sob = v299t3,
     m3sub = v299t2,
@@ -263,8 +263,8 @@ logs = tibble(
     dia_top_ob = v291t5,
     dia_top_ub = v292t5
     ) %>%
-  select(., stem_key, log_key, product_key, starts_with("m3"), everything()) %>%
-  select(., -starts_with("v"), starts_with("v"))
+  dplyr::select(., stem_key, log_key, product_key, starts_with("m3"), everything()) %>%
+  dplyr::select(., -starts_with("v"), starts_with("v"))
 
 
 
