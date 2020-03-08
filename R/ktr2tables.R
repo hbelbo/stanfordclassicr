@@ -8,65 +8,60 @@
 #' @examples
 #'  read_ktr_file(list.files(pattern = ".ktr")[1]
 read_ktr_file = function(filename){
-  #)
-  #'
-  enc <- readr::guess_encoding(filename)
-  enc = as.character
+
   # warning:
 print("NBNB: this read_ktr_file functon ist really not working yet, just copied in some structure from pri2tables to get started on the development")
-  strng <- readr::read_file(filename)
-  Encoding(strng) <- enc
-  strng <- str_replace(string = strng, pattern = '\"','') #Removing the funny tag at the very start of the string
-  VarStrings <- unlist(str_split(strng, pattern = "~")) # Split to individual variables and values at ~
-  VarStrings <- VarStrings[1:(length(VarStrings)-1)] #Removing the funny last tag after the last variable value
-  VarVals <- str_replace(string = VarStrings, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}[ ]", replacement = "")
-  VarNames <- str_extract(string = VarStrings,  pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}" )
-  Vars <- paste0("v",str_replace(string = VarNames, pattern = "[ ]", replacement = "t") )
-  VarNr <- as.integer(str_extract(string = VarNames, pattern = "[[:digit:]]{1,4}"))
-  VarType <- as.integer(str_replace(string = VarNames, pattern = "[[:digit:]]{1,4}[ ]", replacement = ""))
-  VarDataType = case_when(str_starts(string = VarVals, pattern = "\\n") ~ "txt", TRUE ~"Numeric")
-  VarVals = str_replace(string = VarVals, pattern = "\\n", replacement = '') #remove first \n in txt variables
-  VarValsNchar= nchar(VarVals)
 
-  VarTeaser = str_sub(VarVals, start = 1, end = 25)
-  #sfc = tibble(V=Vars, v=VarNames, VarNr, VarType, VarDataType, strn = VarTeaser)
+  strng <- file2strng(filename)
 
-  #https://stats.stackexchange.com/questions/10838/produce-a-list-of-variable-name-in-a-for-loop-then-assign-values-to-them
+  strng_to_v110_1 <- stringr::str_sub(string =  strng,
+                                      start = 1, end = stringr::str_locate(string = strng, pattern = "~110 1")[1,1] )
 
-  txtvars = Vars[VarDataType=="txt"]
-  txtvarvals = VarVals[VarDataType=="txt"]
-  txtVarLength = sapply(X = str_split(string = txtvarvals, pattern = "[\\n]"), length)
+  df1 <- sfclassic2df(strng_to_v110_1)
 
-  txtvarvals <- as.list(txtvarvals)
-  names(txtvarvals) = txtvars
-  txtvarvals <- lapply(X = txtvarvals,  FUN = function(X) {str_split(X, pattern = "\n")})
-  tmp <- str_sub(VarVals[VarDataType=="txt"], start = 1, end = 25)
-  for(i in 1:length(txtvarvals)){
-    assign(txtvars[i], as_vector(txtvarvals[[i]]))
-    }
-  sftxt = tibble(V=Vars[VarDataType=="txt"], v=VarNames[VarDataType=="txt"], VarNr = VarNr[VarDataType=="txt"], VarType = VarType[VarDataType=="txt"],
-                 VarDType = VarDataType[VarDataType=="txt"], VarLength = txtVarLength, strn = tmp)
+  report_headervs <- tibble::tibble(
+    v1t2 = "", v3t1 = "", v3t2 = "", v3t5 = "",
+    v3t6 = "", v3t8="", v6t1="",
+    v12t4="" )[NULL, ]
+  report_header <- bind_rows(report_headervs, df1) %>% select(., names(report_headervs))
+  report_header <-
+    rename(report_header,report_type = v1t2,
+           creation_date = v12t4,
+           country_code = v6t1,
+           base_machine_number = v3t1,
+           base_machine_id = v3t2,
+           base_machine_manufacturer = v3t5,
+           base_machine_model = v3t6,
+           harvester_head_model = v3t8
+           )
 
-  numvars <- Vars[VarDataType == "Numeric"]
-  numvarsvals <- VarVals[VarDataType=="Numeric"]
-  numvarsvals <- as.list(numvarsvals)
-  names(numvarsvals) <- numvars
-  numvarsvals <-  lapply(X = numvarsvals,  FUN = function(X) {as.numeric(unlist(str_split(X, pattern = " ")))})
-  #numVarLength = sapply(X = str_split(string = numvarvals, pattern = " "), length)
-  numVarLength = sapply(X = numvarsvals, length)
-  tmp <- str_sub(VarVals[VarDataType=="Numeric"], start = 1, end = 25)
-  for(i in 1:length(numvarsvals)){
-    assign(numvars[i], as.numeric(as_vector(numvarsvals[[i]])))
 
+  # .. harvested stems
+  strng_from_v110_1 <- # Fetch the string keeping all stem level data for all stems
+    stringr::str_sub(string =  strng,
+                     start = stringr::str_locate(string = strng, pattern = "~110 1")[1,1],
+                     end = stringr::str_length(string = strng))
+
+  loopstring <- stringr::str_sub(string = strng_from_v110_1,  # split string to one piece per stem
+                                 start = stringr::str_locate_all(string = strng_from_v110_1, pattern = "~110")[[1]][,1],
+                                 end = c(stringr::str_locate_all(string = strng_from_v110_1, pattern = "~110")[[1]][-1,1], -1))
+
+  present_vars <- # Find all variables and var.types present for each stem. Assuming two first trees will have all of tehm
+    unlist(stringr::str_split(loopstring[1:2], pattern = "~"))[-1] %>%
+    .[nchar(.)>0] %>%
+    stringr::str_extract(string = .,  pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}" ) %>%
+    unique(.)
+
+
+  # stemdat - one obs per stem
+  stemdat = sfclassic2df(loopstring[1])[NULL, ]
+  for (i in seq_along(loopstring)){
+    stemdat <- dplyr::bind_rows(stemdat, sfclassic2df(loopstring[i]))
   }
-  sfnum = tibble(V=Vars[VarDataType=="Numeric"], v=VarNames[VarDataType=="Numeric"], VarNr = VarNr[VarDataType=="Numeric"], VarType = VarType[VarDataType=="Numeric"],
-                 VarDType = VarDataType[VarDataType=="Numeric"], VarLength = numVarLength, strn = tmp)
-
-  sfdt = bind_rows(sftxt, sfnum) %>% arrange(., VarNr, VarType)
+  stemdat$v110t = dplyr::coalesce(stemdat$v110t1, stemdat$v110t2)
+  stemvars = names(stemdat)
 
 
-  ReportHeader = tibble(CreationDate = v12t4, CountryCode = ifelse(exists("v6t1"), v6t1, NA_integer_) , BaseMachineNumber = v3t1,
-                        BaseMachineId = v3t2,  BaseMachineManufacturer = v3t5, BaseMachineModel = v3t6, HarvesterHeadModel = v3t8)
 
   ObjectDefinition = tibble(ObjectName = v21t1 ,
                             ObjectUserId = v21t1,

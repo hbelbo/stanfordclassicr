@@ -121,22 +121,11 @@ present_vars <- # Find all variables and var.types present for each stem. Assumi
   stringr::str_extract(string = .,  pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}" ) %>%
   unique(.)
 
-grab_varval_per_tree = function(strng){
-  varsvals = unlist(stringr::str_split(strng, "~"))
-  varnames = stringr::str_extract(varsvals, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}")
-  varvals =  stringr::str_replace(string = varsvals, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}[ ]", replacement = "")
-  varvals = varvals[which(!is.na(varnames))]
-  varnames = varnames[which(!is.na(varnames))]
-  varnames = paste0("v", stringr::str_replace(string = varnames, pattern = "[ ]", replacement = "t") )
-  stemdat = data.frame(matrix(data = varvals, nrow = 1), stringsAsFactors=F)
-  names(stemdat) = varnames
-  return(stemdat)
-}
 
 # stemdat - one obs per stem
-stemdat = grab_varval_per_tree(loopstring[1])[NULL, ]
+stemdat = sfclassic2df(loopstring[1])[NULL, ]
   for (i in seq_along(loopstring)){
-    stemdat <- dplyr::bind_rows(stemdat, grab_varval_per_tree(loopstring[i]))
+    stemdat <- dplyr::bind_rows(stemdat, sfclassic2df(loopstring[i]))
   }
 stemdat$v110t = dplyr::coalesce(stemdat$v110t1, stemdat$v110t2)
 stemvars = names(stemdat)
@@ -213,17 +202,22 @@ if  ("v281t1" %in% stemvars) {
 } else stemdat$DBHmm = NA
 
 # stemdiameters
-diavector_from_diffdia <- function(ddv){# to convert from "diff dia vector" to diameter vector
-  xv = as.numeric(unlist(stringr::str_split(ddv, " ")))
-  xv2 = c(xv[1], xv[1]-cumsum(xv[2:length(xv)]))
-  ret = paste0(xv2, collapse = ", ")
-  return(ret)
-  }
+#diavector_from_diffdia <- function(ddv){# to convert from "diff dia vector" to diameter vector
+#  xv = as.numeric(unlist(stringr::str_split(ddv, " ")))
+#  xv2 = c(xv[1], xv[1]-cumsum(xv[2:length(xv)]))
+#  ret = paste0(xv2, collapse = ", ")
+#  return(ret)
+#  }
 
 if ("v273t1" %in% stemvars) {
   stemdat$stemdiav = stemdat$v273t1
 } else if ("v273t3" %in% stemvars) {
-  stemdat$stemdiav = unlist(lapply(stemdat$v273t3, FUN = diavector_from_diffdia))
+  stemdat$stemdiav = unlist(lapply(X = stemdat$v273t3, FUN = function(X){
+    xv = as.numeric(unlist(stringr::str_split(X, " ")))
+    xv2 = c(xv[1], xv[1]-cumsum(xv[2:length(xv)]))
+    ret = paste0(xv2, collapse = ", ")
+    return(ret)
+  } ))
 }
 
 stemdat = stemdat %>% dplyr::select(., -starts_with("v"), starts_with("v"))
@@ -239,17 +233,17 @@ stemgrades <- tibble(stemnr = rep(stemdat$stem_number,  stemdat$v274t1), # NUMGR
 logs = tibble::tibble(
   stem_key = rep(stemdat$stem_key, as.integer(stemdat$v290t1)),
   log_key = unlist(sapply(as.integer(stemdat$v290t1), FUN = function(x){1:x})),
-  v296t1 = unlist(str_split(paste0(stemdat$v296t1, collapse = " "), " ")),  #PRICEMATR, registered price matrix per log; 1...var290t1. 0=Reject, 1... = price matrix number
-  v296t2 = unlist(str_split(paste0(stemdat$v296t2, collapse = ""), "\n"))[-1],  #PRICEMATR,  Description of price matrix, i.e. "Skur", "Massevirke"
-  v296t3 = unlist(str_split(paste0(stemdat$v296t3, collapse = ""), "\n"))[-1], #PRICEMATR, Assortment code (same code as in var121t2) /log: 1...var290t1
-  v296t4 = unlist(str_split(paste0(stemdat$v296t4, collapse = " "), " ")), # PRICEMATR,  Type of price catergory per log (same codes as in var161t1): 1.var290_t1; 1 = price/m3 volume by small-end diameter; 2= price/m3 solid volume, 3=price/log 4=pris/m3 (norsk kategori) 5= pris/m3 (svensk topp-rot). 6=pris/m3f mittm?tt
-  v297t1 = unlist(str_split(paste0(stemdat$v297t1, collapse = " "), " ")), # LOGGRADE
-  v299t1 = unlist(str_split(paste0(stemdat$v299t1, collapse = " "), " ")), # Paid volume of logs as specified by var296_t4* : 1...var290_t1. 10^-4m3
-  v299t2 = unlist(str_split(paste0(stemdat$v299t2, collapse = " "), " ")), # Solid volume of logs under bark
-  v299t3 = unlist(str_split(paste0(stemdat$v299t3, collapse = " "), " ")), # Solid volume of logs on bark, measured by harvester, 10^-4m3sob
-  v293t5 = unlist(str_split(paste0(stemdat$v293t5, collapse = " "), " ")), # Length of logs, (measured by machine, M1): 1...var290_t1
-  v291t5 = unlist(str_split(paste0(stemdat$v291t5, collapse = " "), " ")), # Top diameter of logs on bark (measured by machine, M1): 1...var290_t1
-  v292t5 = unlist(str_split(paste0(stemdat$v292t5, collapse = " "), " ")), # Top diameter of logs under bark (measured by machine, M1): 1...var290_t1
+  v296t1 = unlist(stringr::str_split(paste0(stemdat$v296t1, collapse = " "), " ")),  #PRICEMATR, registered price matrix per log; 1...var290t1. 0=Reject, 1... = price matrix number
+  v296t2 = unlist(stringr::str_split(paste0(stemdat$v296t2, collapse = ""), "\n"))[-1],  #PRICEMATR,  Description of price matrix, i.e. "Skur", "Massevirke"
+  v296t3 = unlist(stringr::str_split(paste0(stemdat$v296t3, collapse = ""), "\n"))[-1], #PRICEMATR, Assortment code (same code as in var121t2) /log: 1...var290t1
+  v296t4 = unlist(stringr::str_split(paste0(stemdat$v296t4, collapse = " "), " ")), # PRICEMATR,  Type of price catergory per log (same codes as in var161t1): 1.var290_t1; 1 = price/m3 volume by small-end diameter; 2= price/m3 solid volume, 3=price/log 4=pris/m3 (norsk kategori) 5= pris/m3 (svensk topp-rot). 6=pris/m3f mittm?tt
+  v297t1 = unlist(stringr::str_split(paste0(stemdat$v297t1, collapse = " "), " ")), # LOGGRADE
+  v299t1 = unlist(stringr::str_split(paste0(stemdat$v299t1, collapse = " "), " ")), # Paid volume of logs as specified by var296_t4* : 1...var290_t1. 10^-4m3
+  v299t2 = unlist(stringr::str_split(paste0(stemdat$v299t2, collapse = " "), " ")), # Solid volume of logs under bark
+  v299t3 = unlist(stringr::str_split(paste0(stemdat$v299t3, collapse = " "), " ")), # Solid volume of logs on bark, measured by harvester, 10^-4m3sob
+  v293t5 = unlist(stringr::str_split(paste0(stemdat$v293t5, collapse = " "), " ")), # Length of logs, (measured by machine, M1): 1...var290_t1
+  v291t5 = unlist(stringr::str_split(paste0(stemdat$v291t5, collapse = " "), " ")), # Top diameter of logs on bark (measured by machine, M1): 1...var290_t1
+  v292t5 = unlist(stringr::str_split(paste0(stemdat$v292t5, collapse = " "), " ")), # Top diameter of logs under bark (measured by machine, M1): 1...var290_t1
 
 
 

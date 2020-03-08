@@ -3,3 +3,4 @@
 export(read_ktr_file)
 export(read_pri_file)
 export(read_stm_file)
+export(sfclassic2df)
