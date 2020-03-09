@@ -19,10 +19,11 @@ print("NBNB: this read_ktr_file functon ist really not working yet, just copied 
 
   df1 <- sfclassic2df(strng_to_v110_1)
 
-  report_headervs <- tibble::tibble(
+  report_headervs <- tibble::tibble( #list of sfclassic vars we want in the report header table
     v1t2 = "", v3t1 = "", v3t2 = "", v3t5 = "",
     v3t6 = "", v3t8="", v6t1="",
     v12t4="" )[NULL, ]
+
   report_header <- bind_rows(report_headervs, df1) %>% select(., names(report_headervs))
   report_header <-
     rename(report_header,report_type = v1t2,
