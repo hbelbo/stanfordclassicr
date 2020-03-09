@@ -47,9 +47,27 @@ read_stm_file = function(filename){
   vls = c(txtvarvals, numvarsvals) # A list of all variable tags and values
   start_epoch = as.integer(lubridate::ymd_hms(vls$v16t4))
 
-  report_header = tibble::tibble(creation_date = vls$v12t4, country_code = vls$v6t1, base_machine_number = vls$v3t1,
-                        base_machine_id = vls$v3t2,  base_machine_manufacturer = vls$v3t5,
-                        base_machine_model = vls$v3t6, harvester_head_model = vls$v3t8)
+  df1 <- sfclassic2df(strng_to_v110_1)
+
+  report_headervs <- tibble::tibble( #list of sfclassic vars we want in the report header table
+    v1t2 = "", v3t1 = "", v3t2 = "", v3t5 = "",v3t6 = "", v3t8="",
+    v6t1="", v12t4="" )[NULL, ]
+
+  report_header <- bind_rows(report_headervs, df1) %>% select(., names(report_headervs))
+  report_header <-
+    rename(report_header,report_type = v1t2,
+           creation_date = v12t4,
+           country_code = v6t1,
+           base_machine_number = v3t1,
+           base_machine_id = v3t2,
+           base_machine_manufacturer = v3t5,
+           base_machine_model = v3t6,
+           harvester_head_model = v3t8
+    ) %>%
+    mutate(., filename = str_extract(stmfiles[1], pattern = "\\w*.stm"))
+
+
+
 
   object_definition = tibble::tibble(object_name = vls$v21t1 ,
                             object_user_id = vls$v21t1,
@@ -134,6 +152,7 @@ stemvars = names(stemdat)
 
 ## Modding the stemdat towards StanFord2010 terminology
 # stem_key, stem_number
+stemdat = as.tibble(stemdat)
 if ("v270t3" %in% stemvars) {
   stemdat$stem_number =  as.integer(stemdat$v270t3)
   stemdat$stem_key =   paste0(start_epoch, as.integer(stemdat$v270t3))
@@ -193,13 +212,13 @@ stemdat = stemdat %>%
   )
 }
 
-
+ #  (sum(as.numeric(stemdat$v290t1)) )
 
 if  ("v281t1" %in% stemvars) {
   stemdat$DBHmm = stemdat$v281t1
 } else if ("v281t2" %in% stemvars) {
   stemdat$DBHmm = stemdat$v281t2
-} else stemdat$DBHmm = NA
+} else stemdat$DBHmm = NA_integer_
 
 # stemdiameters
 #diavector_from_diffdia <- function(ddv){# to convert from "diff dia vector" to diameter vector
@@ -223,10 +242,12 @@ if ("v273t1" %in% stemvars) {
 stemdat = stemdat %>% dplyr::select(., -starts_with("v"), starts_with("v"))
 
 #Stem grade breaks
-stemgrades <- tibble(stemnr = rep(stemdat$stem_number,  stemdat$v274t1), # NUMGRADEBR
+
+stemgrades <- tibble::tibble(stemnr = rep(stemdat$stem_number,  stemdat$v274t1), # NUMGRADEBR
                         height = unlist(stringr::str_split(paste0(stemdat$v275t1, collapse = " "), pattern = " ")),  # HGHTGRADBRK
-                        gradecode = unlist(stringr::str_split(paste0(stemdat$v276t1, collapse = " "), pattern = " ")), #GRADE code
-                     grtxt = unlist(stringr::str_split(paste0(stemdat$v276t2, collapse = " "), pattern = " "))) #GRADE text
+                        gradecode = unlist(stringr::str_split(paste0(stemdat$v276t1, collapse = " "), pattern = " "))) #GRADE code
+
+
 
 
 # preparing logs dataset ----
@@ -234,8 +255,8 @@ logs = tibble::tibble(
   stem_key = rep(stemdat$stem_key, as.integer(stemdat$v290t1)),
   log_key = unlist(sapply(as.integer(stemdat$v290t1), FUN = function(x){1:x})),
   v296t1 = unlist(stringr::str_split(paste0(stemdat$v296t1, collapse = " "), " ")),  #PRICEMATR, registered price matrix per log; 1...var290t1. 0=Reject, 1... = price matrix number
-  v296t2 = unlist(stringr::str_split(paste0(stemdat$v296t2, collapse = ""), "\n"))[-1],  #PRICEMATR,  Description of price matrix, i.e. "Skur", "Massevirke"
-  v296t3 = unlist(stringr::str_split(paste0(stemdat$v296t3, collapse = ""), "\n"))[-1], #PRICEMATR, Assortment code (same code as in var121t2) /log: 1...var290t1
+  v296t2 = unlist(stringr::str_split(paste0(stemdat$v296t2, collapse = "\n"), "\n")),  #PRICEMATR,  Description of price matrix, i.e. "Skur", "Massevirke"
+  v296t3 = unlist(stringr::str_split(paste0(stemdat$v296t3, collapse = "\n"), "\n")), #PRICEMATR, Assortment code (same code as in var121t2) /log: 1...var290t1
   v296t4 = unlist(stringr::str_split(paste0(stemdat$v296t4, collapse = " "), " ")), # PRICEMATR,  Type of price catergory per log (same codes as in var161t1): 1.var290_t1; 1 = price/m3 volume by small-end diameter; 2= price/m3 solid volume, 3=price/log 4=pris/m3 (norsk kategori) 5= pris/m3 (svensk topp-rot). 6=pris/m3f mittm?tt
   v297t1 = unlist(stringr::str_split(paste0(stemdat$v297t1, collapse = " "), " ")), # LOGGRADE
   v299t1 = unlist(stringr::str_split(paste0(stemdat$v299t1, collapse = " "), " ")), # Paid volume of logs as specified by var296_t4* : 1...var290_t1. 10^-4m3
