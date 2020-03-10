@@ -1,6 +1,6 @@
 #' Read StanForD Classic ktr-files (mahcine reports from forest machines)
 #'
-#' @param filename
+#' @param filename A filename (including path) the function should read
 #'
 #' @return a list of tables populated with data from the stm report: report_header, object_definition, calibration dates, control measurements
 #' @export
