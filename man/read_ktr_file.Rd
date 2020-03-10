@@ -7,7 +7,7 @@
 read_ktr_file(filename)
 }
 \arguments{
-\item{filename}{}
+\item{filename}{A filename (including path) the function should read}
 }
 \value{
 a list of tables populated with data from the stm report: report_header, object_definition, calibration dates, control measurements
@@ -16,7 +16,7 @@ a list of tables populated with data from the stm report: report_header, object_
 Read StanForD Classic ktr-files (mahcine reports from forest machines)
 }
 \examples{
- files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
- ktrfiles = files[stringr::str_detect(files, ".ktr")]
+ files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+ ktrfiles <- files[stringr::str_detect(files, ".ktr")]
  read_ktr_file(ktrfiles[1])
 }

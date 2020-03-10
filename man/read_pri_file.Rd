@@ -17,6 +17,6 @@ Read StanForD Classic PRI-files (mahcine reports from forest machines)
 }
 \examples{
  files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
- ktrfiles = files[stringr::str_detect(files, ".pri")]
+ prifiles = files[stringr::str_detect(files, ".pri")]
  read_pri_file(prifiles[1])
 }

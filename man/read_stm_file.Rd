@@ -7,7 +7,7 @@
 read_stm_file(filename)
 }
 \arguments{
-\item{filename}{}
+\item{filename}{(including path)}
 }
 \value{
 a list of tables populated with data from the stm report: report_header, object_definition, operator_definition, product_definitions, stems, logs
@@ -19,7 +19,7 @@ Read StanForD Classic .stm-files (mahcine reports from forest machines)
 this function reads one stanford stemfile (.stm)
 }
 \examples{
- files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
- stmfiles = files[stringr::str_detect(files, ".stm")]
+ files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+ stmfiles <- files[stringr::str_detect(files, ".stm")]
  read_stm_file(stmfiles[1])
 }
