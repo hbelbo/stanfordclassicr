@@ -21,13 +21,8 @@ read_ktr_file = function(filename){
  ## Report header
   selector <- c("v1t2", "v3t1", "v3t2", "v3t5", "v3t6",
                 "v3t8", "v6t1", "v12t4") #list of sfclassic vars we want
-  selected = dl1[selector]
-  isnotnull = sapply(selected, function(x) {length(x)>0})
-  subselected = selected[isnotnull]
-  notselected = selector[!(selector %in% names(subselected))]
-  dataselected = as_tibble(subselected)
-  dataselected = dataselected %>% mutate(., !!notselected := NA)
-  dataselected -> report_header
+
+  report_header = populateselection(valuelist = dl1, selector = selector)
 
   report_header <-
     rename(report_header,report_type = v1t2,
@@ -46,24 +41,14 @@ read_ktr_file = function(filename){
   ## Calibrations
   # Length
   selector <- c("v41t4", "v42t1", "v42t2") #list of sfclassic vars we want
-  selected = dl1[selector]
-  isnotnull = sapply(selected, function(x) {length(x)>0})
-  subselected = selected[isnotnull]
-  notselected = selector[!(selector %in% names(subselected))]
-  dataselected = as_tibble(subselected)
-  dataselected = dataselected %>% mutate(., !!notselected := NA)
-  dataselected -> calibsl
+  calibsl = populateselection(valuelist = dl1, selector = selector)
   calibsl = calibsl %>% mutate(., calibrationtype = "LengthCalibration")
+
+
 
   #Dia
   selector <- c("v44t4", "v45t1", "v45t2") #list of sfclassic vars we want
-  selected = dl1[selector]
-  isnotnull = sapply(selected, function(x) {length(x)>0})
-  subselected = selected[isnotnull]
-  notselected = selector[!(selector %in% names(subselected))]
-  dataselected = as_tibble(subselected)
-  dataselected = dataselected %>% mutate(., !!notselected := NA)
-  dataselected -> calibsd
+  calibsd = populateselection(valuelist = dl1, selector = selector)
   calibsd = calibsd %>% mutate(.,  calibrationtype = "DiameterCalibration")
 
 
@@ -109,7 +94,7 @@ read_ktr_file = function(filename){
     mutate(.,
            object_key = as.integer(lubridate::ymd_hms(v16t4)),
            stem_number = dplyr::coalesce(v270t3, v270t1),
-           stem_key = paste0(start_epoch, stem_number),
+           stem_key = paste0(as.integer(lubridate::ymd_hms(v16t4)), stem_number),
 
            measurement_date_machine = v18t4,
            measurement_date_operator = v18t5

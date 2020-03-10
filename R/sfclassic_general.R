@@ -37,7 +37,6 @@ sfclassic2df_v2 = function(strng){
 
 sfclassic2list = function(strng){
   VarStrings <- unlist(stringr::str_split( strng, pattern = "~")) # Split to individual variables and values at ~
-  #VarStrings <- VarStrings[1:(length(VarStrings)-1)] #Removing the funny last tag after the last variable value
   VarVals <- stringr::str_replace(string = VarStrings, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}[ ]", replacement = "")
   VarNames <- stringr::str_extract(string = VarStrings,  pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}" )
   Vars <- paste0("v", stringr::str_replace(string = VarNames, pattern = "[ ]", replacement = "t") )
@@ -51,8 +50,9 @@ sfclassic2list = function(strng){
 
   txtvarvals <- as.list(txtvarvals)
   names(txtvarvals) = txtvars
-  txtvarvals <- lapply(X = txtvarvals,  FUN = function(X) {
-    unlist(stringr::str_split(X, pattern = "\n"))})
+  txtvarvals <-
+    lapply(X = txtvarvals,  FUN = function(X) {
+    unlist(stringr::str_split(X, pattern = "\n|\\n"))})
 
   numvars <- Vars[VarDataType == "Numeric"]
   numvarsvals <- VarVals[VarDataType=="Numeric"]
@@ -71,7 +71,24 @@ file2strng = function(filename){
   strng <- readr::read_file(filename)
   if ( is.na(enc) & stringr::str_detect(string = strng, pattern = "~1 3 \nISO 8859-1")){ enc = "latin1"}
   Encoding(strng) <- enc
-  strng <- stringr::str_replace(string = strng, pattern = '\"','') #Removing the funny tag at the very start of the string
+  if(stringr::str_detect(stringr::str_sub(strng, start = 1, end = 4), pattern = '\"')){
+    strng <- stringr::str_replace(string = strng, pattern = '\"','') #Removing the funny tag at the very start of the string
+  }
+
   return(strng)
+}
+
+
+
+populateselection = function(valuelist, selector){
+  selected = valuelist[selector]
+  isnotnull = sapply(selected, function(x) {length(x)>0})
+  subselected = selected[isnotnull]
+  notselected = selector[!(selector %in% names(subselected))]
+  dataselected = as_tibble(subselected)
+  for (i in seq_along(notselected)){
+    dataselected = dataselected %>% mutate(., !!notselected[i] := NA_character_)
+  }
+  return(dataselected)
 }
 
