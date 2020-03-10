@@ -21,7 +21,6 @@ read_ktr_file = function(filename){
  ## Report header
   selector <- c("v1t2", "v3t1", "v3t2", "v3t5", "v3t6",
                 "v3t8", "v6t1", "v12t4") #list of sfclassic vars we want
-
   report_header = populateselection(valuelist = dl1, selector = selector)
 
   report_header <-
@@ -44,13 +43,10 @@ read_ktr_file = function(filename){
   calibsl = populateselection(valuelist = dl1, selector = selector)
   calibsl = calibsl %>% mutate(., calibrationtype = "LengthCalibration")
 
-
-
   #Dia
   selector <- c("v44t4", "v45t1", "v45t2") #list of sfclassic vars we want
   calibsd = populateselection(valuelist = dl1, selector = selector)
   calibsd = calibsd %>% mutate(.,  calibrationtype = "DiameterCalibration")
-
 
   calibrations = bind_rows(
     calibsl %>% rename(., calibration_date = v41t4, calibration_reason = v42t1, calibration_reason_code = v42t2),
@@ -98,14 +94,15 @@ read_ktr_file = function(filename){
 
            measurement_date_machine = v18t4,
            measurement_date_operator = v18t5
-
+           # ... to be continued..
 
            ) %>%
     select(., -starts_with("v"), starts_with("v"))
 
 
-
-  object_definition = tibble::tibble(object_name = ktrs$v21t1 ,
+  # Extract object definitions. they are tied to each control stem and not to the file.
+  object_definition =
+    tibble::tibble(object_name = ktrs$v21t1 ,
                                      object_user_id = ktrs$v21t1,
                                      object_start_date = lubridate::ymd_hms(ktrs$v16t4),
                                      object_key = as.integer(lubridate::ymd_hms(ktrs$v16t4)),
