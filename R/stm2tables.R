@@ -1,6 +1,6 @@
 #' Read StanForD Classic .stm-files (mahcine reports from forest machines)
 #'
-#' @param filename
+#' @param filename (including path)
 #'
 #' @return a list of tables populated with data from the stm report: report_header, object_definition, operator_definition, product_definitions, stems, logs
 #' @export
@@ -11,52 +11,20 @@
 #'  stmfiles <- files[stringr::str_detect(files, ".stm")]
 #'  read_stm_file(stmfiles[1])
 read_stm_file <- function(filename){
-  enc <- readr::guess_encoding(filename)
-  enc <- as.character(enc[1,1])
 
-  strng <- readr::read_file(filename)
-  if ( is.na(enc) & stringr::str_detect(string = strng, pattern = "~1 3 \nISO 8859-1")){ enc = "latin1"}
-  Encoding(strng) <- enc
-  strng <- stringr::str_replace(string = strng, pattern = '\"','') #Removing the funny tag at the very start of the string
+  strng <- file2strng(filename)
 
   strng_to_v110_1 <- stringr::str_sub(string =  strng,
                              start = 1, end = stringr::str_locate(string = strng, pattern = "~110 1")[1,1] )
 
-  VarStrings <- unlist(stringr::str_split( strng_to_v110_1, pattern = "~")) # Split to individual variables and values at ~
-  VarStrings <- VarStrings[1:(length(VarStrings)-1)] #Removing the funny last tag after the last variable value
-  VarVals <- stringr::str_replace(string = VarStrings, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}[ ]", replacement = "")
-  VarNames <- stringr::str_extract(string = VarStrings,  pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}" )
-  Vars <- paste0("v", stringr::str_replace(string = VarNames, pattern = "[ ]", replacement = "t") )
-
-  VarDataType <- dplyr::case_when(stringr::str_starts(string = VarVals, pattern = "\\n") ~ "txt", TRUE ~"Numeric")
-  VarVals <- stringr::str_replace(string = VarVals, pattern = "\\n", replacement = '') #remove first \n in txt variables
-
-  txtvars <- Vars[VarDataType=="txt"]
-  txtvarvals <- VarVals[VarDataType=="txt"]
-  txtVarLength <- sapply(X = stringr::str_split(string = txtvarvals, pattern = "[\\n]"), length)
-
-  txtvarvals <- as.list(txtvarvals)
-  names(txtvarvals) <- txtvars
-  txtvarvals <- lapply(X = txtvarvals,  FUN = function(X) {
-    unlist(stringr::str_split(X, pattern = "\n"))})
-
-  numvars <- Vars[VarDataType == "Numeric"]
-  numvarsvals <- VarVals[VarDataType=="Numeric"]
-  numvarsvals <- as.list(numvarsvals)
-  names(numvarsvals) <- numvars
-  numvarsvals <-  lapply(X = numvarsvals,  FUN = function(X) {as.integer(unlist(stringr::str_split(X, pattern = " ")))})
-
-  vls = c(txtvarvals, numvarsvals) # A list of all variable tags and values
+  vls <- sfclassic2list(strng_to_v110_1) #Should correspond to vls
 
   start_epoch = as.integer(lubridate::ymd_hms(vls$v16t4))
 
-  df1 <- sfclassic2df(strng_to_v110_1)
+  ## Report header
+  selector <- c("v1t2", "v3t1", "v3t2", "v3t5", "v3t6", "v3t8", "v6t1", "v12t4") #list of sfclassic vars we want
+  report_header = populateselection(valuelist = vls, selector = selector)
 
-  report_headervs <- tibble::tibble( #list of sfclassic vars we want in the report header table
-    v1t2 = "", v3t1 = "", v3t2 = "", v3t5 = "",v3t6 = "", v3t8="",
-    v6t1="", v12t4="" )[NULL, ]
-
-  report_header <- bind_rows(report_headervs, df1) %>% select(., names(report_headervs))
   report_header <-
     rename(report_header,report_type = v1t2,
            creation_date = v12t4,
@@ -70,15 +38,21 @@ read_stm_file <- function(filename){
     mutate(., filename = str_extract(filename, pattern = "\\w*.stm"))
 
 
+  ## Object definition
+  selector <- c( "v16t4", "v21t1", "v21t2", "v21t3", "v21t4") #list of sfclassic vars we want
+  object_definition = populateselection(valuelist = vls, selector = selector)
+
+  object_definition <-
+    object_definition %>% dplyr::mutate(., object_name = v21t1,
+            object_user_id = v21t1,
+            object_start_date = lubridate::ymd_hms(v16t4),
+            object_key = start_epoch,
+            sub_object_name = v21t2,
+            sub_object_user_id = paste0(v21t2, v21t3, v21t4),
+            sub_object_key = 0) %>%
+    dplyr::select(., -matches("v\\d", perl =T)) %>% glimpse()
 
 
-  object_definition <- tibble::tibble(object_name = vls$v21t1 ,
-                            object_user_id = vls$v21t1,
-                            object_start_date = lubridate::ymd_hms(vls$v16t4),
-                            object_key = start_epoch,
-                            sub_object_name = vls$v21t2,
-                            sub_object_user_id = paste0(vls$v21t2, vls$v21t3, vls$v21t4),
-                            sub_object_key = 1)
 
   # Species and Product definitions
   species_group_definition <-
