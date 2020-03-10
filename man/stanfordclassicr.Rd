@@ -3,9 +3,33 @@
 \docType{package}
 \name{stanfordclassicr}
 \alias{stanfordclassicr}
-\title{stanfordclassicr: A package for reading forest machine files following the
-  stanford classic standard (https://www.skogforsk.se/english/projects/stanford/)}
+\title{Reading forest machine files using stanford classic standard}
 \description{
 The package provide one function for each type of stanford standard file
- and some supplementary functions for internal use.
+ and some supplementary functions for internal use in the package.
+}
+\section{Main functions}{
+
+
+The main functions takes one file path as argument, and organize data in a list of data frames (tibbles).
+
+The list aim to immitate the structure and naming conventions in the successor standard StanForD2010.
+Along with the data is also all stanford classic variable tags belonging to eahc stem, each
+log, each cut object etc. This is to enable further mapping of stanford classic
+variable tags to readable variable names.
+}
+
+\section{Tips}{
+
+Example files and documentation of the stanford classic standard (pdf)
+is provided in the supplementary directory, please have a look
+}
+
+\examples{
+files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+files # to see all files and where they are on your computer
+read_ktr_file(files[str_detect(files, ".ktr")])
+read_stm_file(files[str_detect(files, ".stm")])
+read_pri_file(files[str_detect(files, ".pri")])
+
 }
