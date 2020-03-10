@@ -2,11 +2,13 @@
 #'
 #' @param filename
 #'
-#' @return
+#' @return should return a list of tables populated with data from the stm report: report_header, object_definition, operator_definition, product_definitions, stems, logs
 #' @export
 #'
 #' @examples
-#'  read_pri_file(list.files(pattern = ".pri")[1])
+#'  files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+#'  ktrfiles = files[stringr::str_detect(files, ".pri")]
+#'  read_pri_file(prifiles[1])
 read_pri_file = function(filename){
 
   enc <- readr::guess_encoding(filename)

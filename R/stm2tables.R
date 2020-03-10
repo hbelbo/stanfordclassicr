@@ -2,12 +2,14 @@
 #'
 #' @param filename
 #'
-#' @return a list of tables populated with data from the stm report: report_header, object_definition, operator_definition, product_definitions, stems, logs,
+#' @return a list of tables populated with data from the stm report: report_header, object_definition, operator_definition, product_definitions, stems, logs
 #' @export
-#' @details this function reads one stanford stemfile (.stm). Demo stanford stm files for testing the function:  setwd("./Demo StanFordClassic Reports/stm")
+#' @details this function reads one stanford stemfile (.stm)
 #'
 #' @examples
-#' read_stm_file(list.files(pattern = ".stm")[1])
+#'  files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+#'  stmfiles = files[stringr::str_detect(files, ".stm")]
+#'  read_stm_file(stmfiles[1])
 read_stm_file = function(filename){
   enc <- readr::guess_encoding(filename)
   enc = as.character(enc[1,1])

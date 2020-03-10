@@ -10,11 +10,13 @@ read_pri_file(filename)
 \item{filename}{}
 }
 \value{
-
+should return a list of tables populated with data from the stm report: report_header, object_definition, operator_definition, product_definitions, stems, logs
 }
 \description{
 Read StanForD Classic PRI-files (mahcine reports from forest machines)
 }
 \examples{
- read_pri_file(list.files(pattern = ".pri")[1])
+ files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+ ktrfiles = files[stringr::str_detect(files, ".pri")]
+ read_pri_file(prifiles[1])
 }

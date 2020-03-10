@@ -11,7 +11,7 @@ sfclassic2df(strng)
 }
 \value{
 a data.frame, where each pair of StanForD code and corresponding
-  variable values will form one column. I.e table will have one row
+  variable values will form one column. I.e  have one row
 }
 \description{
 Convert stanford classic text string to dataframe

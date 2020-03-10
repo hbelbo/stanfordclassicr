@@ -2,11 +2,13 @@
 #'
 #' @param filename
 #'
-#' @return
+#' @return a list of tables populated with data from the stm report: report_header, object_definition, calibration dates, control measurements
 #' @export
 #'
 #' @examples
-#'  read_ktr_file(list.files(pattern = ".ktr")[1]
+#'  files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+#'  ktrfiles = files[stringr::str_detect(files, ".ktr")]
+#'  read_ktr_file(ktrfiles[1])
 read_ktr_file = function(filename){
 
   strng <- file2strng(filename)
@@ -108,7 +110,7 @@ read_ktr_file = function(filename){
                                      object_key = as.integer(lubridate::ymd_hms(ktrs$v16t4)),
                                      sub_object_name = ktrs$v21t2,
                                      sub_object_user_id = paste0(ktrs$v21t2, " ", ktrs$v21t3,  ktrs$v21t4),
-                                     sub_object_key = 1) %>% distinct()
+                                     sub_object_key = 0) %>% distinct()
 
 
 

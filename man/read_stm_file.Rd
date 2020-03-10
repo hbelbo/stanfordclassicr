@@ -10,14 +10,16 @@ read_stm_file(filename)
 \item{filename}{}
 }
 \value{
-a list of tables populated with data from the stm report: report_header, object_definition, operator_definition, product_definitions, stems, logs,
+a list of tables populated with data from the stm report: report_header, object_definition, operator_definition, product_definitions, stems, logs
 }
 \description{
 Read StanForD Classic .stm-files (mahcine reports from forest machines)
 }
 \details{
-this function reads one stanford stemfile (.stm). Demo stanford stm files for testing the function:  setwd("./Demo StanFordClassic Reports/stm")
+this function reads one stanford stemfile (.stm)
 }
 \examples{
-read_stm_file(list.files(pattern = ".stm")[1])
+ files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+ stmfiles = files[stringr::str_detect(files, ".stm")]
+ read_stm_file(stmfiles[1])
 }
