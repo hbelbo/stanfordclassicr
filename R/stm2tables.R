@@ -45,6 +45,7 @@ read_stm_file = function(filename){
   numvarsvals <-  lapply(X = numvarsvals,  FUN = function(X) {as.integer(unlist(stringr::str_split(X, pattern = " ")))})
 
   vls = c(txtvarvals, numvarsvals) # A list of all variable tags and values
+
   start_epoch = as.integer(lubridate::ymd_hms(vls$v16t4))
 
   df1 <- sfclassic2df(strng_to_v110_1)
@@ -64,7 +65,7 @@ read_stm_file = function(filename){
            base_machine_model = v3t6,
            harvester_head_model = v3t8
     ) %>%
-    mutate(., filename = str_extract(stmfiles[1], pattern = "\\w*.stm"))
+    mutate(., filename = str_extract(filename, pattern = "\\w*.stm"))
 
 
 
