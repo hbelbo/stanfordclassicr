@@ -6,10 +6,10 @@
 #' @export
 #'
 #' @examples
-#'  files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
-#'  ktrfiles = files[stringr::str_detect(files, ".ktr")]
+#'  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+#'  ktrfiles <- files[stringr::str_detect(files, ".ktr")]
 #'  read_ktr_file(ktrfiles[1])
-read_ktr_file = function(filename){
+read_ktr_file <- function(filename){
 
   strng <- file2strng(filename)
 
@@ -47,10 +47,10 @@ read_ktr_file = function(filename){
 
   #Dia
   selector <- c("v44t4", "v45t1", "v45t2") #list of sfclassic vars we want
-  calibsd = populateselection(valuelist = dl1, selector = selector)
-  calibsd = calibsd %>% mutate(.,  calibrationtype = "DiameterCalibration")
+  calibsd <- populateselection(valuelist = dl1, selector = selector)
+  calibsd <- calibsd %>% mutate(.,  calibrationtype = "DiameterCalibration")
 
-  calibrations = bind_rows(
+  calibrations <- bind_rows(
     calibsl %>% rename(., calibration_date = v41t4, calibration_reason = v42t1, calibration_reason_code = v42t2),
     calibsd %>% rename(., calibration_date = v44t4, calibration_reason = v45t1, calibration_reason_code = v45t2))
 
@@ -67,12 +67,12 @@ read_ktr_file = function(filename){
 
 
   # stemdat - one obs per stem
-  stemdat = sfclassic2df(loopstring[1])[NULL, ]
+  stemdat <- sfclassic2df(loopstring[1])[NULL, ]
   for (i in seq_along(loopstring)){
     stemdat <- dplyr::bind_rows(stemdat, sfclassic2df(loopstring[i]))
   }
-  stemdat$v110t = dplyr::coalesce(stemdat$v110t1, stemdat$v110t2)
-  stemdat = stemdat %>% select(., -v110t2, v110t1)
+  stemdat$v110t <- dplyr::coalesce(stemdat$v110t1, stemdat$v110t2)
+  stemdat <- stemdat %>% select(., -v110t2, v110t1)
   stemdat <- as_tibble(stemdat)
 
 
@@ -103,7 +103,7 @@ read_ktr_file = function(filename){
 
 
   # Extract object definitions. they are tied to each control stem and not to the file.
-  object_definition =
+  object_definition <-
     tibble::tibble(object_name = ktrs$v21t1 ,
                                      object_user_id = ktrs$v21t1,
                                      object_start_date = lubridate::ymd_hms(ktrs$v16t4),

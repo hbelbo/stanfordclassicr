@@ -7,12 +7,12 @@
 #' @details this function reads one stanford stemfile (.stm)
 #'
 #' @examples
-#'  files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
-#'  stmfiles = files[stringr::str_detect(files, ".stm")]
+#'  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+#'  stmfiles <- files[stringr::str_detect(files, ".stm")]
 #'  read_stm_file(stmfiles[1])
-read_stm_file = function(filename){
+read_stm_file <- function(filename){
   enc <- readr::guess_encoding(filename)
-  enc = as.character(enc[1,1])
+  enc <- as.character(enc[1,1])
 
   strng <- readr::read_file(filename)
   if ( is.na(enc) & stringr::str_detect(string = strng, pattern = "~1 3 \nISO 8859-1")){ enc = "latin1"}
@@ -28,15 +28,15 @@ read_stm_file = function(filename){
   VarNames <- stringr::str_extract(string = VarStrings,  pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}" )
   Vars <- paste0("v", stringr::str_replace(string = VarNames, pattern = "[ ]", replacement = "t") )
 
-  VarDataType = dplyr::case_when(stringr::str_starts(string = VarVals, pattern = "\\n") ~ "txt", TRUE ~"Numeric")
-  VarVals = stringr::str_replace(string = VarVals, pattern = "\\n", replacement = '') #remove first \n in txt variables
+  VarDataType <- dplyr::case_when(stringr::str_starts(string = VarVals, pattern = "\\n") ~ "txt", TRUE ~"Numeric")
+  VarVals <- stringr::str_replace(string = VarVals, pattern = "\\n", replacement = '') #remove first \n in txt variables
 
-  txtvars = Vars[VarDataType=="txt"]
-  txtvarvals = VarVals[VarDataType=="txt"]
-  txtVarLength = sapply(X = stringr::str_split(string = txtvarvals, pattern = "[\\n]"), length)
+  txtvars <- Vars[VarDataType=="txt"]
+  txtvarvals <- VarVals[VarDataType=="txt"]
+  txtVarLength <- sapply(X = stringr::str_split(string = txtvarvals, pattern = "[\\n]"), length)
 
   txtvarvals <- as.list(txtvarvals)
-  names(txtvarvals) = txtvars
+  names(txtvarvals) <- txtvars
   txtvarvals <- lapply(X = txtvarvals,  FUN = function(X) {
     unlist(stringr::str_split(X, pattern = "\n"))})
 
@@ -72,7 +72,7 @@ read_stm_file = function(filename){
 
 
 
-  object_definition = tibble::tibble(object_name = vls$v21t1 ,
+  object_definition <- tibble::tibble(object_name = vls$v21t1 ,
                             object_user_id = vls$v21t1,
                             object_start_date = lubridate::ymd_hms(vls$v16t4),
                             object_key = start_epoch,
@@ -81,7 +81,7 @@ read_stm_file = function(filename){
                             sub_object_key = 1)
 
   # Species and Product definitions
-  species_group_definition =
+  species_group_definition <-
     tibble::tibble(species_group_name = vls$v120t1,
                species_group_user_id = paste0(vls$v120t1, "#", vls$v120t3, "#", vls$v2t1),
                tmp_species_nr = 1:vls$v111t1,
@@ -89,17 +89,17 @@ read_stm_file = function(filename){
 
 
   # Help-table of product groups
-  product_grp_species_nr = rep(1:length(vls$v125t1), vls$v125t1)
-  product_grp_code = integer()
+  product_grp_species_nr <- rep(1:length(vls$v125t1), vls$v125t1)
+  product_grp_code <- integer()
   for (i in 1:vls$v111t1) {
     product_grp_code = c(product_grp_code, 1:vls$v125t1[i])
   }
-  product_grp_table =
+  product_grp_table <-
     tibble::tibble(product_grp_code,
                product_grp_species_nr,
                product_group_name = vls$v127t1)
 
-  product_definition =
+  product_definition <-
     tibble::tibble(
       tmp_species_nr = rep(1:vls$v111t1, vls$v116t1),
       tmp_product_number = as.integer(1:length(vls$v121t1)),
@@ -144,18 +144,18 @@ present_vars <- # Find all variables and var.types present for each stem. Assumi
 
 
 # stemdat - one obs per stem
-stemdat = sfclassic2df(loopstring[1])[NULL, ]
+stemdat <- sfclassic2df(loopstring[1])[NULL, ]
   for (i in seq_along(loopstring)){
-    stemdat <- dplyr::bind_rows(stemdat, sfclassic2df(loopstring[i]))
+    stemdat = dplyr::bind_rows(stemdat, sfclassic2df(loopstring[i]))
   }
-stemdat$v110t = dplyr::coalesce(stemdat$v110t1, stemdat$v110t2)
-stemvars = names(stemdat)
+stemdat$v110t <- dplyr::coalesce(stemdat$v110t1, stemdat$v110t2)
+stemvars <- names(stemdat)
 
 # stemdat <- stemdat[1:20, ]
 
 ## Modding the stemdat towards StanFord2010 terminology
 # stem_key, stem_number
-stemdat = as.tibble(stemdat)
+stemdat <- as.tibble(stemdat)
 if ("v270t3" %in% stemvars) {
   stemdat$stem_number =  as.integer(stemdat$v270t3)
   stemdat$stem_key =   paste0(start_epoch, as.integer(stemdat$v270t3))
@@ -254,7 +254,7 @@ stemgrades <- tibble::tibble(stemnr = rep(stemdat$stem_number,  stemdat$v274t1),
 
 
 # preparing logs dataset ----
-logs = tibble::tibble(
+logs <- tibble::tibble(
   stem_key = rep(stemdat$stem_key, as.integer(stemdat$v290t1)),
   log_key = unlist(sapply(as.integer(stemdat$v290t1), FUN = function(x){1:x})),
   v296t1 = unlist(stringr::str_split(paste0(stemdat$v296t1, collapse = " "), " ")),  #PRICEMATR, registered price matrix per log; 1...var290t1. 0=Reject, 1... = price matrix number
@@ -289,7 +289,7 @@ logs = tibble::tibble(
 
 
 
-   Ret = list(report_header = report_header, species_group_definition = species_group_definition,
+   Ret <- list(report_header = report_header, species_group_definition = species_group_definition,
               product_definition = product_definition, object_definition = object_definition, stems = stemdat, logs = logs)
   return(Ret)
 
