@@ -17,6 +17,6 @@ a data.frame, where each pair of StanForD code and corresponding
 Convert stanford classic text string to dataframe
 }
 \examples{
-stanford_classic_string = "~3 6 \n1470E~120 1 \nFURU \nGRAN \nLÃ˜V \nTÃ˜RRGRAN~"
+stanford_classic_string <- "~3 6 \n1470E~120 1 \nFURU \nGRAN \nLÃ˜V \nTÃ˜RRGRAN~"
 sfclassic2df(stanford_classic_string)
 }
