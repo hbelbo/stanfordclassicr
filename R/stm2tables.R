@@ -132,13 +132,13 @@ stemvars <- names(stemdat)
 stemdat <- as.tibble(stemdat)
 if ("v270t3" %in% stemvars) {
   stemdat$stem_number =  as.integer(stemdat$v270t3)
-  stemdat$stem_key =   paste0(start_epoch, as.integer(stemdat$v270t3))
+  stemdat$stem_key =   as.numeric(paste0(start_epoch, as.integer(stemdat$v270t3)))
 } else if ("v270t1" %in% stemvars) {
   stemdat$stem_number =   as.integer(stemdat$v270t1)
-  stemdat$stem_key =   paste0(start_epoch, as.integer(stemdat$v270t1))
+  stemdat$stem_key =   as.numeric(paste0(start_epoch, as.integer(stemdat$v270t1)))
 } else {
   stemdat$stem_number =   NA
-  stemdat$stem_key =   NA
+  stemdat$stem_key =   NA_real_
 }
 
 
@@ -229,7 +229,7 @@ stemgrades <- tibble::tibble(stemnr = rep(stemdat$stem_number,  stemdat$v274t1),
 
 # preparing logs dataset ----
 logs <- tibble::tibble(
-  stem_key = rep(stemdat$stem_key, as.integer(stemdat$v290t1)),
+  stem_key = rep(stemdat$stem_key, as.numeric(stemdat$v290t1)),
   log_key = unlist(sapply(as.integer(stemdat$v290t1), FUN = function(x){1:x})),
   v296t1 = unlist(stringr::str_split(paste0(stemdat$v296t1, collapse = " "), " ")),  #PRICEMATR, registered price matrix per log; 1...var290t1. 0=Reject, 1... = price matrix number
   v296t2 = unlist(stringr::str_split(paste0(stemdat$v296t2, collapse = "\n"), "\n")),  #PRICEMATR,  Description of price matrix, i.e. "Skur", "Massevirke"
