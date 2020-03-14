@@ -1,3 +1,10 @@
+
+
+#sfvardefs = readRDS(
+#file = list.files(system.file("extdata", package = "stanfordclassicr"),
+#full.names = T, pattern = "sfvardefs.Rds"))
+
+
 #' Convert stanford classic text string to dataframe
 #'
 #' @param strng
@@ -11,12 +18,15 @@
 #' sfclassic2df(stanford_classic_string)
 sfclassic2df <- function(strng){
   varsvals = unlist(stringr::str_split(strng, "~"))
+  varsvals <- varsvals[stringr::str_length(varsvals)>1] # to drop empty returns
   varnames = stringr::str_extract(varsvals, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}")
   varvals =  stringr::str_replace(string = varsvals, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}[ ]", replacement = "")
   varvals = varvals[which(!is.na(varnames))]
   varvals = stringr::str_remove(varvals, pattern = "\n")
   varnames = varnames[which(!is.na(varnames))]
+
   varnames = paste0("v", stringr::str_replace(string = varnames, pattern = "[ ]", replacement = "t") )
+  varnames = make.names(varnames, unique = T)
   sfcdf = data.frame(matrix(data = varvals, nrow = 1), stringsAsFactors=F)
   names(sfcdf) = varnames
   return(sfcdf)
@@ -25,34 +35,40 @@ sfclassic2df <- function(strng){
 
 sfclassic2df_v2 <- function(strng){
   varsvals = unlist(stringr::str_split(strng, "~"))
+  varsvals <- varsvals[stringr::str_length(varsvals)>1] # to drop empty returns
   varnames = stringr::str_extract(varsvals, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}")
   varvals =  stringr::str_replace(string = varsvals, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}[ ]", replacement = "")
   varvals = varvals[which(!is.na(varnames))]
   varnames = varnames[which(!is.na(varnames))]
   varnames = paste0("v", stringr::str_replace(string = varnames, pattern = "[ ]", replacement = "t") )
+
+  varvals <- varvals[which(varnames %in% sfvardefs$sfv)]
+  varnames <- varnames[which(varnames %in% sfvardefs$sfv)]
+
   sfcdf = data.frame(matrix(data = varvals, nrow = 1), stringsAsFactors=F)
+  sfcdf = tibble::as_tibble(sfcdf)
+  varnames = make.names(varnames, unique = T)
   names(sfcdf) = varnames
+
+  #sfcdf2 = sfcdf %>% select_if(.,  !is.na(.))
   return(sfcdf)
 }
 
 sfclassic2list <- function(strng){
   VarStrings <- unlist(stringr::str_split( strng, pattern = "~")) # Split to individual variables and values at ~
+  VarStrings <- VarStrings[stringr::str_length(VarStrings)>1] # to drop empty returns
   VarVals <- stringr::str_replace(string = VarStrings, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}[ ]", replacement = "")
   VarNames <- stringr::str_extract(string = VarStrings,  pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}" )
   Vars <- paste0("v", stringr::str_replace(string = VarNames, pattern = "[ ]", replacement = "t") )
 
   VarDataType <- dplyr::case_when(stringr::str_starts(string = VarVals, pattern = "\\n") ~ "txt", TRUE ~"Numeric")
-  VarVals <- stringr::str_replace(string = VarVals, pattern = "\\n", replacement = '') #remove first \n in txt variables
 
   txtvars <- Vars[VarDataType=="txt"]
   txtvarvals <- VarVals[VarDataType=="txt"]
-  txtVarLength <- sapply(X = stringr::str_split(string = txtvarvals, pattern = "[\\n]"), length)
 
   txtvarvals <- as.list(txtvarvals)
   names(txtvarvals) <- txtvars
-  txtvarvals <-
-    lapply(X = txtvarvals,  FUN = function(X) {
-    unlist(stringr::str_split(X, pattern = "\n|\\n"))})
+
 
   numvars <- Vars[VarDataType == "Numeric"]
   numvarsvals <- VarVals[VarDataType=="Numeric"]
@@ -92,3 +108,35 @@ populateselection <- function(valuelist, selector){
   return(dataselected)
 }
 
+
+
+expand_str <- function(tibbl){
+  ## tibbl = calibsd # for testing only
+  var1 = dplyr::pull(tibbl[,1])
+  type1 = ifelse(stringr::str_starts(string = var1[1], pattern = "\n"), "txt", "num")
+  if(type1 == "txt") {
+    lexp1 =
+      unlist(stringr::str_split(stringr::str_remove(var1, "\n"), "\n" ))
+  } else {
+    lexp1 =
+      as.integer(unlist(stringr::str_split(var1, " ")))
+  }
+  retdf = tibble::tibble(.rows = length(lexp1))
+
+
+  for (i in seq_along(names(tibbl))){
+    nami = names(tibbl)[i]
+    vari = dplyr::pull(tibbl[,i])
+    typei = ifelse(stringr::str_starts(string = vari[1], pattern = "\n"), "txt", "num")
+    n_obsi = length(vari)
+    if(typei == "txt") {
+      lexp =
+        unlist(stringr::str_split(stringr::str_remove(vari, "\n"), "\n" ))
+    } else {
+      lexp =
+        as.integer(unlist(stringr::str_split(vari, " ")))
+    }
+    retdf = mutate(retdf, !!nami := lexp)
+  }
+  return(retdf)
+}

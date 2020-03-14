@@ -18,5 +18,6 @@ Read StanForD Classic ktr-files (mahcine reports from forest machines)
 \examples{
  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
  ktrfiles <- files[stringr::str_detect(files, ".ktr")]
- read_ktr_file(ktrfiles[1])
+ filename = ktrfiles[1]
+ read_ktr_file(filename)
 }
