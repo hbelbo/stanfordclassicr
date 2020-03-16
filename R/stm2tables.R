@@ -30,7 +30,7 @@ read_stm_file <- function(filename){
     selector <- selector[which(selector %in% names(df1))] # Ensure to not select vars not present
     selected <- df1 %>% dplyr::select(., tidyselect::all_of(selector))
     report_header <- expand_str(tibbl = selected) %>%
-      mutate(., report_type = get0("v1t2", ifnotfound = NA_character_),
+      dplyr::mutate(., report_type = get0("v1t2", ifnotfound = NA_character_),
              creation_date = get0("v12t4", ifnotfound = NA_character_),
              country_code = get0("v6t1", ifnotfound = NA_integer_),
              base_machine_number = get0("v3t1", ifnotfound = NA_character_),
@@ -40,7 +40,7 @@ read_stm_file <- function(filename){
              harvester_head_model = get0("v3t8", ifnotfound = NA_character_),
              machine_application_verision = get0("v5t1", ifnotfound = NA_character_),
              filename = str_extract(filename, pattern = "\\w*.stm")) %>%
-      select(., -selector)
+      dplyr::select(., -tidyselect::all_of(selector))
 
 
 
@@ -72,7 +72,7 @@ read_stm_file <- function(filename){
                                         get0("v34t4", ifnotfound = ""),
                                         get0("v34t5", ifnotfound = "")),
                     contract_nr = dplyr::coalesce(get0("v35t2"), get0("v35t1"))) %>%
-      dplyr::select(., -matches("v\\d", perl =T))
+      dplyr::select(., -tidyselect::matches("v\\d", perl =T))
 
 
     # Species and Product definitions
@@ -84,7 +84,7 @@ read_stm_file <- function(filename){
                       species_group_user_id = paste0(v120t1, "#", v120t3, "#", stringr::str_replace( df1$v2t1, "\n", "")),
                       tmp_species_nr = as.integer(v120t3),
                       species_group_key = as.numeric(paste0(start_epoch, tmp_species_nr)))  %>%
-      dplyr::select(., -matches("v\\d", perl =T))
+      dplyr::select(., -tidyselect::matches("v\\d", perl =T))
 
 
     # Help-table of product groups
@@ -96,11 +96,11 @@ read_stm_file <- function(filename){
     product_grp_table <-
       tibble::tibble(product_grp_code,
                      product_grp_species_nr,
-                     product_group_name = (expand_str(df1 %>% select(., v127t1)) %>% dplyr::pull(.))
+                     product_group_name = (expand_str(df1 %>% dplyr::select(., v127t1)) %>% dplyr::pull(.))
       )
 
     # Product definitions
-    selector <- c( "v121t1", "v121t2", "v126t1", "v121t6")
+    selector <- c( "v121t1", "v121t2", "v126t1", "v121t6", "v126t1")
     selector <- selector[which(selector %in% names(df1))] # Ensure to not select vars not present
     selected <- df1 %>% dplyr::select(., tidyselect::all_of(selector))
     prods_per_species <- as.integer(unlist(stringr::str_split(df1$v116t1, " ")))
@@ -110,7 +110,7 @@ read_stm_file <- function(filename){
       dfx %>%
       mutate(., product_name = v121t1,
              product_info = v121t2,
-             v126t1 = vls$v126t1,
+             v126t1 = v126t1,
              tmp_species_nr = rep(1:as.integer(df1$v111t1), prods_per_species),
              tmp_product_nr = as.integer(1:length(v121t1)),
              species_group_name = rep(dplyr::pull(expand_str(df1 %>% dplyr::select(., v120t1))), prods_per_species),
@@ -142,7 +142,7 @@ read_stm_file <- function(filename){
     }
     stemdat$v110t1 <- dplyr::coalesce(stemdat$v110t1, stemdat$v110t2)
     nanyna = function(x){ !(any(is.na(x)))}
-    stemdat <- stemdat %>% select_if(., nanyna)
+    stemdat <- stemdat %>% dplyr::select_if(., nanyna)
 
     is_one_text <- function(x){ all (stringr::str_count(x, "\n") == 1)}
     removeslash <- function(x){ stringr::str_remove(x, "\n")}
@@ -262,7 +262,7 @@ read_stm_file <- function(filename){
       ) %>%
       dplyr::select(.,
                     -tidyselect::matches("v\\d*"), tidyselect::matches("v\\d*")) %>%
-      dplyr::select(., stem_key, log_key, product_key, tidyselect::starts_with("m3"), everything())
+      dplyr::select(., stem_key, log_key, product_key, tidyselect::starts_with("m3"), tidyselect::everything())
 
     Ret <- list(report_header = report_header, species_group_definition = species_group_definition,
                 product_definition = product_definition, object_definition = object_definition, stems = stemdat, logs = logs)

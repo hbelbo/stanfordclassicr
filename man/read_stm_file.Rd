@@ -22,4 +22,5 @@ this function reads one stanford stemfile (.stm)
  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
  stmfiles <- files[stringr::str_detect(files, ".stm")]
  read_stm_file(stmfiles[1])
+ filename <- stmfiles[1]
 }
