@@ -29,4 +29,3 @@ read_ktr_file(ktrfiles[1])
 ktrtest = read_ktr_file(ktrfiles[1])
 ```
 
-
