@@ -12,9 +12,6 @@
 read_pri_file2 = function(filename){
   #  filename = prifiles[1]
   strng <- file2strng(filename)
-
-  vls <- sfclassic2list(strng_to_v110_1) #Should correspond to vls
-  #start_epoch = as.integer(lubridate::ymd_hms(vls$v16t4))
   df1 <- sfclassic2df_v2(strng)
   start_epoch = as.integer(lubridate::ymd_hms(stringr::str_replace(df1$v16t4, "\n", "")))
 
@@ -71,7 +68,8 @@ read_pri_file2 = function(filename){
     dplyr::select(., -tidyselect::matches("v\\d", perl =T))
 
 
-  # Species and Product definitions
+  ## Species and Product definitions
+  # Species
   selector <- c( "v120t1", "v120t3")
   selected <- df1 %>% dplyr::select(., tidyselect::all_of(selector))
   dfx = expand_str(selected)
@@ -171,8 +169,18 @@ read_pri_file2 = function(filename){
     LogData$tmp_pk = LogData$price_matrix_uid
   } else {LogData$tmp_pk = LogData$price_matrix_nr}
 
-  if("vol_dl_sob" %in%  names(LogData)){
-    LogData$m3_sob = LogData$vol_dl_sob
+  if("vol_dl" %in%  names(LogData)){
+    LogData <- Logdata %>%
+      mutate(., m3price = as.numeric(vol_dl) / 10000,
+                m3sob = as.numeric(vol_dl_sob) / 10000,
+                m3sub = as.numeric(vol_dl_sub) / 10000
+             )
+  } else if ("vol_sob" %in% names(LogData)) {
+    LogData <- Logdata %>% rowwise() %>%
+      mutate(., m3price = as.numeric(paste(vol, voldec, sep = ".")),
+             m3sob = as.numeric(paste(vol_sob, vol_sob_dec, sep = ".")),
+             m3sub = as.numeric(paste(vol_sub, vol_sub_dec, sep = ".")))
+
   }
 
   logs = LogData %>%
@@ -180,8 +188,7 @@ read_pri_file2 = function(filename){
            product_key = case_when("price_matrix_uid" %in% names(LogData) ~  as.numeric(tmp_pk),
                                    TRUE ~ as.numeric(paste0(start_epoch, tmp_pk))),
            stem_key = as.numeric(paste0(start_epoch, stem_no)),
-           log_key = log_no
-           )
+           log_key = log_no           )
 
 
 
@@ -191,7 +198,8 @@ read_pri_file2 = function(filename){
               product_definition = product_definition,
               stems = stems,
               logs = logs,
-              product_grp_table = product_grp_table
+              product_grp_table = product_grp_table,
+              present_vars = names(df1)
 
               )
   return(Ret)
