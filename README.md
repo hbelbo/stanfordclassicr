@@ -3,7 +3,7 @@
 
 To read StanForD classic forest machine reports
 
-Currently the package provide functions to read .pri, .stm and .ktr files. The functions have been tested for only a few example files of each category. It is therefore likely the functions will fail and that they will need further modification to work. 
+Currently the package provide functions to read .pri, .stm and .ktr files. The functions have been tested for only a few example files of each category. If they fail please send an email to: beh at nibio.no, and please attach the file to parse. 
 
 ## Install from github:
 ```r
