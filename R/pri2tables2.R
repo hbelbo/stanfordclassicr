@@ -134,10 +134,10 @@ read_pri_file2 = function(filename){
   stems <- as_tibble(stems)
   #stems <- as.data.frame(stems)
   #names(stems) <- Code_Name_pairs_present$CodeN
-  stems$stem_key = paste0(start_epoch,  stems$stemnumber)
-  stems$species_group_key = paste0(start_epoch, species)
-  stems$object_key = start_epoch
-  stems = stems %>%
+  stems$stem_key <- paste0(start_epoch,  stems$stemnumber)
+  stems$species_group_key <- paste0(start_epoch, species)
+  stems$object_key <- start_epoch
+  stems <- stems %>%
     mutate(.,
            latitude_category = case_when(., Lat1North2South == 1 ~"North", TRUE ~ "South"),
            longitude_category = case_when(., Lon2West1East == 1 ~"East", TRUE ~ "West")
