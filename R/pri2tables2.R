@@ -32,7 +32,7 @@ read_pri_file2 = function(filename){
                   base_machine_model = get0("v3t6", ifnotfound = NA_character_),
                   harvester_head_model = get0("v3t8", ifnotfound = NA_character_),
                   machine_application_verision = get0("v5t1", ifnotfound = NA_character_),
-                  filename = str_extract(filename, pattern = "\\w*.stm")) %>%
+                  filename = str_extract(filename, pattern = "\\w*.pri")) %>%
     dplyr::select(., -tidyselect::all_of(selector))
 
 
