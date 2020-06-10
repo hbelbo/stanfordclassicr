@@ -6,14 +6,14 @@
 #' @export
 #'
 #' @examples
-#'  files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
-#'  prifiles = files[stringr::str_detect(files, ".pri")]
+#'  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+#'  prifiles <- files[stringr::str_detect(files, ".pri")]
 #'  read_pri_file(prifiles[1])
-read_pri_file2 = function(filename){
-  #  filename = prifiles[1]
+read_pri_file2 <- function(filename){
+  #  filename <- prifiles[1]
   strng <- file2strng(filename)
   df1 <- sfclassic2df_v2(strng)
-  start_epoch = as.integer(lubridate::ymd_hms(stringr::str_replace(df1$v16t4, "\n", "")))
+  start_epoch <- as.integer(lubridate::ymd_hms(stringr::str_replace(df1$v16t4, "\n", "")))
 
 
   ## Report header
@@ -70,14 +70,16 @@ read_pri_file2 = function(filename){
 
   ## Species and Product definitions
   # Species
+
   selector <- c( "v120t1", "v120t3")
   selected <- df1 %>% dplyr::select(., tidyselect::all_of(selector))
-  dfx = expand_str(selected)
+  dfx <- expand_str(selected)
+  dfx$tmp_species_nr = 1:nrow(species_group_definition)
 
   species_group_definition <-
     dfx %>%  mutate(., species_group_name = v120t1,
                     species_group_user_id = paste0(v120t1, "#", v120t3, "#", stringr::str_replace( df1$v2t1, "\n", "")),
-                    tmp_species_nr = as.integer(v120t3),
+                    species_code = v120t3,
                     species_group_key = as.numeric(paste0(start_epoch, tmp_species_nr)))  %>%
     dplyr::select(., -tidyselect::matches("v\\d", perl =T))
 
@@ -87,7 +89,7 @@ read_pri_file2 = function(filename){
     product_grp_species_nr <- rep(1:length(replicator), replicator)
   product_grp_code <- integer()
   for (i in 1:as.integer(df1$v111t1)) {
-    product_grp_code = c(product_grp_code, 1:replicator[i])
+    product_grp_code <- c(product_grp_code, 1:replicator[i])
   }
   product_grp_table <-
     tibble::tibble(product_grp_code,
