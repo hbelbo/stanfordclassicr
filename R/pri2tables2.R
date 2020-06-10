@@ -139,11 +139,16 @@ read_pri_file2 <- function(filename){
   stems$stem_key <- paste0(start_epoch,  stems$stemnumber)
   stems$species_group_key <- paste0(start_epoch, species)
   stems$object_key <- start_epoch
+
   stems <- stems %>%
-    mutate(.,
-           latitude_category = case_when(., Lat1North2South == 1 ~"North", TRUE ~ "South"),
-           longitude_category = case_when(., Lon2West1East == 1 ~"East", TRUE ~ "West")
-           )
+    dplyr::mutate(.,
+                  latitude_category =
+                    case_when(
+                      Lat1North2South == 1 ~ "North",
+                      Lat1North2South == 2 ~ "South",
+                      TRUE ~ NA_character_),
+                  longitude_category = case_when( Lon2West1East == 1 ~"East", Lon2West1East == 1 ~"West", TRUE ~ NA_character_)
+    )
 
 
   # .. Logs
@@ -172,13 +177,13 @@ read_pri_file2 <- function(filename){
   } else {LogData$tmp_pk = LogData$price_matrix_nr}
 
   if("vol_dl" %in%  names(LogData)){
-    LogData <- Logdata %>%
+    LogData <- LogData %>%
       mutate(., m3price = as.numeric(vol_dl) / 10000,
                 m3sob = as.numeric(vol_dl_sob) / 10000,
                 m3sub = as.numeric(vol_dl_sub) / 10000
              )
   } else if ("vol_sob" %in% names(LogData)) {
-    LogData <- Logdata %>% rowwise() %>%
+    LogData <- LogData %>% rowwise() %>%
       mutate(., m3price = as.numeric(paste(vol, voldec, sep = ".")),
              m3sob = as.numeric(paste(vol_sob, vol_sob_dec, sep = ".")),
              m3sub = as.numeric(paste(vol_sub, vol_sub_dec, sep = ".")))
