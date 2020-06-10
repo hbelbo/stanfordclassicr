@@ -42,7 +42,7 @@ read_pri_file = function(filename){
   txtvarvals <- lapply(X = txtvarvals,  FUN = function(X) {str_split(X, pattern = "\n")})
   tmp <- str_sub(VarVals[VarDataType=="txt"], start = 1, end = 25)
   for(i in 1:length(txtvarvals)){
-    assign(txtvars[i], as_vector(txtvarvals[[i]]))
+    assign(txtvars[i], as.vector(txtvarvals[[i]]))
     }
   sftxt = tibble(V=Vars[VarDataType=="txt"], v=VarNames[VarDataType=="txt"], VarNr = VarNr[VarDataType=="txt"], VarType = VarType[VarDataType=="txt"],
                  VarDType = VarDataType[VarDataType=="txt"], VarLength = txtVarLength, strn = tmp)
@@ -56,7 +56,7 @@ read_pri_file = function(filename){
   numVarLength = sapply(X = numvarsvals, length)
   tmp <- str_sub(VarVals[VarDataType=="Numeric"], start = 1, end = 25)
   for(i in 1:length(numvarsvals)){
-    assign(numvars[i], as.numeric(as_vector(numvarsvals[[i]])))
+    assign(numvars[i], as.numeric(as.vector(numvarsvals[[i]])))
 
   }
   sfnum = tibble(V=Vars[VarDataType=="Numeric"], v=VarNames[VarDataType=="Numeric"], VarNr = VarNr[VarDataType=="Numeric"], VarType = VarType[VarDataType=="Numeric"],
