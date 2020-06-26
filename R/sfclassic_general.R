@@ -1,8 +1,8 @@
 
 
-#sfvardefs = readRDS(
-#file = list.files(system.file("extdata", package = "stanfordclassicr"),
-#full.names = T, pattern = "sfvardefs.Rds"))
+# sfvardefs = readRDS(
+# file = list.files(system.file("extdata", package = "stanfordclassicr"),
+# full.names = T, pattern = "sfvardefs.Rds"))
 
 
 #' Convert stanford classic text string to dataframe
@@ -111,12 +111,15 @@ populateselection <- function(valuelist, selector){
 
 
 expand_str <- function(tibbl){
-  ## tibbl = calibsd # for testing only
+
   var1 = dplyr::pull(tibbl[,1])
-  type1 = ifelse(stringr::str_starts(string = var1[1], pattern = "\n"), "txt", "num")
+  # Clue1: text variables starts with new line (\n or \cr \r\n)
+  type1 = ifelse(stringr::str_starts(string = var1[1], pattern = "[\n\r]{1,2}"), "txt", "num")
+
+  # Clue2: if text, each data entry is split by newline. If numeric, each data entry split by space.
   if(type1 == "txt") {
     lexp1 =
-      unlist(stringr::str_split(stringr::str_remove(var1, "\n"), "\n" ))
+      unlist(stringr::str_split(stringr::str_remove(var1, "[\n\r]{1,2}"), "[\n\r]{1,2}" ))
   } else {
     lexp1 =
       as.integer(unlist(stringr::str_split(var1, " ")))
@@ -127,11 +130,15 @@ expand_str <- function(tibbl){
   for (i in seq_along(names(tibbl))){
     nami = names(tibbl)[i]
     vari = dplyr::pull(tibbl[,i])
-    typei = ifelse(stringr::str_starts(string = vari[1], pattern = "\n"), "txt", "num")
+    # Clue1: text variables starts with new line (\n or \cr \r\n)
+
+    typei = ifelse(stringr::str_starts(string = vari[1], pattern = "[\n\r]{1,2}"), "txt", "num")
     n_obsi = length(vari)
+
+    # Clue2: if text, each data entry is split by newline. If numeric, each data entry split by space.
     if(typei == "txt") {
       lexp =
-        unlist(stringr::str_split(stringr::str_remove(vari, "\n"), "\n" ))
+        unlist(stringr::str_split(stringr::str_remove(vari, "[\n\r]{1,2}"), "[\n\r]{1,2}" ))
     } else {
       lexp =
         as.integer(unlist(stringr::str_split(vari, " ")))
@@ -140,3 +147,22 @@ expand_str <- function(tibbl){
   }
   return(retdf)
 }
+
+
+
+varvals2one <- function(stanford.tibbl, vars2use){
+  selector <- vars2use # e.g. c(  "v21t2", "v21t3", "v21t4") #list of sfclassic vars we want
+  selector <- selector[which(selector %in% names(stanford.tibbl))] # Ensure to not select vars not present
+  selected <- df1 %>% dplyr::select(., tidyselect::all_of(selector)) %>%
+    expand_str(.) %>%
+    dplyr::select_if(., ~nchar(.)>0)
+
+  if(ncol(selected)>0){
+    collapsed2one <- selected %>%
+      stringr::str_c(., sep = ", ", collapse = ", ")
+  } else {
+    collapsed2one <- character()
+  }
+  return(collapsed2one)
+}
+
