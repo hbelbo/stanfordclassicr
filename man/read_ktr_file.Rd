@@ -16,8 +16,9 @@ a list of tables populated with data from the stm report: report_header, object_
 Read StanForD Classic ktr-files (mahcine reports from forest machines)
 }
 \examples{
- files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+ files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = TRUE)
  ktrfiles <- files[stringr::str_detect(files, ".ktr")]
  filename = ktrfiles[2]
  ktrdata <- read_ktr_file(filename)
+
 }

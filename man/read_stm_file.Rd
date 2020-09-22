@@ -4,10 +4,13 @@
 \alias{read_stm_file}
 \title{Read StanForD Classic .stm-files (mahcine reports from forest machines)}
 \usage{
-read_stm_file(filename)
+read_stm_file(filename, verbose = FALSE)
 }
 \arguments{
 \item{filename}{(including path)}
+
+\item{verbose}{Setting this parameter to TRUE will make the function also
+return the variable content of all variables available in the file.}
 }
 \value{
 a list of tables populated with data from the stm report: report_header, object_definition, operator_definition, product_definitions, stems, logs
@@ -19,8 +22,8 @@ Read StanForD Classic .stm-files (mahcine reports from forest machines)
 this function reads one stanford stemfile (.stm)
 }
 \examples{
- files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+ files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = TRUE)
  stmfiles <- files[stringr::str_detect(files, ".stm")]
- read_stm_file(stmfiles[1])
- filename <- stmfiles[1]
+ stemdata <- read_stm_file(stmfiles[1])
+ dplyr::glimpse
 }

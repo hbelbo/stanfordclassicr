@@ -1,0 +1,4556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OperationalMonitoring xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" messageType="mom" areaUnit="ha" diameterUnit="mm" lengthUnit="cm" volumeUnit="m3" weightUnit="kg" version="2.1" xmlns="urn:skogforsk:stanford2010">
+  <OperationalMonitoringHeader>
+    <CreationDate>2016-12-14T11:12:17.6101431+01:00</CreationDate>
+    <ModificationDate>2016-12-14T11:12:17.6101431+01:00</ModificationDate>
+    <ApplicationVersionCreated>MaxiXplorer 3.3.2.24854 </ApplicationVersionCreated>
+    <ApplicationVersionModified>MaxiXplorer 3.3.2.24854 </ApplicationVersionModified>
+    <CountryCode>578</CountryCode>
+  </OperationalMonitoringHeader>
+  <Machine machineCategory="Forwarder">
+    <MachineKey>15984636045159287515948</MachineKey>
+    <MachineUserID>1594831146159</MachineUserID>
+    <MachineOwnerID>865 Repsak</MachineOwnerID>
+    <MachineApplicationVersion>MaxiXplorer 3.3.2.24854 </MachineApplicationVersion>
+    <MachineBaseManufacturer>Komatsu Forest</MachineBaseManufacturer>
+    <MachineBaseModel>865</MachineBaseModel>
+    <MachineOwner>
+      <FirstName>Furugaidd Skogsavvirkning AS</FirstName>
+      <Address>
+        <Street>Bagn</Street>
+      </Address>
+      <Phone>61347900</Phone>
+      <Email>emil@mo_example.no</Email>
+      <BusinessName>949863928580</BusinessName>
+      <BusinessID>949863928580</BusinessID>
+    </MachineOwner>
+    <LoggingContractor>
+      <FirstName>Furugaidd Skogsavvirkning AS</FirstName>
+      <Address>
+        <Street>Attavettet</Street>
+      </Address>
+      <Phone>12345678</Phone>
+      <Email>emil@lc_example.no</Email>
+      <BusinessName>jhkløasdf</BusinessName>
+      <BusinessID>456987456469</BusinessID>
+    </LoggingContractor>
+    <OperatorDefinition>
+      <OperatorKey>3</OperatorKey>
+      <OperatorUserID>96a712d8-b63d-496a-9e82-cd20ed0d8372</OperatorUserID>
+      <ContactInformation>
+        <FirstName>Ola</FirstName>
+        <LastName>Dunk</LastName>
+      </ContactInformation>
+    </OperatorDefinition>
+    <Extension>
+      <MachineManufacturerID>86505001155664466</MachineManufacturerID>
+      <MachineStatus>Disturbance</MachineStatus>
+    </Extension>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2014-04-15T10:53:58.853+02:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">Pine#1#APT_1</SpeciesGroupUserID>
+      <SpeciesGroupName>Pine</SpeciesGroupName>
+      <SpeciesGroupInfo>1</SpeciesGroupInfo>
+      <SpeciesGroupVersion>1</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>11</StemTypeCode>
+        <StemTypeName>Default</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>1</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>3</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Grade1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Grade2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Grade3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Grade4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Grade5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Grade6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Grade7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Grade8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="Swedish Zacco">
+        <SwedishZacco>
+          <ConstantA>1.360000000</ConstantA>
+          <FactorB>0.032800000</FactorB>
+        </SwedishZacco>
+      </BarkFunction>
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>24.300000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-1.324000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.039372000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.000385000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>1.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.381000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>-0.006291000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>7.700000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.233000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.003056000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>1</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2014-04-15T10:53:59.463+02:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">Spruce#2#APT_2</SpeciesGroupUserID>
+      <SpeciesGroupName>Spruce</SpeciesGroupName>
+      <SpeciesGroupInfo>2</SpeciesGroupInfo>
+      <SpeciesGroupVersion>2</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>21</StemTypeCode>
+        <StemTypeName>Default</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>2</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>3</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Grade1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Grade2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Grade3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Grade4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Grade5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Grade6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Grade7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Grade8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="Swedish Zacco">
+        <SwedishZacco>
+          <ConstantA>3.270000000</ConstantA>
+          <FactorB>0.036900000</FactorB>
+        </SwedishZacco>
+      </BarkFunction>
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>30.460000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-3.399000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.181337000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.004345900</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000039080</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>-0.350000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.143000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>0.016430000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>-0.000380000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>12.650000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.556000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.008019000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>2</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2014-04-15T10:53:59.603+02:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">Hardwood 1#3#APT_3</SpeciesGroupUserID>
+      <SpeciesGroupName>Hardwood 1</SpeciesGroupName>
+      <SpeciesGroupInfo>3</SpeciesGroupInfo>
+      <SpeciesGroupVersion>3</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>31</StemTypeCode>
+        <StemTypeName>Default</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>3</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>6</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Grade1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Grade2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Grade3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Grade4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Grade5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Grade6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Grade7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Grade8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="None" />
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>27.040000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-2.004000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.066531000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.000702000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>0.410000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.440000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>-0.006870000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>8.850000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.300000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.004027000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>3</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2014-04-15T10:53:59.633+02:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">Hardwood 2#4#APT_4</SpeciesGroupUserID>
+      <SpeciesGroupName>Hardwood 2</SpeciesGroupName>
+      <SpeciesGroupInfo>4</SpeciesGroupInfo>
+      <SpeciesGroupVersion>4</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>41</StemTypeCode>
+        <StemTypeName>Default</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>4</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>6</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Grade1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Grade2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Grade3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Grade4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Grade5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Grade6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Grade7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Grade8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="None" />
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>27.040000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-2.004000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.066531000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.000702000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>0.410000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.440000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>-0.006870000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>8.850000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.300000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.004027000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>4</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:45:24.313+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">FURU#1#APT_1</SpeciesGroupUserID>
+      <SpeciesGroupName>FURU</SpeciesGroupName>
+      <SpeciesGroupInfo>1</SpeciesGroupInfo>
+      <SpeciesGroupVersion>1</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>65</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>2</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="Swedish Zacco">
+        <SwedishZacco>
+          <ConstantA>3.520000000</ConstantA>
+          <FactorB>0.028600000</FactorB>
+        </SwedishZacco>
+      </BarkFunction>
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>24.300000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-1.324000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.039372000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.000385000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>1.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.381000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>-0.006291000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>7.700000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.233000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.003056000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>1</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:45:25.797+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">GRAN#2#APT_2</SpeciesGroupUserID>
+      <SpeciesGroupName>GRAN</SpeciesGroupName>
+      <SpeciesGroupInfo>2</SpeciesGroupInfo>
+      <SpeciesGroupVersion>2</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>66</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>1</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="Swedish Zacco">
+        <SwedishZacco>
+          <ConstantA>4.540000000</ConstantA>
+          <FactorB>0.030900000</FactorB>
+        </SwedishZacco>
+      </BarkFunction>
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>30.460000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-3.399000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.181337000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.004345900</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000039080</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>-0.350000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.143000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>0.016430000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>-0.000380000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>12.650000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.556000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.008019000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>2</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:45:26.343+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">BJØRK#3#APT_3</SpeciesGroupUserID>
+      <SpeciesGroupName>BJØRK</SpeciesGroupName>
+      <SpeciesGroupInfo>3</SpeciesGroupInfo>
+      <SpeciesGroupVersion>3</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>67</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>6</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="None" />
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>27.040000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-2.004000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.066531000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.000702000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>0.410000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.440000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>-0.006870000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>8.850000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.300000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.004027000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>3</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:45:26.437+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">LØV#4#APT_4</SpeciesGroupUserID>
+      <SpeciesGroupName>LØV</SpeciesGroupName>
+      <SpeciesGroupInfo>4</SpeciesGroupInfo>
+      <SpeciesGroupVersion>4</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>68</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>6</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="None" />
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>27.040000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-2.004000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.066531000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.000702000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>0.410000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.440000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>-0.006870000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>8.850000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.300000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.004027000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>4</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:55:50.533+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">FURU#1#APT_1</SpeciesGroupUserID>
+      <SpeciesGroupName>FURU</SpeciesGroupName>
+      <SpeciesGroupInfo>1</SpeciesGroupInfo>
+      <SpeciesGroupVersion>1</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>69</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>2</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="Swedish Zacco">
+        <SwedishZacco>
+          <ConstantA>3.520000000</ConstantA>
+          <FactorB>0.028600000</FactorB>
+        </SwedishZacco>
+      </BarkFunction>
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>24.300000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-1.324000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.039372000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.000385000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>1.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.381000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>-0.006291000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>7.700000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.233000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.003056000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>1</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:55:51.157+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">GRAN#2#APT_2</SpeciesGroupUserID>
+      <SpeciesGroupName>GRAN</SpeciesGroupName>
+      <SpeciesGroupInfo>2</SpeciesGroupInfo>
+      <SpeciesGroupVersion>2</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>70</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>1</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="Swedish Zacco">
+        <SwedishZacco>
+          <ConstantA>4.540000000</ConstantA>
+          <FactorB>0.030900000</FactorB>
+        </SwedishZacco>
+      </BarkFunction>
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>30.460000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-3.399000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.181337000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.004345900</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000039080</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>-0.350000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.143000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>0.016430000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>-0.000380000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>12.650000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.556000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.008019000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>2</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:55:51.703+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">BJØRK#3#APT_3</SpeciesGroupUserID>
+      <SpeciesGroupName>BJØRK</SpeciesGroupName>
+      <SpeciesGroupInfo>3</SpeciesGroupInfo>
+      <SpeciesGroupVersion>3</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>71</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>6</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="None" />
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>27.040000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-2.004000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.066531000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.000702000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>0.410000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.440000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>-0.006870000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>8.850000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.300000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.004027000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>3</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:55:51.797+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">LØV#4#APT_4</SpeciesGroupUserID>
+      <SpeciesGroupName>LØV</SpeciesGroupName>
+      <SpeciesGroupInfo>4</SpeciesGroupInfo>
+      <SpeciesGroupVersion>4</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>72</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>6</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="None" />
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>27.040000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-2.004000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.066531000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.000702000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>0.410000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.440000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>-0.006870000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>8.850000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.300000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.004027000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>4</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:57:52.907+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">FURU#1#APT_1</SpeciesGroupUserID>
+      <SpeciesGroupName>FURU</SpeciesGroupName>
+      <SpeciesGroupInfo>1</SpeciesGroupInfo>
+      <SpeciesGroupVersion>1</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>73</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>2</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="Swedish Zacco">
+        <SwedishZacco>
+          <ConstantA>3.520000000</ConstantA>
+          <FactorB>0.028600000</FactorB>
+        </SwedishZacco>
+      </BarkFunction>
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>24.300000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-1.324000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.039372000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.000385000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>1.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.381000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>-0.006291000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>7.700000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.233000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.003056000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>1</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:57:53.517+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">GRAN#2#APT_2</SpeciesGroupUserID>
+      <SpeciesGroupName>GRAN</SpeciesGroupName>
+      <SpeciesGroupInfo>2</SpeciesGroupInfo>
+      <SpeciesGroupVersion>2</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>74</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>1</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="Swedish Zacco">
+        <SwedishZacco>
+          <ConstantA>4.540000000</ConstantA>
+          <FactorB>0.030900000</FactorB>
+        </SwedishZacco>
+      </BarkFunction>
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>30.460000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-3.399000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.181337000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.004345900</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000039080</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>-0.350000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.143000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>0.016430000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>-0.000380000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>12.650000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.556000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.008019000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>2</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:57:54.063+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">BJØRK#3#APT_3</SpeciesGroupUserID>
+      <SpeciesGroupName>BJØRK</SpeciesGroupName>
+      <SpeciesGroupInfo>3</SpeciesGroupInfo>
+      <SpeciesGroupVersion>3</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>75</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>6</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="None" />
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>27.040000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-2.004000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.066531000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.000702000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>0.410000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.440000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>-0.006870000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>8.850000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.300000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.004027000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>3</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:57:54.173+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">LØV#4#APT_4</SpeciesGroupUserID>
+      <SpeciesGroupName>LØV</SpeciesGroupName>
+      <SpeciesGroupInfo>4</SpeciesGroupInfo>
+      <SpeciesGroupVersion>4</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>76</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>6</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="None" />
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>27.040000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-2.004000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.066531000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.000702000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>0.410000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.440000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>-0.006870000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>8.850000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.300000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.004027000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>4</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:59:27.313+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">FURU#1#APT_1</SpeciesGroupUserID>
+      <SpeciesGroupName>FURU</SpeciesGroupName>
+      <SpeciesGroupInfo>1</SpeciesGroupInfo>
+      <SpeciesGroupVersion>1</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>77</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>2</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="Swedish Zacco">
+        <SwedishZacco>
+          <ConstantA>3.520000000</ConstantA>
+          <FactorB>0.028600000</FactorB>
+        </SwedishZacco>
+      </BarkFunction>
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>24.300000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-1.324000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.039372000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.000385000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>1.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.381000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>-0.006291000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>7.700000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.233000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.003056000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>1</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:59:27.937+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">GRAN#2#APT_2</SpeciesGroupUserID>
+      <SpeciesGroupName>GRAN</SpeciesGroupName>
+      <SpeciesGroupInfo>2</SpeciesGroupInfo>
+      <SpeciesGroupVersion>2</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>78</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>1</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="Swedish Zacco">
+        <SwedishZacco>
+          <ConstantA>4.540000000</ConstantA>
+          <FactorB>0.030900000</FactorB>
+        </SwedishZacco>
+      </BarkFunction>
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>30.460000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-3.399000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.181337000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.004345900</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000039080</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>-0.350000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.143000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>0.016430000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>-0.000380000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>12.650000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.556000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.008019000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>2</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:59:28.5+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">BJØRK#3#APT_3</SpeciesGroupUserID>
+      <SpeciesGroupName>BJØRK</SpeciesGroupName>
+      <SpeciesGroupInfo>3</SpeciesGroupInfo>
+      <SpeciesGroupVersion>3</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>79</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>6</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="None" />
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>27.040000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-2.004000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.066531000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.000702000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>0.410000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.440000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>-0.006870000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>8.850000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.300000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.004027000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>3</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <SpeciesGroupDefinition>
+      <SpeciesGroupModificationDate>2016-12-14T10:59:28.593+01:00</SpeciesGroupModificationDate>
+      <SpeciesGroupUserID agency="Other">LØV#4#APT_4</SpeciesGroupUserID>
+      <SpeciesGroupName>LØV</SpeciesGroupName>
+      <SpeciesGroupInfo>4</SpeciesGroupInfo>
+      <SpeciesGroupVersion>4</SpeciesGroupVersion>
+      <DBHHeight modificationRestricted="false">120</DBHHeight>
+      <StemTypeDefinition>
+        <StemTypeCode>0</StemTypeCode>
+        <StemTypeName>Stam1</StemTypeName>
+      </StemTypeDefinition>
+      <StemTypeDefinition>
+        <StemTypeCode>1</StemTypeCode>
+        <StemTypeName>Stam2</StemTypeName>
+      </StemTypeDefinition>
+      <SpeciesGroupKey>80</SpeciesGroupKey>
+      <Grades modificationRestricted="false">
+        <StartGrade>6</StartGrade>
+        <MTHStartGrade>7</MTHStartGrade>
+        <Grade>
+          <GradeNumber>1</GradeNumber>
+          <GradeName>Kval1</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>2</GradeNumber>
+          <GradeName>Kval2</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>3</GradeNumber>
+          <GradeName>Kval3</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>4</GradeNumber>
+          <GradeName>Kval4</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>5</GradeNumber>
+          <GradeName>Kval5</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>6</GradeNumber>
+          <GradeName>Kval6</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>7</GradeNumber>
+          <GradeName>Kval7</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>8</GradeNumber>
+          <GradeName>Kval8</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>9</GradeNumber>
+          <GradeName>9</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>10</GradeNumber>
+          <GradeName>10</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>11</GradeNumber>
+          <GradeName>11</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>12</GradeNumber>
+          <GradeName>12</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>13</GradeNumber>
+          <GradeName>13</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>14</GradeNumber>
+          <GradeName>14</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>15</GradeNumber>
+          <GradeName>15</GradeName>
+        </Grade>
+        <Grade>
+          <GradeNumber>16</GradeNumber>
+          <GradeName>16</GradeName>
+        </Grade>
+      </Grades>
+      <BarkFunction barkFunctionCategory="None" />
+      <ButtEndProfileExtrapolation buttEndProfileExtrapolationMethod="ExtrapolationFunction">
+        <ReferenceHeight>130</ReferenceHeight>
+        <ButtEndProfileExtrapolationFunction ButtEndProfileExtrapolationFunctionCategory="Poikela 2007">
+          <Parameter>
+            <ParameterName>a00</ParameterName>
+            <ParameterValue>27.040000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a01</ParameterName>
+            <ParameterValue>-2.004000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a02</ParameterName>
+            <ParameterValue>0.066531000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a03</ParameterName>
+            <ParameterValue>-0.000702000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a04</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a10</ParameterName>
+            <ParameterValue>0.410000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a11</ParameterName>
+            <ParameterValue>0.440000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a12</ParameterName>
+            <ParameterValue>-0.006870000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a13</ParameterName>
+            <ParameterValue>0.000000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a20</ParameterName>
+            <ParameterValue>8.850000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a21</ParameterName>
+            <ParameterValue>-0.300000000</ParameterValue>
+          </Parameter>
+          <Parameter>
+            <ParameterName>a22</ParameterName>
+            <ParameterValue>0.004027000</ParameterValue>
+          </Parameter>
+        </ButtEndProfileExtrapolationFunction>
+      </ButtEndProfileExtrapolation>
+      <SpeciesGroupPresentationOrder>4</SpeciesGroupPresentationOrder>
+    </SpeciesGroupDefinition>
+    <ObjectDefinition>
+      <ObjectUserID agency="LoggingOrganisation">Standard Pricelist</ObjectUserID>
+      <ObjectName>Default</ObjectName>
+      <ForestCertification>None</ForestCertification>
+      <LoggingForm>
+        <LoggingFormCode>0</LoggingFormCode>
+        <LoggingFormDescription />
+      </LoggingForm>
+      <LoggingOrganisation>
+        <ContactInformation>
+          <FirstName />
+          <LastName />
+          <Address>
+            <Street />
+            <City />
+            <Province />
+            <Country />
+          </Address>
+          <Phone />
+          <Fax />
+          <Email />
+          <BusinessName />
+          <BusinessID />
+        </ContactInformation>
+        <District />
+        <Team />
+      </LoggingOrganisation>
+      <ForestOwner>
+        <FirstName />
+        <LastName />
+        <Address>
+          <Street />
+          <City />
+          <Province />
+          <Country />
+        </Address>
+        <Phone />
+        <Fax />
+        <Email />
+        <BusinessName />
+        <BusinessID />
+      </ForestOwner>
+      <ContractNumber>1</ContractNumber>
+      <RealEstateIDObject agency="LoggingOrganisation">1</RealEstateIDObject>
+      <AuditingOrganisation>
+        <FirstName />
+        <LastName />
+        <Address>
+          <Street />
+          <City />
+          <Province />
+          <Country />
+        </Address>
+        <Phone />
+        <Fax />
+        <Email />
+        <BusinessName />
+        <BusinessID />
+      </AuditingOrganisation>
+      <ObjectKey>2</ObjectKey>
+      <StartDate>2014-04-15T10:53:56.717+02:00</StartDate>
+      <SubObject>
+        <SubObjectUserID agency="Other">Default</SubObjectUserID>
+        <SubObjectName>Default</SubObjectName>
+        <LoggingForm>
+          <LoggingFormCode>0</LoggingFormCode>
+          <LoggingFormDescription>0</LoggingFormDescription>
+        </LoggingForm>
+        <RealEstateIDSubObject>Default</RealEstateIDSubObject>
+        <SubObjectKey>2</SubObjectKey>
+      </SubObject>
+    </ObjectDefinition>
+    <ObjectDefinition>
+      <ObjectUserID agency="LoggingOrganisation" />
+      <ObjectName />
+      <ForestCertification>None</ForestCertification>
+      <LoggingForm>
+        <LoggingFormCode>0</LoggingFormCode>
+        <LoggingFormDescription />
+      </LoggingForm>
+      <LoggingOrganisation>
+        <ContactInformation>
+          <FirstName />
+          <LastName />
+          <Address>
+            <Street />
+            <City />
+            <Province />
+            <Country />
+          </Address>
+          <Phone />
+          <Fax />
+          <Email />
+          <BusinessName />
+          <BusinessID />
+        </ContactInformation>
+        <District />
+        <Team />
+      </LoggingOrganisation>
+      <ForestOwner>
+        <FirstName />
+        <LastName />
+        <Address>
+          <Street />
+          <City />
+          <Province />
+          <Country />
+        </Address>
+        <Phone />
+        <Fax />
+        <Email />
+        <BusinessName />
+        <BusinessID />
+      </ForestOwner>
+      <ContractNumber>17</ContractNumber>
+      <RealEstateIDObject agency="LoggingOrganisation">17</RealEstateIDObject>
+      <AuditingOrganisation>
+        <FirstName />
+        <LastName />
+        <Address>
+          <Street />
+          <City />
+          <Province />
+          <Country />
+        </Address>
+        <Phone />
+        <Fax />
+        <Email />
+        <BusinessName />
+        <BusinessID />
+      </AuditingOrganisation>
+      <ObjectKey>19</ObjectKey>
+      <StartDate>2016-12-14T10:45:20.283+01:00</StartDate>
+      <SubObject>
+        <SubObjectUserID agency="Other">05b4eb8d-b538-4874-b271-639ec3f95569</SubObjectUserID>
+        <SubObjectName>Delobjekt1</SubObjectName>
+        <LoggingForm>
+          <LoggingFormCode>0</LoggingFormCode>
+          <LoggingFormDescription>0</LoggingFormDescription>
+        </LoggingForm>
+        <RealEstateIDSubObject />
+        <Extension />
+        <SubObjectKey>22</SubObjectKey>
+      </SubObject>
+    </ObjectDefinition>
+    <ObjectDefinition>
+      <ObjectUserID agency="LoggingOrganisation">c5d26e75-c3f2-447a-abb4-d6fcb9e69b67</ObjectUserID>
+      <ObjectName>Objekt18</ObjectName>
+      <ForestCertification>None</ForestCertification>
+      <LoggingForm>
+        <LoggingFormCode>0</LoggingFormCode>
+        <LoggingFormDescription />
+      </LoggingForm>
+      <LoggingOrganisation>
+        <ContactInformation>
+          <FirstName />
+          <LastName />
+          <Address>
+            <Street />
+            <City />
+            <Province />
+            <Country />
+          </Address>
+          <Phone />
+          <Fax />
+          <Email />
+          <BusinessName />
+          <BusinessID />
+        </ContactInformation>
+        <District />
+        <Team />
+      </LoggingOrganisation>
+      <ForestOwner>
+        <FirstName />
+        <LastName />
+        <Address>
+          <Street />
+          <City />
+          <Province />
+          <Country />
+        </Address>
+        <Phone />
+        <Fax />
+        <Email />
+        <BusinessName />
+        <BusinessID />
+      </ForestOwner>
+      <ContractNumber>18</ContractNumber>
+      <RealEstateIDObject agency="LoggingOrganisation">18</RealEstateIDObject>
+      <AuditingOrganisation>
+        <FirstName />
+        <LastName />
+        <Address>
+          <Street />
+          <City />
+          <Province />
+          <Country />
+        </Address>
+        <Phone />
+        <Fax />
+        <Email />
+        <BusinessName />
+        <BusinessID />
+      </AuditingOrganisation>
+      <ObjectKey>20</ObjectKey>
+      <StartDate>2016-12-14T10:53:18.61+01:00</StartDate>
+      <SubObject>
+        <SubObjectUserID agency="Other">49668ce6-5434-4514-8c89-453f4c07b02f</SubObjectUserID>
+        <SubObjectName>Delobjekt1</SubObjectName>
+        <LoggingForm>
+          <LoggingFormCode>0</LoggingFormCode>
+          <LoggingFormDescription>0</LoggingFormDescription>
+        </LoggingForm>
+        <RealEstateIDSubObject />
+        <Extension />
+        <SubObjectKey>23</SubObjectKey>
+      </SubObject>
+    </ObjectDefinition>
+    <ObjectDefinition>
+      <ObjectUserID agency="LoggingOrganisation">121a568d-4c48-4014-9746-0f85caaa3e01</ObjectUserID>
+      <ObjectName>Objekt19</ObjectName>
+      <ForestCertification>None</ForestCertification>
+      <LoggingForm>
+        <LoggingFormCode>0</LoggingFormCode>
+        <LoggingFormDescription />
+      </LoggingForm>
+      <LoggingOrganisation>
+        <ContactInformation>
+          <FirstName />
+          <LastName />
+          <Address>
+            <Street />
+            <City />
+            <Province />
+            <Country />
+          </Address>
+          <Phone />
+          <Fax />
+          <Email />
+          <BusinessName />
+          <BusinessID />
+        </ContactInformation>
+        <District />
+        <Team />
+      </LoggingOrganisation>
+      <ForestOwner>
+        <FirstName />
+        <LastName />
+        <Address>
+          <Street />
+          <City />
+          <Province />
+          <Country />
+        </Address>
+        <Phone />
+        <Fax />
+        <Email />
+        <BusinessName />
+        <BusinessID />
+      </ForestOwner>
+      <ContractNumber>19</ContractNumber>
+      <RealEstateIDObject agency="LoggingOrganisation">19</RealEstateIDObject>
+      <AuditingOrganisation>
+        <FirstName />
+        <LastName />
+        <Address>
+          <Street />
+          <City />
+          <Province />
+          <Country />
+        </Address>
+        <Phone />
+        <Fax />
+        <Email />
+        <BusinessName />
+        <BusinessID />
+      </AuditingOrganisation>
+      <ObjectKey>21</ObjectKey>
+      <StartDate>2016-12-14T10:55:49.377+01:00</StartDate>
+      <SubObject>
+        <SubObjectUserID agency="Other">7cf48192-950e-4413-80eb-d11a0fbb3be5</SubObjectUserID>
+        <SubObjectName>Delobjekt1</SubObjectName>
+        <LoggingForm>
+          <LoggingFormCode>0</LoggingFormCode>
+          <LoggingFormDescription>0</LoggingFormDescription>
+        </LoggingForm>
+        <RealEstateIDSubObject />
+        <Extension />
+        <SubObjectKey>24</SubObjectKey>
+      </SubObject>
+    </ObjectDefinition>
+    <ObjectDefinition>
+      <ObjectUserID agency="LoggingOrganisation">89b11b59-22af-4f68-a216-ecef0c08eac2</ObjectUserID>
+      <ObjectName>Objekt20</ObjectName>
+      <ForestCertification>None</ForestCertification>
+      <LoggingForm>
+        <LoggingFormCode>0</LoggingFormCode>
+        <LoggingFormDescription />
+      </LoggingForm>
+      <LoggingOrganisation>
+        <ContactInformation>
+          <FirstName />
+          <LastName />
+          <Address>
+            <Street />
+            <City />
+            <Province />
+            <Country />
+          </Address>
+          <Phone />
+          <Fax />
+          <Email />
+          <BusinessName />
+          <BusinessID />
+        </ContactInformation>
+        <District />
+        <Team />
+      </LoggingOrganisation>
+      <ForestOwner>
+        <FirstName />
+        <LastName />
+        <Address>
+          <Street />
+          <City />
+          <Province />
+          <Country />
+        </Address>
+        <Phone />
+        <Fax />
+        <Email />
+        <BusinessName />
+        <BusinessID />
+      </ForestOwner>
+      <ContractNumber>20</ContractNumber>
+      <RealEstateIDObject agency="LoggingOrganisation">20</RealEstateIDObject>
+      <AuditingOrganisation>
+        <FirstName />
+        <LastName />
+        <Address>
+          <Street />
+          <City />
+          <Province />
+          <Country />
+        </Address>
+        <Phone />
+        <Fax />
+        <Email />
+        <BusinessName />
+        <BusinessID />
+      </AuditingOrganisation>
+      <ObjectKey>22</ObjectKey>
+      <StartDate>2016-12-14T10:56:30.64+01:00</StartDate>
+      <SubObject>
+        <SubObjectUserID agency="Other">a8a1e4d4-8e07-4a8f-a0cc-720ce8934a48</SubObjectUserID>
+        <SubObjectName>Delobjekt1</SubObjectName>
+        <LoggingForm>
+          <LoggingFormCode>0</LoggingFormCode>
+          <LoggingFormDescription>0</LoggingFormDescription>
+        </LoggingForm>
+        <RealEstateIDSubObject />
+        <Extension />
+        <SubObjectKey>25</SubObjectKey>
+      </SubObject>
+    </ObjectDefinition>
+    <ObjectDefinition>
+      <ObjectUserID agency="LoggingOrganisation">49d7758c-4565-460c-9f98-e4b496dfd45a</ObjectUserID>
+      <ObjectName>Objekt21</ObjectName>
+      <ForestCertification>None</ForestCertification>
+      <LoggingForm>
+        <LoggingFormCode>0</LoggingFormCode>
+        <LoggingFormDescription />
+      </LoggingForm>
+      <LoggingOrganisation>
+        <ContactInformation>
+          <FirstName />
+          <LastName />
+          <Address>
+            <Street />
+            <City />
+            <Province />
+            <Country />
+          </Address>
+          <Phone />
+          <Fax />
+          <Email />
+          <BusinessName />
+          <BusinessID />
+        </ContactInformation>
+        <District />
+        <Team />
+      </LoggingOrganisation>
+      <ForestOwner>
+        <FirstName />
+        <LastName />
+        <Address>
+          <Street />
+          <City />
+          <Province />
+          <Country />
+        </Address>
+        <Phone />
+        <Fax />
+        <Email />
+        <BusinessName />
+        <BusinessID />
+      </ForestOwner>
+      <ContractNumber>21</ContractNumber>
+      <RealEstateIDObject agency="LoggingOrganisation">21</RealEstateIDObject>
+      <AuditingOrganisation>
+        <FirstName />
+        <LastName />
+        <Address>
+          <Street />
+          <City />
+          <Province />
+          <Country />
+        </Address>
+        <Phone />
+        <Fax />
+        <Email />
+        <BusinessName />
+        <BusinessID />
+      </AuditingOrganisation>
+      <ObjectKey>23</ObjectKey>
+      <StartDate>2016-12-14T10:57:51.687+01:00</StartDate>
+      <SubObject>
+        <SubObjectUserID agency="Other">39517240-2f30-40a1-bab5-bef9edd40c68</SubObjectUserID>
+        <SubObjectName>Delobjekt1</SubObjectName>
+        <LoggingForm>
+          <LoggingFormCode>0</LoggingFormCode>
+          <LoggingFormDescription>0</LoggingFormDescription>
+        </LoggingForm>
+        <RealEstateIDSubObject />
+        <Extension />
+        <SubObjectKey>26</SubObjectKey>
+      </SubObject>
+    </ObjectDefinition>
+    <ObjectDefinition>
+      <ObjectUserID agency="LoggingOrganisation">2259</ObjectUserID>
+      <ObjectName>Diserud Olaf Nils</ObjectName>
+      <ForestCertification>None</ForestCertification>
+      <LoggingForm>
+        <LoggingFormCode>0</LoggingFormCode>
+        <LoggingFormDescription />
+      </LoggingForm>
+      <LoggingOrganisation>
+        <ContactInformation>
+          <FirstName />
+          <LastName />
+          <Address>
+            <Street />
+            <City />
+            <Province />
+            <Country />
+          </Address>
+          <Phone />
+          <Fax />
+          <Email />
+          <BusinessName />
+          <BusinessID />
+        </ContactInformation>
+        <District />
+        <Team />
+      </LoggingOrganisation>
+      <ForestOwner>
+        <FirstName />
+        <LastName />
+        <Address>
+          <Street />
+          <City />
+          <Province />
+          <Country />
+        </Address>
+        <Phone />
+        <Fax />
+        <Email />
+        <BusinessName />
+        <BusinessID />
+      </ForestOwner>
+      <ContractNumber>214853</ContractNumber>
+      <RealEstateIDObject agency="LoggingOrganisation">Nystølen</RealEstateIDObject>
+      <AuditingOrganisation>
+        <FirstName />
+        <LastName />
+        <Address>
+          <Street />
+          <City />
+          <Province />
+          <Country />
+        </Address>
+        <Phone />
+        <Fax />
+        <Email />
+        <BusinessName />
+        <BusinessID />
+      </AuditingOrganisation>
+      <ObjectKey>24</ObjectKey>
+      <StartDate>2016-12-14T10:59:26.11+01:00</StartDate>
+      <SubObject>
+        <SubObjectUserID agency="Other">2259</SubObjectUserID>
+        <SubObjectName>Diserud</SubObjectName>
+        <LoggingForm>
+          <LoggingFormCode>0</LoggingFormCode>
+          <LoggingFormDescription>0</LoggingFormDescription>
+        </LoggingForm>
+        <RealEstateIDSubObject />
+        <SubObjectKey>27</SubObjectKey>
+      </SubObject>
+    </ObjectDefinition>
+    <CombinedMachineWorkTime>
+      <OperatorKey>3</OperatorKey>
+      <StartTime>2016-12-14T10:45:01.86+01:00</StartTime>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <MonitoringSettingsKey>1</MonitoringSettingsKey>
+      <OtherMachineData>
+        <EngineTime>0</EngineTime>
+        <DrivenDistance>0</DrivenDistance>
+        <FuelConsumption>0</FuelConsumption>
+        <ForwarderData>
+          <ForwardedGreenMass>0</ForwardedGreenMass>
+          <TotalForwardedVolume forwardedVolumeCategory="Volume, m3sob">0</TotalForwardedVolume>
+          <NumberOfLoads>0</NumberOfLoads>
+          <DeliveryDefinitionEstimation>
+            <DeliveryEstimationMethod>Scale</DeliveryEstimationMethod>
+            <DeliveryEstimationUnit>Volume, m3sob</DeliveryEstimationUnit>
+          </DeliveryDefinitionEstimation>
+        </ForwarderData>
+      </OtherMachineData>
+      <CombinedMachineRunTime>
+        <MachineRunTimeCategory>Terrain travel</MachineRunTimeCategory>
+        <TimeLength>32</TimeLength>
+      </CombinedMachineRunTime>
+      <CombinedEndTime>2016-12-14T10:45:31.39+01:00</CombinedEndTime>
+      <Extension>
+        <SessionId>644</SessionId>
+        <SessionBreakReason>SubObjectChanged</SessionBreakReason>
+        <MachineMode>PowerMode</MachineMode>
+      </Extension>
+    </CombinedMachineWorkTime>
+    <CombinedMachineWorkTime>
+      <OperatorKey>3</OperatorKey>
+      <StartTime>2016-12-14T10:45:31.39+01:00</StartTime>
+      <ObjectKey>19</ObjectKey>
+      <SubObjectKey>22</SubObjectKey>
+      <MonitoringSettingsKey>1</MonitoringSettingsKey>
+      <OtherMachineData>
+        <EngineTime>180</EngineTime>
+        <DrivenDistance>0</DrivenDistance>
+        <FuelConsumption>0</FuelConsumption>
+        <ForwarderData>
+          <ForwardedGreenMass>0</ForwardedGreenMass>
+          <TotalForwardedVolume forwardedVolumeCategory="Volume, m3sob">0</TotalForwardedVolume>
+          <NumberOfLoads>0</NumberOfLoads>
+          <DeliveryDefinitionEstimation>
+            <DeliveryEstimationMethod>Scale</DeliveryEstimationMethod>
+            <DeliveryEstimationUnit>Volume, m3sob</DeliveryEstimationUnit>
+          </DeliveryDefinitionEstimation>
+        </ForwarderData>
+      </OtherMachineData>
+      <CombinedMachineRunTime>
+        <MachineRunTimeCategory>Terrain travel</MachineRunTimeCategory>
+        <TimeLength>1</TimeLength>
+      </CombinedMachineRunTime>
+      <CombinedEndTime>2016-12-14T10:52:56.783+01:00</CombinedEndTime>
+      <Extension>
+        <SessionId>645</SessionId>
+        <SessionBreakReason>SubObjectChanged</SessionBreakReason>
+        <MachineMode>PowerMode</MachineMode>
+      </Extension>
+    </CombinedMachineWorkTime>
+    <CombinedMachineWorkTime>
+      <OperatorKey>3</OperatorKey>
+      <StartTime>2016-12-14T10:52:56.783+01:00</StartTime>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <MonitoringSettingsKey>1</MonitoringSettingsKey>
+      <OtherMachineData>
+        <EngineTime>0</EngineTime>
+        <DrivenDistance>0</DrivenDistance>
+        <FuelConsumption>0</FuelConsumption>
+        <ForwarderData>
+          <ForwardedGreenMass>0</ForwardedGreenMass>
+          <TotalForwardedVolume forwardedVolumeCategory="Volume, m3sob">0</TotalForwardedVolume>
+          <NumberOfLoads>0</NumberOfLoads>
+          <DeliveryDefinitionEstimation>
+            <DeliveryEstimationMethod>Scale</DeliveryEstimationMethod>
+            <DeliveryEstimationUnit>Volume, m3sob</DeliveryEstimationUnit>
+          </DeliveryDefinitionEstimation>
+        </ForwarderData>
+      </OtherMachineData>
+      <CombinedMachineRunTime>
+        <MachineRunTimeCategory>Terrain travel</MachineRunTimeCategory>
+        <TimeLength>26</TimeLength>
+      </CombinedMachineRunTime>
+      <CombinedEndTime>2016-12-14T10:53:21.173+01:00</CombinedEndTime>
+      <Extension>
+        <SessionId>646</SessionId>
+        <SessionBreakReason>SubObjectChanged</SessionBreakReason>
+        <MachineMode>PowerMode</MachineMode>
+      </Extension>
+    </CombinedMachineWorkTime>
+    <CombinedMachineWorkTime>
+      <OperatorKey>3</OperatorKey>
+      <StartTime>2016-12-14T10:53:21.173+01:00</StartTime>
+      <ObjectKey>20</ObjectKey>
+      <SubObjectKey>23</SubObjectKey>
+      <MonitoringSettingsKey>1</MonitoringSettingsKey>
+      <OtherMachineData>
+        <EngineTime>0</EngineTime>
+        <DrivenDistance>0</DrivenDistance>
+        <FuelConsumption>0</FuelConsumption>
+        <ForwarderData>
+          <ForwardedGreenMass>0</ForwardedGreenMass>
+          <TotalForwardedVolume forwardedVolumeCategory="Volume, m3sob">0</TotalForwardedVolume>
+          <NumberOfLoads>0</NumberOfLoads>
+          <DeliveryDefinitionEstimation>
+            <DeliveryEstimationMethod>Scale</DeliveryEstimationMethod>
+            <DeliveryEstimationUnit>Volume, m3sob</DeliveryEstimationUnit>
+          </DeliveryDefinitionEstimation>
+        </ForwarderData>
+      </OtherMachineData>
+      <CombinedEndTime>2016-12-14T10:53:27.047+01:00</CombinedEndTime>
+      <Extension>
+        <SessionId>647</SessionId>
+        <SessionBreakReason>SubObjectChanged</SessionBreakReason>
+        <MachineMode>PowerMode</MachineMode>
+      </Extension>
+    </CombinedMachineWorkTime>
+    <CombinedMachineWorkTime>
+      <OperatorKey>3</OperatorKey>
+      <StartTime>2016-12-14T10:53:27.047+01:00</StartTime>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <MonitoringSettingsKey>1</MonitoringSettingsKey>
+      <OtherMachineData>
+        <EngineTime>0</EngineTime>
+        <DrivenDistance>0</DrivenDistance>
+        <FuelConsumption>0</FuelConsumption>
+        <ForwarderData>
+          <ForwardedGreenMass>0</ForwardedGreenMass>
+          <TotalForwardedVolume forwardedVolumeCategory="Volume, m3sob">0</TotalForwardedVolume>
+          <NumberOfLoads>0</NumberOfLoads>
+          <DeliveryDefinitionEstimation>
+            <DeliveryEstimationMethod>Scale</DeliveryEstimationMethod>
+            <DeliveryEstimationUnit>Volume, m3sob</DeliveryEstimationUnit>
+          </DeliveryDefinitionEstimation>
+        </ForwarderData>
+      </OtherMachineData>
+      <CombinedMachineDownTime>
+        <Disturbance>
+          <DisturbanceStandardCode>Miscellaneous / other</DisturbanceStandardCode>
+          <DisturbanceManufacturerCode>
+            <Code>1000</Code>
+            <CodeDescription>Forstyrrelse-Annet</CodeDescription>
+          </DisturbanceManufacturerCode>
+        </Disturbance>
+        <StartTime>2016-12-14T10:45:29.047+01:00</StartTime>
+        <TimeLength>1625</TimeLength>
+        <Extension>
+          <EngineMinutes>527595</EngineMinutes>
+        </Extension>
+      </CombinedMachineDownTime>
+      <CombinedEndTime>2016-12-14T10:55:56.127+01:00</CombinedEndTime>
+      <Extension>
+        <SessionId>648</SessionId>
+        <SessionBreakReason>SubObjectChanged</SessionBreakReason>
+        <MachineMode>PowerMode</MachineMode>
+      </Extension>
+    </CombinedMachineWorkTime>
+    <CombinedMachineWorkTime>
+      <OperatorKey>3</OperatorKey>
+      <StartTime>2016-12-14T10:55:56.127+01:00</StartTime>
+      <ObjectKey>21</ObjectKey>
+      <SubObjectKey>24</SubObjectKey>
+      <MonitoringSettingsKey>1</MonitoringSettingsKey>
+      <OtherMachineData>
+        <EngineTime>0</EngineTime>
+        <DrivenDistance>0</DrivenDistance>
+        <FuelConsumption>0</FuelConsumption>
+        <ForwarderData>
+          <ForwardedGreenMass>0</ForwardedGreenMass>
+          <TotalForwardedVolume forwardedVolumeCategory="Volume, m3sob">0</TotalForwardedVolume>
+          <NumberOfLoads>0</NumberOfLoads>
+          <DeliveryDefinitionEstimation>
+            <DeliveryEstimationMethod>Scale</DeliveryEstimationMethod>
+            <DeliveryEstimationUnit>Volume, m3sob</DeliveryEstimationUnit>
+          </DeliveryDefinitionEstimation>
+        </ForwarderData>
+      </OtherMachineData>
+      <CombinedEndTime>2016-12-14T10:56:21.033+01:00</CombinedEndTime>
+      <Extension>
+        <SessionId>649</SessionId>
+        <SessionBreakReason>SubObjectChanged</SessionBreakReason>
+        <MachineMode>PowerMode</MachineMode>
+      </Extension>
+    </CombinedMachineWorkTime>
+    <CombinedMachineWorkTime>
+      <OperatorKey>3</OperatorKey>
+      <StartTime>2016-12-14T10:56:21.033+01:00</StartTime>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <MonitoringSettingsKey>1</MonitoringSettingsKey>
+      <OtherMachineData>
+        <EngineTime>0</EngineTime>
+        <DrivenDistance>0</DrivenDistance>
+        <FuelConsumption>0</FuelConsumption>
+        <ForwarderData>
+          <ForwardedGreenMass>0</ForwardedGreenMass>
+          <TotalForwardedVolume forwardedVolumeCategory="Volume, m3sob">0</TotalForwardedVolume>
+          <NumberOfLoads>0</NumberOfLoads>
+          <DeliveryDefinitionEstimation>
+            <DeliveryEstimationMethod>Scale</DeliveryEstimationMethod>
+            <DeliveryEstimationUnit>Volume, m3sob</DeliveryEstimationUnit>
+          </DeliveryDefinitionEstimation>
+        </ForwarderData>
+      </OtherMachineData>
+      <CombinedEndTime>2016-12-14T10:56:33.267+01:00</CombinedEndTime>
+      <Extension>
+        <SessionId>650</SessionId>
+        <SessionBreakReason>SubObjectChanged</SessionBreakReason>
+        <MachineMode>PowerMode</MachineMode>
+      </Extension>
+    </CombinedMachineWorkTime>
+    <CombinedMachineWorkTime>
+      <OperatorKey>3</OperatorKey>
+      <StartTime>2016-12-14T10:56:33.267+01:00</StartTime>
+      <ObjectKey>22</ObjectKey>
+      <SubObjectKey>25</SubObjectKey>
+      <MonitoringSettingsKey>1</MonitoringSettingsKey>
+      <OtherMachineData>
+        <EngineTime>0</EngineTime>
+        <DrivenDistance>0</DrivenDistance>
+        <FuelConsumption>0</FuelConsumption>
+        <ForwarderData>
+          <ForwardedGreenMass>0</ForwardedGreenMass>
+          <TotalForwardedVolume forwardedVolumeCategory="Volume, m3sob">0</TotalForwardedVolume>
+          <NumberOfLoads>0</NumberOfLoads>
+          <DeliveryDefinitionEstimation>
+            <DeliveryEstimationMethod>Scale</DeliveryEstimationMethod>
+            <DeliveryEstimationUnit>Volume, m3sob</DeliveryEstimationUnit>
+          </DeliveryDefinitionEstimation>
+        </ForwarderData>
+      </OtherMachineData>
+      <CombinedEndTime>2016-12-14T10:57:37.22+01:00</CombinedEndTime>
+      <Extension>
+        <SessionId>651</SessionId>
+        <SessionBreakReason>SubObjectChanged</SessionBreakReason>
+        <MachineMode>PowerMode</MachineMode>
+      </Extension>
+    </CombinedMachineWorkTime>
+    <CombinedMachineWorkTime>
+      <OperatorKey>3</OperatorKey>
+      <StartTime>2016-12-14T10:57:37.22+01:00</StartTime>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <MonitoringSettingsKey>1</MonitoringSettingsKey>
+      <OtherMachineData>
+        <EngineTime>0</EngineTime>
+        <DrivenDistance>0</DrivenDistance>
+        <FuelConsumption>0</FuelConsumption>
+        <ForwarderData>
+          <ForwardedGreenMass>0</ForwardedGreenMass>
+          <TotalForwardedVolume forwardedVolumeCategory="Volume, m3sob">0</TotalForwardedVolume>
+          <NumberOfLoads>0</NumberOfLoads>
+          <DeliveryDefinitionEstimation>
+            <DeliveryEstimationMethod>Scale</DeliveryEstimationMethod>
+            <DeliveryEstimationUnit>Volume, m3sob</DeliveryEstimationUnit>
+          </DeliveryDefinitionEstimation>
+        </ForwarderData>
+      </OtherMachineData>
+      <CombinedEndTime>2016-12-14T10:57:58.487+01:00</CombinedEndTime>
+      <Extension>
+        <SessionId>652</SessionId>
+        <SessionBreakReason>SubObjectChanged</SessionBreakReason>
+        <MachineMode>PowerMode</MachineMode>
+      </Extension>
+    </CombinedMachineWorkTime>
+    <CombinedMachineWorkTime>
+      <OperatorKey>3</OperatorKey>
+      <StartTime>2016-12-14T10:57:58.487+01:00</StartTime>
+      <ObjectKey>23</ObjectKey>
+      <SubObjectKey>26</SubObjectKey>
+      <MonitoringSettingsKey>1</MonitoringSettingsKey>
+      <OtherMachineData>
+        <EngineTime>0</EngineTime>
+        <DrivenDistance>0</DrivenDistance>
+        <FuelConsumption>0</FuelConsumption>
+        <ForwarderData>
+          <ForwardedGreenMass>0</ForwardedGreenMass>
+          <TotalForwardedVolume forwardedVolumeCategory="Volume, m3sob">0</TotalForwardedVolume>
+          <NumberOfLoads>0</NumberOfLoads>
+          <DeliveryDefinitionEstimation>
+            <DeliveryEstimationMethod>Scale</DeliveryEstimationMethod>
+            <DeliveryEstimationUnit>Volume, m3sob</DeliveryEstimationUnit>
+          </DeliveryDefinitionEstimation>
+        </ForwarderData>
+      </OtherMachineData>
+      <CombinedEndTime>2016-12-14T10:59:10.517+01:00</CombinedEndTime>
+      <Extension>
+        <SessionId>653</SessionId>
+        <SessionBreakReason>SubObjectChanged</SessionBreakReason>
+        <MachineMode>PowerMode</MachineMode>
+      </Extension>
+    </CombinedMachineWorkTime>
+    <CombinedMachineWorkTime>
+      <OperatorKey>3</OperatorKey>
+      <StartTime>2016-12-14T10:59:10.517+01:00</StartTime>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <MonitoringSettingsKey>1</MonitoringSettingsKey>
+      <OtherMachineData>
+        <EngineTime>0</EngineTime>
+        <DrivenDistance>0</DrivenDistance>
+        <FuelConsumption>0</FuelConsumption>
+        <ForwarderData>
+          <ForwardedGreenMass>0</ForwardedGreenMass>
+          <TotalForwardedVolume forwardedVolumeCategory="Volume, m3sob">0</TotalForwardedVolume>
+          <NumberOfLoads>0</NumberOfLoads>
+          <DeliveryDefinitionEstimation>
+            <DeliveryEstimationMethod>Scale</DeliveryEstimationMethod>
+            <DeliveryEstimationUnit>Volume, m3sob</DeliveryEstimationUnit>
+          </DeliveryDefinitionEstimation>
+        </ForwarderData>
+      </OtherMachineData>
+      <CombinedEndTime>2016-12-14T10:59:33.687+01:00</CombinedEndTime>
+      <Extension>
+        <SessionId>654</SessionId>
+        <SessionBreakReason>SubObjectChanged</SessionBreakReason>
+        <MachineMode>PowerMode</MachineMode>
+      </Extension>
+    </CombinedMachineWorkTime>
+    <CombinedMachineWorkTime>
+      <OperatorKey>3</OperatorKey>
+      <StartTime>2016-12-14T10:59:33.687+01:00</StartTime>
+      <ObjectKey>24</ObjectKey>
+      <SubObjectKey>27</SubObjectKey>
+      <MonitoringSettingsKey>1</MonitoringSettingsKey>
+      <OtherMachineData>
+        <EngineTime>0</EngineTime>
+        <DrivenDistance>0</DrivenDistance>
+        <FuelConsumption>0</FuelConsumption>
+        <ForwarderData>
+          <ForwardedGreenMass>0</ForwardedGreenMass>
+          <TotalForwardedVolume forwardedVolumeCategory="Volume, m3sob">0</TotalForwardedVolume>
+          <NumberOfLoads>0</NumberOfLoads>
+          <DeliveryDefinitionEstimation>
+            <DeliveryEstimationMethod>Scale</DeliveryEstimationMethod>
+            <DeliveryEstimationUnit>Volume, m3sob</DeliveryEstimationUnit>
+          </DeliveryDefinitionEstimation>
+        </ForwarderData>
+      </OtherMachineData>
+      <CombinedEndTime>2016-12-14T11:12:17.313+01:00</CombinedEndTime>
+      <Extension>
+        <SessionId>655</SessionId>
+        <SessionBreakReason>SubObjectChanged</SessionBreakReason>
+        <MachineMode>PowerMode</MachineMode>
+      </Extension>
+    </CombinedMachineWorkTime>
+    <OperatorShiftDefinition>
+      <ShifKey>219</ShifKey>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <ShiftDescription />
+      <ShiftStartTime>2016-12-14T10:45:01.86+01:00</ShiftStartTime>
+      <ShiftEndTime>2016-12-14T10:45:31.39+01:00</ShiftEndTime>
+    </OperatorShiftDefinition>
+    <OperatorShiftDefinition>
+      <ShifKey>220</ShifKey>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>19</ObjectKey>
+      <SubObjectKey>22</SubObjectKey>
+      <ShiftDescription />
+      <ShiftStartTime>2016-12-14T10:45:31.39+01:00</ShiftStartTime>
+      <ShiftEndTime>2016-12-14T10:52:56.783+01:00</ShiftEndTime>
+    </OperatorShiftDefinition>
+    <OperatorShiftDefinition>
+      <ShifKey>221</ShifKey>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <ShiftDescription />
+      <ShiftStartTime>2016-12-14T10:52:56.783+01:00</ShiftStartTime>
+      <ShiftEndTime>2016-12-14T10:53:21.173+01:00</ShiftEndTime>
+    </OperatorShiftDefinition>
+    <OperatorShiftDefinition>
+      <ShifKey>222</ShifKey>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>20</ObjectKey>
+      <SubObjectKey>23</SubObjectKey>
+      <ShiftDescription />
+      <ShiftStartTime>2016-12-14T10:53:21.173+01:00</ShiftStartTime>
+      <ShiftEndTime>2016-12-14T10:53:27.047+01:00</ShiftEndTime>
+    </OperatorShiftDefinition>
+    <OperatorShiftDefinition>
+      <ShifKey>223</ShifKey>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <ShiftDescription />
+      <ShiftStartTime>2016-12-14T10:53:27.047+01:00</ShiftStartTime>
+      <ShiftEndTime>2016-12-14T10:55:56.127+01:00</ShiftEndTime>
+    </OperatorShiftDefinition>
+    <OperatorShiftDefinition>
+      <ShifKey>224</ShifKey>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>21</ObjectKey>
+      <SubObjectKey>24</SubObjectKey>
+      <ShiftDescription />
+      <ShiftStartTime>2016-12-14T10:55:56.127+01:00</ShiftStartTime>
+      <ShiftEndTime>2016-12-14T10:56:21.033+01:00</ShiftEndTime>
+    </OperatorShiftDefinition>
+    <OperatorShiftDefinition>
+      <ShifKey>225</ShifKey>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <ShiftDescription />
+      <ShiftStartTime>2016-12-14T10:56:21.033+01:00</ShiftStartTime>
+      <ShiftEndTime>2016-12-14T10:56:33.267+01:00</ShiftEndTime>
+    </OperatorShiftDefinition>
+    <OperatorShiftDefinition>
+      <ShifKey>226</ShifKey>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>22</ObjectKey>
+      <SubObjectKey>25</SubObjectKey>
+      <ShiftDescription />
+      <ShiftStartTime>2016-12-14T10:56:33.267+01:00</ShiftStartTime>
+      <ShiftEndTime>2016-12-14T10:57:37.22+01:00</ShiftEndTime>
+    </OperatorShiftDefinition>
+    <OperatorShiftDefinition>
+      <ShifKey>227</ShifKey>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <ShiftDescription />
+      <ShiftStartTime>2016-12-14T10:57:37.22+01:00</ShiftStartTime>
+      <ShiftEndTime>2016-12-14T10:57:58.487+01:00</ShiftEndTime>
+    </OperatorShiftDefinition>
+    <OperatorShiftDefinition>
+      <ShifKey>228</ShifKey>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>23</ObjectKey>
+      <SubObjectKey>26</SubObjectKey>
+      <ShiftDescription />
+      <ShiftStartTime>2016-12-14T10:57:58.487+01:00</ShiftStartTime>
+      <ShiftEndTime>2016-12-14T10:59:10.517+01:00</ShiftEndTime>
+    </OperatorShiftDefinition>
+    <OperatorShiftDefinition>
+      <ShifKey>229</ShifKey>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <ShiftDescription />
+      <ShiftStartTime>2016-12-14T10:59:10.517+01:00</ShiftStartTime>
+      <ShiftEndTime>2016-12-14T10:59:33.687+01:00</ShiftEndTime>
+    </OperatorShiftDefinition>
+    <OperatorShiftDefinition>
+      <ShifKey>230</ShifKey>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>24</ObjectKey>
+      <SubObjectKey>27</SubObjectKey>
+      <ShiftDescription />
+      <ShiftStartTime>2016-12-14T10:59:33.687+01:00</ShiftStartTime>
+      <ShiftEndTime>2016-12-14T11:12:17.313+01:00</ShiftEndTime>
+    </OperatorShiftDefinition>
+    <OperatorWorkTime OperatorWorkTimeCategory="MachineRunTime">
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <MonitoringStartTime>2016-12-14T10:45:01.86+01:00</MonitoringStartTime>
+      <MonitoringTimeLength>29</MonitoringTimeLength>
+      <Extension>
+        <SessionId>644</SessionId>
+      </Extension>
+      <ShifKey>219</ShifKey>
+    </OperatorWorkTime>
+    <OperatorWorkTime OperatorWorkTimeCategory="MachineRunTime">
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>19</ObjectKey>
+      <SubObjectKey>22</SubObjectKey>
+      <MonitoringStartTime>2016-12-14T10:45:31.39+01:00</MonitoringStartTime>
+      <MonitoringTimeLength>445</MonitoringTimeLength>
+      <Extension>
+        <SessionId>645</SessionId>
+      </Extension>
+      <ShifKey>220</ShifKey>
+    </OperatorWorkTime>
+    <OperatorWorkTime OperatorWorkTimeCategory="MachineRunTime">
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <MonitoringStartTime>2016-12-14T10:52:56.783+01:00</MonitoringStartTime>
+      <MonitoringTimeLength>24</MonitoringTimeLength>
+      <Extension>
+        <SessionId>646</SessionId>
+      </Extension>
+      <ShifKey>221</ShifKey>
+    </OperatorWorkTime>
+    <OperatorWorkTime OperatorWorkTimeCategory="MachineRunTime">
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>20</ObjectKey>
+      <SubObjectKey>23</SubObjectKey>
+      <MonitoringStartTime>2016-12-14T10:53:21.173+01:00</MonitoringStartTime>
+      <MonitoringTimeLength>5</MonitoringTimeLength>
+      <Extension>
+        <SessionId>647</SessionId>
+      </Extension>
+      <ShifKey>222</ShifKey>
+    </OperatorWorkTime>
+    <OperatorWorkTime OperatorWorkTimeCategory="MachineRunTime">
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <MonitoringStartTime>2016-12-14T10:53:27.047+01:00</MonitoringStartTime>
+      <MonitoringTimeLength>149</MonitoringTimeLength>
+      <Extension>
+        <SessionId>648</SessionId>
+      </Extension>
+      <ShifKey>223</ShifKey>
+    </OperatorWorkTime>
+    <OperatorWorkTime OperatorWorkTimeCategory="MachineRunTime">
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>21</ObjectKey>
+      <SubObjectKey>24</SubObjectKey>
+      <MonitoringStartTime>2016-12-14T10:55:56.127+01:00</MonitoringStartTime>
+      <MonitoringTimeLength>24</MonitoringTimeLength>
+      <Extension>
+        <SessionId>649</SessionId>
+      </Extension>
+      <ShifKey>224</ShifKey>
+    </OperatorWorkTime>
+    <OperatorWorkTime OperatorWorkTimeCategory="MachineRunTime">
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <MonitoringStartTime>2016-12-14T10:56:21.033+01:00</MonitoringStartTime>
+      <MonitoringTimeLength>12</MonitoringTimeLength>
+      <Extension>
+        <SessionId>650</SessionId>
+      </Extension>
+      <ShifKey>225</ShifKey>
+    </OperatorWorkTime>
+    <OperatorWorkTime OperatorWorkTimeCategory="MachineRunTime">
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>22</ObjectKey>
+      <SubObjectKey>25</SubObjectKey>
+      <MonitoringStartTime>2016-12-14T10:56:33.267+01:00</MonitoringStartTime>
+      <MonitoringTimeLength>63</MonitoringTimeLength>
+      <Extension>
+        <SessionId>651</SessionId>
+      </Extension>
+      <ShifKey>226</ShifKey>
+    </OperatorWorkTime>
+    <OperatorWorkTime OperatorWorkTimeCategory="MachineRunTime">
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <MonitoringStartTime>2016-12-14T10:57:37.22+01:00</MonitoringStartTime>
+      <MonitoringTimeLength>21</MonitoringTimeLength>
+      <Extension>
+        <SessionId>652</SessionId>
+      </Extension>
+      <ShifKey>227</ShifKey>
+    </OperatorWorkTime>
+    <OperatorWorkTime OperatorWorkTimeCategory="MachineRunTime">
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>23</ObjectKey>
+      <SubObjectKey>26</SubObjectKey>
+      <MonitoringStartTime>2016-12-14T10:57:58.487+01:00</MonitoringStartTime>
+      <MonitoringTimeLength>72</MonitoringTimeLength>
+      <Extension>
+        <SessionId>653</SessionId>
+      </Extension>
+      <ShifKey>228</ShifKey>
+    </OperatorWorkTime>
+    <OperatorWorkTime OperatorWorkTimeCategory="MachineRunTime">
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <MonitoringStartTime>2016-12-14T10:59:10.517+01:00</MonitoringStartTime>
+      <MonitoringTimeLength>23</MonitoringTimeLength>
+      <Extension>
+        <SessionId>654</SessionId>
+      </Extension>
+      <ShifKey>229</ShifKey>
+    </OperatorWorkTime>
+    <OperatorWorkTime OperatorWorkTimeCategory="MachineRunTime">
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>24</ObjectKey>
+      <SubObjectKey>27</SubObjectKey>
+      <MonitoringStartTime>2016-12-14T10:59:33.687+01:00</MonitoringStartTime>
+      <MonitoringTimeLength>763</MonitoringTimeLength>
+      <Extension>
+        <SessionId>655</SessionId>
+      </Extension>
+      <ShifKey>230</ShifKey>
+    </OperatorWorkTime>
+    <ReportInterval>
+      <ReportStartTime>2016-12-14T10:45:00.86+01:00</ReportStartTime>
+      <ReportEndTime>2016-12-14T11:12:17.313+01:00</ReportEndTime>
+    </ReportInterval>
+    <MonitoringSettings>
+      <MonitoringFilterTimeDown>600</MonitoringFilterTimeDown>
+      <MonitoringFilterTimeRun>90</MonitoringFilterTimeRun>
+      <MonitoringFilterTimeMinimum>20</MonitoringFilterTimeMinimum>
+      <MonitoringSettingsKey>1</MonitoringSettingsKey>
+    </MonitoringSettings>
+    <MachineEngineTime>31655700</MachineEngineTime>
+    <MachineDrivenDistance>4157636</MachineDrivenDistance>
+    <MachineFuelConsumption>88712</MachineFuelConsumption>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <LowerTimeLimit>0</LowerTimeLimit>
+      <UpperTimeLimit>60</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <LowerTimeLimit>60</LowerTimeLimit>
+      <UpperTimeLimit>120</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <LowerTimeLimit>120</LowerTimeLimit>
+      <UpperTimeLimit>180</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <LowerTimeLimit>180</LowerTimeLimit>
+      <UpperTimeLimit>240</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <LowerTimeLimit>240</LowerTimeLimit>
+      <UpperTimeLimit>300</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <LowerTimeLimit>300</LowerTimeLimit>
+      <UpperTimeLimit>360</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <LowerTimeLimit>360</LowerTimeLimit>
+      <UpperTimeLimit>420</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <LowerTimeLimit>420</LowerTimeLimit>
+      <UpperTimeLimit>480</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <LowerTimeLimit>480</LowerTimeLimit>
+      <UpperTimeLimit>540</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>2</ObjectKey>
+      <SubObjectKey>2</SubObjectKey>
+      <LowerTimeLimit>540</LowerTimeLimit>
+      <UpperTimeLimit>600</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>19</ObjectKey>
+      <SubObjectKey>22</SubObjectKey>
+      <LowerTimeLimit>0</LowerTimeLimit>
+      <UpperTimeLimit>60</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>19</ObjectKey>
+      <SubObjectKey>22</SubObjectKey>
+      <LowerTimeLimit>60</LowerTimeLimit>
+      <UpperTimeLimit>120</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>19</ObjectKey>
+      <SubObjectKey>22</SubObjectKey>
+      <LowerTimeLimit>120</LowerTimeLimit>
+      <UpperTimeLimit>180</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>19</ObjectKey>
+      <SubObjectKey>22</SubObjectKey>
+      <LowerTimeLimit>180</LowerTimeLimit>
+      <UpperTimeLimit>240</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>19</ObjectKey>
+      <SubObjectKey>22</SubObjectKey>
+      <LowerTimeLimit>240</LowerTimeLimit>
+      <UpperTimeLimit>300</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>19</ObjectKey>
+      <SubObjectKey>22</SubObjectKey>
+      <LowerTimeLimit>300</LowerTimeLimit>
+      <UpperTimeLimit>360</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>19</ObjectKey>
+      <SubObjectKey>22</SubObjectKey>
+      <LowerTimeLimit>360</LowerTimeLimit>
+      <UpperTimeLimit>420</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>19</ObjectKey>
+      <SubObjectKey>22</SubObjectKey>
+      <LowerTimeLimit>420</LowerTimeLimit>
+      <UpperTimeLimit>480</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>19</ObjectKey>
+      <SubObjectKey>22</SubObjectKey>
+      <LowerTimeLimit>480</LowerTimeLimit>
+      <UpperTimeLimit>540</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>19</ObjectKey>
+      <SubObjectKey>22</SubObjectKey>
+      <LowerTimeLimit>540</LowerTimeLimit>
+      <UpperTimeLimit>600</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>20</ObjectKey>
+      <SubObjectKey>23</SubObjectKey>
+      <LowerTimeLimit>0</LowerTimeLimit>
+      <UpperTimeLimit>60</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>20</ObjectKey>
+      <SubObjectKey>23</SubObjectKey>
+      <LowerTimeLimit>60</LowerTimeLimit>
+      <UpperTimeLimit>120</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>20</ObjectKey>
+      <SubObjectKey>23</SubObjectKey>
+      <LowerTimeLimit>120</LowerTimeLimit>
+      <UpperTimeLimit>180</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>20</ObjectKey>
+      <SubObjectKey>23</SubObjectKey>
+      <LowerTimeLimit>180</LowerTimeLimit>
+      <UpperTimeLimit>240</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>20</ObjectKey>
+      <SubObjectKey>23</SubObjectKey>
+      <LowerTimeLimit>240</LowerTimeLimit>
+      <UpperTimeLimit>300</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>20</ObjectKey>
+      <SubObjectKey>23</SubObjectKey>
+      <LowerTimeLimit>300</LowerTimeLimit>
+      <UpperTimeLimit>360</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>20</ObjectKey>
+      <SubObjectKey>23</SubObjectKey>
+      <LowerTimeLimit>360</LowerTimeLimit>
+      <UpperTimeLimit>420</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>20</ObjectKey>
+      <SubObjectKey>23</SubObjectKey>
+      <LowerTimeLimit>420</LowerTimeLimit>
+      <UpperTimeLimit>480</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>20</ObjectKey>
+      <SubObjectKey>23</SubObjectKey>
+      <LowerTimeLimit>480</LowerTimeLimit>
+      <UpperTimeLimit>540</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>20</ObjectKey>
+      <SubObjectKey>23</SubObjectKey>
+      <LowerTimeLimit>540</LowerTimeLimit>
+      <UpperTimeLimit>600</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>21</ObjectKey>
+      <SubObjectKey>24</SubObjectKey>
+      <LowerTimeLimit>0</LowerTimeLimit>
+      <UpperTimeLimit>60</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>21</ObjectKey>
+      <SubObjectKey>24</SubObjectKey>
+      <LowerTimeLimit>60</LowerTimeLimit>
+      <UpperTimeLimit>120</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>21</ObjectKey>
+      <SubObjectKey>24</SubObjectKey>
+      <LowerTimeLimit>120</LowerTimeLimit>
+      <UpperTimeLimit>180</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>21</ObjectKey>
+      <SubObjectKey>24</SubObjectKey>
+      <LowerTimeLimit>180</LowerTimeLimit>
+      <UpperTimeLimit>240</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>21</ObjectKey>
+      <SubObjectKey>24</SubObjectKey>
+      <LowerTimeLimit>240</LowerTimeLimit>
+      <UpperTimeLimit>300</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>21</ObjectKey>
+      <SubObjectKey>24</SubObjectKey>
+      <LowerTimeLimit>300</LowerTimeLimit>
+      <UpperTimeLimit>360</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>21</ObjectKey>
+      <SubObjectKey>24</SubObjectKey>
+      <LowerTimeLimit>360</LowerTimeLimit>
+      <UpperTimeLimit>420</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>21</ObjectKey>
+      <SubObjectKey>24</SubObjectKey>
+      <LowerTimeLimit>420</LowerTimeLimit>
+      <UpperTimeLimit>480</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>21</ObjectKey>
+      <SubObjectKey>24</SubObjectKey>
+      <LowerTimeLimit>480</LowerTimeLimit>
+      <UpperTimeLimit>540</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>21</ObjectKey>
+      <SubObjectKey>24</SubObjectKey>
+      <LowerTimeLimit>540</LowerTimeLimit>
+      <UpperTimeLimit>600</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>22</ObjectKey>
+      <SubObjectKey>25</SubObjectKey>
+      <LowerTimeLimit>0</LowerTimeLimit>
+      <UpperTimeLimit>60</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>22</ObjectKey>
+      <SubObjectKey>25</SubObjectKey>
+      <LowerTimeLimit>60</LowerTimeLimit>
+      <UpperTimeLimit>120</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>22</ObjectKey>
+      <SubObjectKey>25</SubObjectKey>
+      <LowerTimeLimit>120</LowerTimeLimit>
+      <UpperTimeLimit>180</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>22</ObjectKey>
+      <SubObjectKey>25</SubObjectKey>
+      <LowerTimeLimit>180</LowerTimeLimit>
+      <UpperTimeLimit>240</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>22</ObjectKey>
+      <SubObjectKey>25</SubObjectKey>
+      <LowerTimeLimit>240</LowerTimeLimit>
+      <UpperTimeLimit>300</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>22</ObjectKey>
+      <SubObjectKey>25</SubObjectKey>
+      <LowerTimeLimit>300</LowerTimeLimit>
+      <UpperTimeLimit>360</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>22</ObjectKey>
+      <SubObjectKey>25</SubObjectKey>
+      <LowerTimeLimit>360</LowerTimeLimit>
+      <UpperTimeLimit>420</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>22</ObjectKey>
+      <SubObjectKey>25</SubObjectKey>
+      <LowerTimeLimit>420</LowerTimeLimit>
+      <UpperTimeLimit>480</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>22</ObjectKey>
+      <SubObjectKey>25</SubObjectKey>
+      <LowerTimeLimit>480</LowerTimeLimit>
+      <UpperTimeLimit>540</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>22</ObjectKey>
+      <SubObjectKey>25</SubObjectKey>
+      <LowerTimeLimit>540</LowerTimeLimit>
+      <UpperTimeLimit>600</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>23</ObjectKey>
+      <SubObjectKey>26</SubObjectKey>
+      <LowerTimeLimit>0</LowerTimeLimit>
+      <UpperTimeLimit>60</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>23</ObjectKey>
+      <SubObjectKey>26</SubObjectKey>
+      <LowerTimeLimit>60</LowerTimeLimit>
+      <UpperTimeLimit>120</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>23</ObjectKey>
+      <SubObjectKey>26</SubObjectKey>
+      <LowerTimeLimit>120</LowerTimeLimit>
+      <UpperTimeLimit>180</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>23</ObjectKey>
+      <SubObjectKey>26</SubObjectKey>
+      <LowerTimeLimit>180</LowerTimeLimit>
+      <UpperTimeLimit>240</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>23</ObjectKey>
+      <SubObjectKey>26</SubObjectKey>
+      <LowerTimeLimit>240</LowerTimeLimit>
+      <UpperTimeLimit>300</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>23</ObjectKey>
+      <SubObjectKey>26</SubObjectKey>
+      <LowerTimeLimit>300</LowerTimeLimit>
+      <UpperTimeLimit>360</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>23</ObjectKey>
+      <SubObjectKey>26</SubObjectKey>
+      <LowerTimeLimit>360</LowerTimeLimit>
+      <UpperTimeLimit>420</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>23</ObjectKey>
+      <SubObjectKey>26</SubObjectKey>
+      <LowerTimeLimit>420</LowerTimeLimit>
+      <UpperTimeLimit>480</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>23</ObjectKey>
+      <SubObjectKey>26</SubObjectKey>
+      <LowerTimeLimit>480</LowerTimeLimit>
+      <UpperTimeLimit>540</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>23</ObjectKey>
+      <SubObjectKey>26</SubObjectKey>
+      <LowerTimeLimit>540</LowerTimeLimit>
+      <UpperTimeLimit>600</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>24</ObjectKey>
+      <SubObjectKey>27</SubObjectKey>
+      <LowerTimeLimit>0</LowerTimeLimit>
+      <UpperTimeLimit>60</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>24</ObjectKey>
+      <SubObjectKey>27</SubObjectKey>
+      <LowerTimeLimit>60</LowerTimeLimit>
+      <UpperTimeLimit>120</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>24</ObjectKey>
+      <SubObjectKey>27</SubObjectKey>
+      <LowerTimeLimit>120</LowerTimeLimit>
+      <UpperTimeLimit>180</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>24</ObjectKey>
+      <SubObjectKey>27</SubObjectKey>
+      <LowerTimeLimit>180</LowerTimeLimit>
+      <UpperTimeLimit>240</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>24</ObjectKey>
+      <SubObjectKey>27</SubObjectKey>
+      <LowerTimeLimit>240</LowerTimeLimit>
+      <UpperTimeLimit>300</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>24</ObjectKey>
+      <SubObjectKey>27</SubObjectKey>
+      <LowerTimeLimit>300</LowerTimeLimit>
+      <UpperTimeLimit>360</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>24</ObjectKey>
+      <SubObjectKey>27</SubObjectKey>
+      <LowerTimeLimit>360</LowerTimeLimit>
+      <UpperTimeLimit>420</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>24</ObjectKey>
+      <SubObjectKey>27</SubObjectKey>
+      <LowerTimeLimit>420</LowerTimeLimit>
+      <UpperTimeLimit>480</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>24</ObjectKey>
+      <SubObjectKey>27</SubObjectKey>
+      <LowerTimeLimit>480</LowerTimeLimit>
+      <UpperTimeLimit>540</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+    <FrequencyShortDownTimes>
+      <OperatorKey>3</OperatorKey>
+      <ObjectKey>24</ObjectKey>
+      <SubObjectKey>27</SubObjectKey>
+      <LowerTimeLimit>540</LowerTimeLimit>
+      <UpperTimeLimit>600</UpperTimeLimit>
+      <NoOfShortDownTimes>0</NoOfShortDownTimes>
+    </FrequencyShortDownTimes>
+  </Machine>
+</OperationalMonitoring>

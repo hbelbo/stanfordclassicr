@@ -5,10 +5,10 @@ Authors@R:
     person(given = "Helmer",
            family = "Belbo",
            role = c("aut", "cre"),
-           email = "helmer.belbot@nibio.no",
+           email = "helmer.belbo@nibio.no",
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: Functions to read StanForD Classic machine reports.
-License: GNU AGPLv3
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
@@ -16,5 +16,9 @@ Imports:
     stringr,
     dplyr,
     tibble,
-    lubridate
-RoxygenNote: 7.1.0
+    lubridate,
+    rlang,
+    readr,
+    tidyr,
+    tidyselect
+RoxygenNote: 7.1.1

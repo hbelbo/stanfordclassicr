@@ -4,10 +4,13 @@
 \alias{read_pri_file}
 \title{Read StanForD Classic PRI-files (mahcine reports from forest machines)}
 \usage{
-read_pri_file(filename)
+read_pri_file(filename, verbose = FALSE)
 }
 \arguments{
-\item{filename}{}
+\item{filename}{is the file name of the pri file to be digested}
+
+\item{verbose}{Setting this parameter to TRUE will make the function also
+return the variable content of all variables available in the file.}
 }
 \value{
 should return a list of tables populated with data from the stm report: report_header, object_definition, operator_definition, product_definitions, stems, logs
@@ -16,7 +19,7 @@ should return a list of tables populated with data from the stm report: report_h
 Read StanForD Classic PRI-files (mahcine reports from forest machines)
 }
 \examples{
- files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
- prifiles = files[stringr::str_detect(files, ".pri")]
- read_pri_file(prifiles[1])
+ files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = TRUE)
+ prifiles <- files[stringr::str_detect(files, ".pri")]
+ pridat <- read_pri_file(prifiles[1], verbose = TRUE)
 }

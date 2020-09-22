@@ -1,18 +1,22 @@
 #' Read StanForD Classic .stm-files (mahcine reports from forest machines)
 #'
 #' @param filename (including path)
+#' @param verbose Setting this parameter to TRUE will make the function also
+#' return the variable content of all variables available in the file.
 #'
 #' @return a list of tables populated with data from the stm report: report_header, object_definition, operator_definition, product_definitions, stems, logs
 #' @export
 #' @details this function reads one stanford stemfile (.stm)
 #'
 #' @examples
-#'  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+#'  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = TRUE)
 #'  stmfiles <- files[stringr::str_detect(files, ".stm")]
-#'  read_stm_file(stmfiles[1])
-#'  filename <- stmfiles[1]
-read_stm_file <- function(filename){
-    strng <- file2strng(filename)
+#'  stemdata <- read_stm_file(stmfiles[1])
+#'  dplyr::glimpse
+
+read_stm_file <- function(filename, verbose = FALSE){
+ # filename <- stmfiles[1]
+  strng <- file2strng(filename)
 
     strng_to_v110_1 <- stringr::str_sub(string =  strng,
                                         start = 1, end = stringr::str_locate(string = strng, pattern = "~110 1")[1,1] )
@@ -28,9 +32,9 @@ read_stm_file <- function(filename){
                   "v3t8", "v5t1" , "v6t1", "v12t4") #list of sfclassic vars we want
 
     selector <- selector[which(selector %in% names(df1))] # Ensure to not select vars not present
-    selected <- df1 %>% dplyr::select(., tidyselect::all_of(selector))
-    report_header <- expand_str(tibbl = selected) %>%
-      dplyr::mutate(., report_type = get0("v1t2", ifnotfound = NA_character_),
+    selected <- df1 %>% dplyr::select( tidyselect::all_of(selector))
+    report_header <- expand_stcvs(tibbl = selected) %>%
+      dplyr::mutate( report_type = get0("v1t2", ifnotfound = NA_character_),
              creation_date = get0("v12t4", ifnotfound = NA_character_),
              country_code = get0("v6t1", ifnotfound = NA_integer_),
              base_machine_number = get0("v3t1", ifnotfound = NA_character_),
@@ -39,8 +43,8 @@ read_stm_file <- function(filename){
              base_machine_model = get0("v3t6", ifnotfound = NA_character_),
              harvester_head_model = get0("v3t8", ifnotfound = NA_character_),
              machine_application_verision = get0("v5t1", ifnotfound = NA_character_),
-             filename = str_extract(filename, pattern = "\\w*.stm")) %>%
-      dplyr::select(., -tidyselect::all_of(selector))
+             filename = stringr::str_extract(filename, pattern = "\\w*.stm")) %>%
+      dplyr::select( -tidyselect::all_of(selector))
 
 
 
@@ -50,10 +54,10 @@ read_stm_file <- function(filename){
                    "v34t2", "v34t3", "v34t5", "v34t5", "v34t6",
                    "v35t1", "v35t2") #list of sfclassic vars we want
     selector <- selector[which(selector %in% names(df1))] # Ensure to not select vars not present
-    selected <- df1 %>% dplyr::select(., tidyselect::all_of(selector))
+    selected <- df1 %>% dplyr::select( tidyselect::all_of(selector))
     object_definition  <-
-      expand_str(tibbl = selected) %>%
-      dplyr::mutate(., object_name = get0("v21t1", ifnotfound = NA_character_),
+      expand_stcvs(tibbl = selected) %>%
+      dplyr::mutate( object_name = get0("v21t1", ifnotfound = NA_character_),
                     object_user_id = get0("v21t1", ifnotfound = NA_character_),
                     object_start_date = lubridate::ymd_hms(get0("v16t4", ifnotfound = NA_character_)),
                     object_key = get0("start_epoch", ifnotfound = NA_integer_),
@@ -72,19 +76,30 @@ read_stm_file <- function(filename){
                                         get0("v34t4", ifnotfound = ""),
                                         get0("v34t5", ifnotfound = "")),
                     contract_nr = dplyr::coalesce(get0("v35t2"), get0("v35t1"))) %>%
-      dplyr::select(., -tidyselect::matches("v\\d", perl =T))
+      dplyr::select( -tidyselect::matches("v\\d", perl =T))
 
 
     # Species and Product definitions
     selector <- c( "v120t1", "v120t3")
-    selected <- df1 %>% dplyr::select(., tidyselect::all_of(selector))
-    dfx = expand_str(selected)
+    selected <- df1 %>% dplyr::select( tidyselect::all_of(selector))
+    dfx = expand_stcvs(selected)
     species_group_definition <-
-      dfx %>%  mutate(., species_group_name = v120t1,
-                      species_group_user_id = paste0(v120t1, "#", v120t3, "#", stringr::str_replace( df1$v2t1, "\n", "")),
-                      tmp_species_nr = as.integer(v120t3),
-                      species_group_key = as.numeric(paste0(start_epoch, tmp_species_nr)))  %>%
-      dplyr::select(., -tidyselect::matches("v\\d", perl =T))
+      dfx %>%
+      dplyr::mutate( species_group_name = get0("v120t1",
+                                                        ifnotfound = NA_character_),
+                      species_group_user_id =
+                        paste0(get0("v120t1",
+                                    ifnotfound = ""),
+                               "#",
+                               get0("v120t3", ifnotfound = ""),
+                               "#", stringr::str_replace( df1$v2t1, "\n", "")),
+                      tmp_species_nr = as.integer(dfx$v120t3))
+    species_group_definition <-
+      species_group_definition %>%
+      dplyr::mutate(
+        species_group_key = as.numeric(paste0(start_epoch,
+                                              species_group_definition$tmp_species_nr)))  %>%
+      dplyr::select( -tidyselect::matches("v\\d", perl =T))
 
 
     # Help-table of product groups
@@ -96,31 +111,36 @@ read_stm_file <- function(filename){
     product_grp_table <-
       tibble::tibble(product_grp_code,
                      product_grp_species_nr,
-                     product_group_name = (expand_str(df1 %>% dplyr::select(., v127t1)) %>% dplyr::pull(.))
+                     product_group_name =
+                       expand_stcvs(df1 %>% dplyr::select(v127t1)) %>% pull()
       )
 
     # Product definitions
     selector <- c( "v121t1", "v121t2", "v126t1", "v121t6", "v126t1")
     selector <- selector[which(selector %in% names(df1))] # Ensure to not select vars not present
-    selected <- df1 %>% dplyr::select(., tidyselect::all_of(selector))
+    selected <- df1 %>% dplyr::select( tidyselect::all_of(selector))
     prods_per_species <- as.integer(unlist(stringr::str_split(df1$v116t1, " ")))
-    dfx <- expand_str(selected)
+    dfx <- expand_stcvs(selected)
 
     product_definition <-
       dfx %>%
-      mutate(., product_name = v121t1,
-             product_info = v121t2,
-             v126t1 = v126t1,
+      dplyr::mutate( product_name = .data$v121t1,
+             product_info = .data$v121t2,
+             v126t1 = .data$v126t1,
              tmp_species_nr = rep(1:as.integer(df1$v111t1), prods_per_species),
-             tmp_product_nr = as.integer(1:length(v121t1)),
-             species_group_name = rep(dplyr::pull(expand_str(df1 %>% dplyr::select(., v120t1))), prods_per_species),
-             product_key = as.numeric(paste0(start_epoch, tmp_product_nr)),
-             species_group_key = as.numeric(paste0(start_epoch, tmp_species_nr))) %>%
-      dplyr::left_join(.,
-                       product_grp_table,
+             tmp_product_nr = as.integer(1:length(.data$v121t1)),
+             species_group_name =
+               rep(dplyr::pull(expand_stcvs(df1 %>%
+                                              dplyr::select(.data$v120t1))),
+                   prods_per_species),
+             product_key = as.numeric(paste0(start_epoch, .data$tmp_product_nr)),
+             species_group_key =
+               as.numeric(paste0(start_epoch, .data$tmp_species_nr))) %>%
+      dplyr::left_join( product_grp_table,
                        by = c("tmp_species_nr" = "product_grp_species_nr",
                               "v126t1" = "product_grp_code")) %>%
-      dplyr::select(., -matches("tmp|v\\d", perl =T), matches("tmp|v\\d", perl =T))
+      dplyr::select( -tidyselect::matches("tmp|v\\d", perl =T),
+                     tidyselect::matches("tmp|v\\d", perl =T))
 
 
 
@@ -142,43 +162,50 @@ read_stm_file <- function(filename){
     }
     stemdat$v110t1 <- dplyr::coalesce(stemdat$v110t1, stemdat$v110t2)
     nanyna = function(x){ !(any(is.na(x)))}
-    stemdat <- stemdat %>% dplyr::select_if(., nanyna)
+    stemdat <- stemdat %>% dplyr::select_if( nanyna)
+    stemvars_present <- names(stemdat)
 
     is_one_text <- function(x){ all (stringr::str_count(x, "\n") == 1)}
     removeslash <- function(x){ stringr::str_remove(x, "\n")}
     onetextdat = dplyr::select_if(.tbl = stemdat, .predicate = is_one_text) %>%
-      mutate_if(is.character, removeslash)
+      dplyr::mutate_if(is.character, removeslash)
 
     is_one_number <- function(x){ all ((!stringr::str_detect(x,"\n")) & (!stringr::str_detect(x, " ")))}
     onenumdat = dplyr::select_if(.tbl = stemdat, .predicate = is_one_number)  %>%
-      mutate_if(is.character, as.integer)
+      dplyr::mutate_if(is.character, as.integer)
 
 
-    stemvars = sfvardefs$sfv[which(sfvardefs$sfv %in% names(stemdat))] # for reordering to varname vartype
+    stemvars <- stanfordclassicr::sfvardefs$sfv[
+      which(stanfordclassicr::sfvardefs$sfv %in% names(stemdat))
+      ] # for reordering to varname vartype
     stemdat <-
-      stemdat %>% dplyr::select(., -tidyselect::all_of(c(names(onetextdat), names(onenumdat)))) %>%
-      dplyr::bind_cols(., onenumdat) %>%
-      dplyr::bind_cols(.,onetextdat) %>%
+      stemdat %>%
+      dplyr::select( -tidyselect::all_of(c(names(onetextdat), names(onenumdat)))) %>%
+      dplyr::bind_cols( onenumdat) %>%
+      dplyr::bind_cols( onetextdat) %>%
       ## Reorder variables in ascending order
-      dplyr::select(., tidyselect::all_of(stemvars)) %>%
-      mutate(.,
+      dplyr::select( tidyselect::all_of(stemvars)) %>%
+      dplyr::mutate(
              object_key = start_epoch,
              stem_number = dplyr::coalesce(get0("v270t3"), get0("v270t1")),
-             stem_key = as.numeric(paste0(start_epoch, stem_number)),
+             stem_key = as.numeric(paste0(start_epoch, .data$stem_number)),
              species_nr = get0("v110t1"),
              measurement_date_machine = get0("v18t4"),
-             DBHmm = dplyr::coalesce(get0("v281t1"), get0("v281t2"))
+             DBHmm = dplyr::case_when(
+               "v281t1" %in% names(stemdat) ~ get0("v281t1", ifnotfound = NA_character_),
+               "v281t2" %in% names(stemdat) ~ get0("v281t2", ifnotfound = NA_character_),
+               TRUE ~ NA_character_)
       )
 
     if("v521t1" %in% names(stemdat)){
       stemdat <- stemdat %>%
-        dplyr::mutate(.,
-                      latitude = as.numeric(v523t1),  # v523t1 COORD Latitude ,
-                      longitude = as.numeric(v523t3),  # v523t3 COORD Longitude
+        dplyr::mutate(
+                      latitude = as.numeric(.data$v523t1),  # v523t1 COORD Latitude ,
+                      longitude = as.numeric(.data$v523t3),  # v523t3 COORD Longitude
                       stem_coordinate_position = dplyr::case_when(
-                        v520t1 == "1" ~ "base_machine_pos",
-                        v520t1 == "2" ~ "crane_tip_when_felling",
-                        v520t1 == "3" ~ "crane_tip_when_processing",
+                        .data$v520t1 == "1" ~ "base_machine_pos",
+                        .data$v520t1 == "2" ~ "crane_tip_when_felling",
+                        .data$v520t1 == "3" ~ "crane_tip_when_processing",
                         TRUE ~ NA_character_  ),
                       coordinate_reference_system = dplyr::case_when(
                         v521t2 == "1" ~ "WGS84", # Coordinate system used in stm file: 1=WGS84 (Default)
@@ -198,7 +225,7 @@ read_stm_file <- function(filename){
         )
     }
     if ("v523t6" %in% stemvars){
-      stemdat$coordinate_time = as.numeric(str_remove(stemdat$v523t6, pattern = "\n"))
+      stemdat$coordinate_time = as.numeric(stringr::str_remove(stemdat$v523t6, pattern = "\n"))
     }
 
     if ("v273t1" %in% stemvars) {
@@ -212,14 +239,18 @@ read_stm_file <- function(filename){
       }))
     }
 
-    stemdat <- dplyr::select(stemdat, -matches("tmp|v\\d", perl =T), matches("tmp|v\\d", perl =T))
+    stemdat <- dplyr::select(
+      stemdat,
+      -tidyselect::matches("tmp|v\\d", perl =T),
+      tidyselect::matches("tmp|v\\d", perl =T))
 
 
     #Stem grade breaks
 
-    stemgrades <- tibble::tibble(stemnr = rep(stemdat$stem_number,  stemdat$v274t1), # NUMGRADEBR
-                                 height = unlist(stringr::str_split(paste0(stemdat$v275t1, collapse = " "), pattern = " ")),  # HGHTGRADBRK
-                                 gradecode = unlist(stringr::str_split(paste0(stemdat$v276t1, collapse = " "), pattern = " "))) #GRADE code
+    stemgrades <- tibble::tibble(
+      stemnr = rep(stemdat$stem_number,  stemdat$v274t1), # NUMGRADEBR
+      height = unlist(stringr::str_split(paste0(stemdat$v275t1, collapse = " "), pattern = " ")),  # HGHTGRADBRK
+      gradecode = unlist(stringr::str_split(paste0(stemdat$v276t1, collapse = " "), pattern = " "))) #GRADE code
 
 
 
@@ -236,36 +267,63 @@ read_stm_file <- function(filename){
                       "v299t1", "v299t2","v299t3",
                       "v300t1",
                       "v306t1","v306t2" )
-    stmlogdat <- stemdat %>% dplyr::select(., which(names(stemdat) %in% logselector))
-    logselector = logselector[which(logselector %in% names(stmlogdat))]
+    stmlogdat <- stemdat %>% dplyr::select( which(names(stemdat) %in% logselector))
+    logselector <- logselector[which(logselector %in% names(stmlogdat))]
 
-    logs  <- expand_str(tibbl = stmlogdat)
+    logs  <- expand_stcvs(tibbl = stmlogdat)
     logs$stem_key <- rep(stemdat$stem_key, stemdat$v290t1)
     logs$object_key <- rep(stemdat$object_key, stemdat$v290t1)
     logs$log_key <- sequence(stemdat$v290t1)
 
     logs <- logs %>%
-      mutate(.,
-
-             product_key = as.numeric(paste0(object_key, v296t1)),
+      dplyr::mutate(
+             product_key = as.numeric(paste0(.data$object_key, .data$v296t1)),
              product_name = get0("v296t2"),
              assortment_code = get0("v296t3"),
              price_category_code = get0("v296t4"),
              m3price = get0("v299t1"),
              m3sub = get0("v299t2"),
              m3sob = get0("v299t3"),
-             dia_top_ob = dplyr::coalesce(get0("v291t5"),get0("v291t1")),
-             dia_top_ub = dplyr::coalesce(get0("v292t5"), get0("v292t5")),
-             length_cm = dplyr::coalesce(get0("v293t5"),get0("v293t1")),
+             dia_top_ob = dplyr::coalesce(get0("v291t5", ifnotfound = NA_integer_),
+                                          get0("v291t1", ifnotfound = NA_integer_)),
+             dia_top_ub = dplyr::coalesce(get0("v292t5", ifnotfound = NA_integer_),
+                                          get0("v292t5", ifnotfound = NA_integer_)),
+             length_cm = dplyr::coalesce(get0("v293t5", ifnotfound = NA_integer_),
+                                         get0("v293t1", ifnotfound = NA_integer_)),
              length_class_cm = get0("v295t2"),
              dia_class_mm = get0("v294t2")
       ) %>%
-      dplyr::select(.,
+      dplyr::select(
                     -tidyselect::matches("v\\d*"), tidyselect::matches("v\\d*")) %>%
-      dplyr::select(., stem_key, log_key, product_key, tidyselect::starts_with("m3"), tidyselect::everything())
+      dplyr::select( .data$stem_key, .data$log_key, .data$product_key,
+                     tidyselect::starts_with("m3"),
+                     tidyselect::everything())
+    if (verbose == FALSE){
+      product_definition <-product_definition %>%
+        dplyr::select( -tidyselect::starts_with(c("v1", "tmp")))
 
-    Ret <- list(report_header = report_header, species_group_definition = species_group_definition,
-                product_definition = product_definition, object_definition = object_definition, stems = stemdat, logs = logs)
+      stemdat <- stemdat %>%
+        dplyr::select( -tidyselect::starts_with(c("v1", "v2", "v3",  "v5", "tmp")))
+
+      logs <- logs %>%
+        dplyr::select( -tidyselect::starts_with(c( "v2", "v3",  "tmp")))
+
+      Ret <- list(report_header = report_header,
+                species_group_definition = species_group_definition,
+                product_definition = product_definition,
+                object_definition = object_definition,
+                stems = stemdat,
+                logs = logs)
+    } else {
+      Ret <- list(report_header = report_header,
+                  species_group_definition = species_group_definition,
+                  product_definition = product_definition,
+                  object_definition = object_definition,
+                  stems = stemdat,
+                  logs = logs,
+                  present_vars = c(names(df1), stemvars_present))
+
+    }
     return(Ret)
 
   }
