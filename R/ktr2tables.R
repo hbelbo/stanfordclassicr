@@ -8,8 +8,8 @@
 #' @examples
 #'  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
 #'  ktrfiles <- files[stringr::str_detect(files, ".ktr")]
-#'  filename = ktrfiles[1]
-#'  read_ktr_file(filename)
+#'  filename = ktrfiles[2]
+#'  ktrdata <- read_ktr_file(filename)
 read_ktr_file <- function(filename){
 
   strng <- file2strng(filename)
@@ -17,7 +17,6 @@ read_ktr_file <- function(filename){
                                       start = 1,
                                       end = stringr::str_locate(string = strng, pattern = "~110 1")[1,1] )
   df1 <- sfclassic2df_v2(strng_to_v110_1)
-
 
   ## Report header
   selector <- c("v1t2", "v3t1", "v3t2", "v3t5", "v3t6",
@@ -38,18 +37,38 @@ read_ktr_file <- function(filename){
            filename = str_extract(filename, pattern = "\\w*.ktr")) %>%
     select(., -selector)
 
+  ## Species and Product definitions
+  # Species
+
+  selector <- c( "v120t1", "v120t3")
+  selector <- selector[which(selector %in% names(df1))] # Ensure to not select vars not present
+  selected <- df1 %>% dplyr::select(., tidyselect::all_of(selector))
+  species <- expand_str(selected)
+  species$tmp_species_nr = 1:nrow(species)
+
+
+
+
 
   ## Calibrations
   # Length
+  nmlngth_s <- df1 %>% dplyr::select(., v40t2)
+  nmlngth_n <- df1 %>% dplyr::select(., v46t1)
+
   selector <- c("v41t4", "v42t1", "v42t2") #list of sfclassic vars we want
   selector <- selector[which(selector %in% names(df1))]
-  calibsl = df1 %>% dplyr::select(., tidyselect::all_of(selector))
+  calibsl <- df1 %>% dplyr::select(., tidyselect::all_of(selector))
+
   calibsl <- expand_str(tibbl = calibsl) %>%
     dplyr::mutate(., calibration_date = get0("v41t4"),
                   calibration_reason = get0("v42t1"),
                   calibration_reason_code =get0("v42t2")) %>%
     mutate(., calibrationtype = "LengthCalibration") %>%
-    select(., -selector)
+    select(., -tidyselect::all_of(selector))
+
+  calibsl$species_group_user_id =
+    rep(dplyr::pull(expand_str(df1 %>% select(v120t1)), 1),
+        times = dplyr::pull(expand_str(df1 %>% select(v40t2))))
 
   #Dia
   selector <- c("v44t4", "v45t1", "v45t2") #list of sfclassic vars we want
@@ -59,8 +78,11 @@ read_ktr_file <- function(filename){
     dplyr::mutate(., calibration_date = get0("v44t4"),
                   calibration_reason = get0("v45t1"),
                   calibration_reason_code = get0("v45t2")) %>%
-    mutate(., calibrationtype = "DiameterCalibration") %>%
-    select(., -selector)
+    dplyr::mutate(., calibrationtype = "DiameterCalibration") %>%
+    dplyr::select(., -tidyselect::all_of(selector))
+  calibsd$species_group_user_id =
+    rep(dplyr::pull(expand_str(df1 %>% select(v120t1)), 1),
+        times = dplyr::pull(expand_str(df1 %>% select(v43t2))))
 
   # Both calibration types in one table
   calibrations <- dplyr::bind_rows(
@@ -109,9 +131,9 @@ read_ktr_file <- function(filename){
     ## Reorder variables in ascending order
     dplyr::select(., tidyselect::all_of(stemvars)) %>%
     mutate(.,
-           object_key = as.integer(lubridate::ymd_hms(get0("v16t4"))),
+           object_key = get0("v16t4"), #as.integer(lubridate::ymd_hms(get0("v16t4"))),
            stem_number = dplyr::coalesce(get0("v270t3"), get0("v270t1")),
-           stem_key = as.numeric((paste0(as.numeric(lubridate::ymd_hms(get0("v16t4"))), stem_number))),
+           stem_key = paste0((get0("v16t4")), stem_number), # as.numeric((paste0(as.numeric(lubridate::ymd_hms(get0("v16t4"))), stem_number))),
            species_nr = get0("v110t1"),
            measurement_date_machine = get0("v18t4"),
            measurement_date_operator = get0("v18t5")) %>%
@@ -183,25 +205,32 @@ read_ktr_file <- function(filename){
     ktrsd$stem_key <- rep(logs$stem_key, logs$v372t3)
     ktrsd$logkey <- rep(logs$log_key, logs$v372t3)
     selectable <- c("v373t3", "v373t4",  "v373t5", "v373t6", "v374t3", "v374t5")
-    selectable = selectable[which(selectable %in% ktr_selector)]
+    selectable <- selectable[which(selectable %in% ktr_selector)]
     ktrsd <- ktrsd %>%
-      dplyr::mutate(., contdia_manual_f = get0("v373t3"),
-                    ctr_dia_manual_uf = get0("v373t4"),
-                    ctr_dia_machine_f = get0("v373t5"),
-                    ctr_dia_machine_uf = get0("v373t6"),
+      dplyr::mutate(.,
                     ctr_pos_manual = get0("v374t3"),
-                    ctr_pos_machine = get0("v374t5")) %>%
-      dplyr::select(., -tidyselect::all_of(selectable))
+                    ctr_dia_manual = get0("v373t3"),
+                    ctr_pos_machine = get0("v374t5"),
+                    ctr_dia_machine = get0("v373t5"),
+                    #ctr_dia_manual_uf = get0("v373t4"),
+                    #ctr_dia_machine_uf = get0("v373t6"),
+                    ) %>%
+      dplyr::select(., -tidyselect::all_of(selectable)) %>%
+      left_join(., (stemdat %>%
+                      select(., stem_key,
+                             measurement_date_machine = v18t4,
+                             measurement_date_operator = v18t5)))
+
   } else {
     ktrsd$stem_key <- NA
     ktrsd$logkey <- NA
     selectable <- c("v373t3", "v373t4",  "v373t5", "v373t6", "v374t3", "v374t5")
     selectable = selectable[which(selectable %in% ktr_selector)]
     ktrsd <- ktrsd %>%
-      dplyr::mutate(., contdia_manual_f = get0("v373t3"),
-                    ctr_dia_manual_uf = get0("v373t4"),
-                    ctr_dia_machine_f = get0("v373t5"),
-                    ctr_dia_machine_uf = get0("v373t6"),
+      dplyr::mutate(., ctr_dia_manual = get0("v373t3"),
+                    #ctr_dia_manual_uf = get0("v373t4"),
+                    ctr_dia_machine = get0("v373t5"),
+                    #ctr_dia_machine_uf = get0("v373t6"),
                     ctr_pos_manual = get0("v374t3"),
                     ctr_pos_machine = get0("v374t5")) %>%
       dplyr::select(., -tidyselect::all_of(selectable)) %>%
@@ -211,6 +240,7 @@ read_ktr_file <- function(filename){
 
   Ret <- list(report_header = report_header,
               calibrations = calibrations,
+              species = species,
               stemdat = stemdat,
               logs = logs,
               ctrs = ktrsd

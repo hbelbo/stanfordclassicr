@@ -145,7 +145,7 @@ read_pri_file = function(filename){
   # Regarding Log_CodeCodes and names: IN SF2010 code 20 would be the same as Product Key, while code 1 would not have any direct equivalent as it is not a true unique key.
 
   Log_CodeCodes <- c( 1,         2,       20,    201,       202,       203,        204,      205,       206,       207,       208,       300,        301,    302,       400,   1400,    401,     1401,      402,      1402,       403,     1403,      404,      1404,       405,     1405,      406,        1406,        420,    421,        422,      423,          424,         425,         426,        500,       501,     600,        2000)
-  Log_CodeNames <- c("ord_asort","specie","asor","Diatopob","Diatopub","Diamidob","Diamidub","Diabotob","Diabotub","HKSmidob","HKSmidub","forcecut","lenght","Lenclass","vol","voldec","volsob","volsobdec","volsub","volsubdec","volpob","volpobdec","volpub","volpubdec","volsmi","volsmidec","volsmiub","volsmiubdec","voldl","voldlsob","voldlsub","voldltopob","voldltopub","voldlsmiob","voldlsmiub","stem_no","log_no","numoflogs","userdefined")
+  Log_CodeNames <- c("ord_asort","specie","asor","Diatopob","Diatopub","Diamidob","Diamidub","Diabotob","Diabotub","HKSmidob","HKSmidub","forcecut","length","Lenclass","vol","voldec","volsob","volsobdec","volsub","volsubdec","volpob","volpobdec","volpub","volpubdec","volsmi","volsmidec","volsmiub","volsmiubdec","voldl","voldlsob","voldlsub","voldltopob","voldltopub","voldlsmiob","voldlsmiub","stem_nr","log_nr","numoflogs","userdefined")
   Log_Code_Name_pairs <- tibble(Code=Log_CodeCodes, CodeN= Log_CodeNames)
   Matches <- match(v256t1, Log_Code_Name_pairs$Code)
   Log_Code_Name_pairs_present <-Log_Code_Name_pairs[Matches,]

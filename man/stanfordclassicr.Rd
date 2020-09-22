@@ -12,7 +12,6 @@ The package provide one function for each type of stanford standard file
 
 
 The main functions takes one file path as argument, and organize data in a list of data frames (tibbles).
-
 The list aim to immitate the structure and naming conventions in the successor standard StanForD2010.
 Along with the data is also all stanford classic variable tags belonging to eahc stem, each
 log, each cut object etc. This to enable further mapping of stanford classic
@@ -23,6 +22,16 @@ variable tags to readable variable names.
 
 Example files and documentation of the stanford classic standard (pdf)
 is provided in the supplementary directory, please have a look
+}
+
+\section{Further development}{
+
+The ambitions is to first improve the mapping from tags and codes to
+reasonable variable names in current functions
+
+Then expand to include .drt, .apt, .prl and .prd files.
+
+"Stanford homepage": https://www.skogforsk.se/english/projects/stanford/
 }
 
 \examples{

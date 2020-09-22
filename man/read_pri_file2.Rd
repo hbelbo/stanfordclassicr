@@ -4,7 +4,7 @@
 \alias{read_pri_file2}
 \title{Read StanForD Classic PRI-files (mahcine reports from forest machines)}
 \usage{
-read_pri_file2(filename)
+read_pri_file2(filename, verbose = FALSE)
 }
 \arguments{
 \item{filename}{}
@@ -16,7 +16,7 @@ should return a list of tables populated with data from the stm report: report_h
 Read StanForD Classic PRI-files (mahcine reports from forest machines)
 }
 \examples{
- files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
- prifiles = files[stringr::str_detect(files, ".pri")]
+ files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+ prifiles <- files[stringr::str_detect(files, ".pri")]
  read_pri_file(prifiles[1])
 }

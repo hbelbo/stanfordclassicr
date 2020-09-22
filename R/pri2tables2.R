@@ -9,7 +9,7 @@
 #'  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
 #'  prifiles <- files[stringr::str_detect(files, ".pri")]
 #'  read_pri_file(prifiles[1])
-read_pri_file2 <- function(filename){
+read_pri_file2 <- function(filename, verbose = FALSE){
   #  filename <- prifiles[1]
   strng <- file2strng(filename)
   df1 <- sfclassic2df_v2(strng)
@@ -213,6 +213,18 @@ read_pri_file2 <- function(filename){
               present_vars = names(df1)
 
               )
+
+  if(verbose == TRUE) {
+    Ret <- list(report_header = report_header,
+                object_definition = object_definition,
+                species_group_definition = species_group_definition,
+                product_definition = product_definition,
+                stems = stems,
+                logs = logs,
+                product_grp_table = product_grp_table,
+                present_vars = names(df1),
+                present_dat = df1)
+    }
   return(Ret)
 
 }

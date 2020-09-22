@@ -4,7 +4,9 @@
 \name{sfvardefs}
 \alias{sfvardefs}
 \title{StanForD classic variable definitions}
-\format{An object of class tibble.}
+\format{
+An object of class tibble.
+}
 \source{
 \href{https://www.skogforsk.se/english/projects/stanford/}{StanForD documentation}
 }
