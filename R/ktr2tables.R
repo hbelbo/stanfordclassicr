@@ -140,7 +140,7 @@ read_ktr_file <- function(filename){
      tmp110 <-  c(tmp1, tmp2)
     stemdat <- subset(stemdat, select = -c(v110t1, v110t2))
 
-    stemdat$v110t1 <- tmp110
+    stemdat$v110t1 <- as.list(tmp110)
 
     nanyna = function(x){ !(any(is.na(x)))}
     stemdat <- stemdat %>% dplyr::select_if( nanyna)
