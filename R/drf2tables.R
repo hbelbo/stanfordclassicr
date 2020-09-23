@@ -32,7 +32,7 @@ read_drf_file <- function(filename){
   if(drfdf$v315t4 == "0") {
     print(paste(stringr::str_trunc(filename, width = 15, side = "left"),"REPORT IS TIME ORIENTED"))
     } else {
-      print(paste(stringr::str_trunc(filename, width = 15, side = "left"), "Report is object oriented"))
+      print(paste(stringr::str_trunc(filename, width = 15, side = "left"), "Report is combiened, i.e. object oriented"))
       }
 
 

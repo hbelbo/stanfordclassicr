@@ -5,27 +5,48 @@ To read StanForD classic forest machine reports
 
 Currently the package provide functions to read .pri, .stm and .ktr files. The functions have been tested for only a few example files of each category. If they fail please send an email to: beh at nibio.no, and please attach the file to parse. 
 
-## Install from github:
+## Get started
+**_Install from github:_**
 ```r
 devtools::install_github("helmerbelbo/stanfordclassicr")
+
 ```
-## Demo
+**_Then load stanfordclassicr and necessary pkgs_**
 ```r
-lapply(c("magrittr","stringr","dplyr","tibble","lubridate"), library, character.only =T) 
+lapply(c("magrittr","stringr","dplyr","tibble","lubridate", "stanfordclassicr"), library, character.only =T) 
+```
+**_Demo: stanfordclassicr example files provided in the package_**
+```r
+stanford_examples_path <- system.file("extdata", package = "stanfordclassicr")
 
-files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
+drffiles <- list.files(path = stanford_examples_path, pattern = ".drf", full.names = T)
+drffiles[1:2]
 
-stmfiles = files[stringr::str_detect(files, ".stm")] 
-prifiles = files[stringr::str_detect(files, ".pri")] 
-ktrfiles = files[stringr::str_detect(files, ".ktr")]
+ktrfiles <- list.files(path = stanford_examples_path, pattern = ".ktr", full.names = T)
+ktrfiles[1:2]
 
-stmfiles[1] 
-ktrfiles[1] 
-prifiles[1]
+prifiles <- list.files(path = stanford_examples_path, pattern = ".pri", full.names = T)
+prifiles[1:2]
 
-read_stm_file(stmfiles[1]) 
-read_ktr_file(ktrfiles[1]) 
-read_ktr_file(ktrfiles[1]) 
-ktrtest = read_ktr_file(ktrfiles[1])
+stmfiles <- list.files(path = stanford_examples_path, pattern = ".stm", full.names = T)
+stmfiles[1]
+
+prdfiles <- list.files(path = stanford_examples_path, pattern = ".prd", full.names = T)
+prdfiles[1:2]
 ```
 
+**_Demo: using the main functions to read the example files and organize the data in a list structure_**
+```r
+drfdat <- read_drf_file(drffiles[1]) 
+
+ktrdat <- read_ktr_file(ktrfiles[1])
+
+pridat <- read_pri_file(prifiles[1])
+
+prddat <- read_prd_file(prdfiles[1])
+
+stemdat <- read_stm_file(stmfiles[1]) 
+dplyr::glimpse(stemdat[[1]]) 
+
+```
+**_Then find the path to your own stanford classic files and start reading the content. Good luck:-)_**
