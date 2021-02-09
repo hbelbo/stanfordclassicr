@@ -42,11 +42,15 @@ sfclassic2df <- function(strng){
 #' Split stanford classic text string to a tibble
 #'
 #' @param strng is a "stanfor classic file text string", i.e. the text string
-#' being the content of any
-#' StanForD classic machine report.
+#' being the content of any StanForD classic machine report.
 #' The content is a long string which carries all the data.
 #' Stanford classic variables are separated by a "~", followed by two numbers defining
 #' the variable code and type, then followed by the variable values.
+#' @param sfvardefs is a tibble providing all stanford classic variable
+#' definitions found in the documentation.
+#' Columns:
+#' sfv is stanford variable number and type, e.g. "v1t1", and
+#' sfvc is variable category (character, integer, code)
 #'
 #' @return a data.frame, where each pair of StanForD code and corresponding
 #'   variable values will form one column. I.e  have one row
@@ -56,7 +60,7 @@ sfclassic2df <- function(strng){
 #' stanford_classic_string <-
 #' "1 2 \nSTM~120 1 \nFURU \nGRAN~16 4 \n20160208064316~116 1 7 7 2 2"
 #' sfclassic2df_v2(stanford_classic_string)
-sfclassic2df_v2 <- function(strng){
+sfclassic2df_v2 <- function(strng, sfvardefs = stanfordclassicr::sfvardefs ){
   varsvals <- unlist(stringr::str_split(strng, "~"))
   varsvals <- varsvals[stringr::str_length(varsvals)>1] # to drop empty returns
   varnames <- stringr::str_extract(varsvals, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}")
@@ -65,15 +69,13 @@ sfclassic2df_v2 <- function(strng){
   varnames <- varnames[which(!is.na(varnames))]
   varnames <- paste0("v", stringr::str_replace(string = varnames, pattern = "[ ]", replacement = "t") )
 
-  varvals <- varvals[which(varnames %in% stanfordclassicr::sfvardefs$sfv)]
-  varnames <- varnames[which(varnames %in% stanfordclassicr::sfvardefs$sfv)]
+  varvals <- varvals[which(varnames %in% sfvardefs$sfv)]
+  varnames <- varnames[which(varnames %in% sfvardefs$sfv)]
 
   sfcdf = data.frame(matrix(data = varvals, nrow = 1), stringsAsFactors=F)
   sfcdf = tibble::as_tibble(sfcdf)
   varnames <- make.names(varnames, unique = T)
   names(sfcdf) <- varnames
-
-
   return(sfcdf)
 }
 
@@ -120,7 +122,6 @@ sfclassic2list <- function(strng){
 #' x <- "stanford classic is fun"
 #' readr::write_file(x, tmp)
 #' file2strng(tmp)
-
 file2strng <- function(filename){
   enc <- readr::guess_encoding(filename)
   enc <- as.character(enc[1,1])
