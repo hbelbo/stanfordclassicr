@@ -24,6 +24,5 @@ this function reads one stanford stemfile (.stm)
 \examples{
  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = TRUE)
  stmfiles <- files[stringr::str_detect(files, ".stm")]
- stemdata <- read_stm_file(stmfiles[1])
- dplyr::glimpse
+ stemdata <- read_stm_file(stmfiles[2])
 }

@@ -4,15 +4,20 @@
 \alias{sfclassic2df_v2}
 \title{Split stanford classic text string to a tibble}
 \usage{
-sfclassic2df_v2(strng)
+sfclassic2df_v2(strng, sfvardefs = stanfordclassicr::sfvardefs)
 }
 \arguments{
 \item{strng}{is a "stanfor classic file text string", i.e. the text string
-being the content of any
-StanForD classic machine report.
+being the content of any StanForD classic machine report.
 The content is a long string which carries all the data.
 Stanford classic variables are separated by a "~", followed by two numbers defining
 the variable code and type, then followed by the variable values.}
+
+\item{sfvardefs}{is a tibble providing all stanford classic variable
+definitions found in the documentation.
+Columns:
+sfv is stanford variable number and type, e.g. "v1t1", and
+sfvc is variable category (character, integer, code)}
 }
 \value{
 a data.frame, where each pair of StanForD code and corresponding

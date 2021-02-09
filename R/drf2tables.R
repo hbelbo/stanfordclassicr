@@ -16,7 +16,17 @@ read_drf_file <- function(filename){
 
   strng <- file2strng(filename)
 
-  drfdf <- sfclassic2df_v2(strng)
+  drfspecial <-
+    tibble::tibble(
+      sfv = c("v329t26","v329t27","v329t30", "v329t31"),
+      sfvc = c("integer", "integer", "integer", "integer"))
+  sfvardefs <- sfvardefs %>% dplyr::bind_rows(sfvardefs, drfspecial) %>%
+    dplyr::distinct()
+
+
+
+  drfdf <- sfclassic2df_v2(strng, sfvardefs = sfvardefs)
+  print(names(drfdf))
 
   selector <- c("v16t4") #list of sfclassic vars we want
   selector <- selector[which(selector %in% names(drfdf))] # Ensure to not select vars not present
@@ -30,10 +40,10 @@ read_drf_file <- function(filename){
 
   # Report orientation (var 315t4)
   if(drfdf$v315t4 == "0") {
-    print(paste(stringr::str_trunc(filename, width = 15, side = "left"),"REPORT IS TIME ORIENTED"))
-    } else {
-      print(paste(stringr::str_trunc(filename, width = 15, side = "left"), "Report is combiened, i.e. object oriented"))
-      }
+    print(paste(stringr::str_trunc(filename, width = 15, side = "left"),"REPORT IS time oriented"))
+  } else {
+      print(paste(stringr::str_trunc(filename, width = 15, side = "left"), "Report is object oriented"))
+  }
 
 
   ## Report header
@@ -197,7 +207,8 @@ read_drf_file <- function(filename){
     if(length(selector)){
       selected <- drfdf %>%
         dplyr::select(tidyselect::all_of(selector))
-      expdd <- expand_stcvs(selected) %>% dplyr::mutate(operatornr = rep(1:length(n_pr_opr), each = n_pr_opr) )
+      expdd <- expand_stcvs(selected) %>%
+        dplyr::mutate(operatornr = rep(1:length(n_pr_opr), times = n_pr_opr) )
       runtime <- expdd
       cmwt.mrt <- runtime %>%  # make this correspond to CombinedMachineWorkTime.CombinedMachineRunTime in mom files
         dplyr::filter( .data$v316t3 %in% c(10, 11, 12, 13, 14)) %>%
@@ -208,14 +219,14 @@ read_drf_file <- function(filename){
         tidyr::pivot_wider(  names_from = .data$mrt.category, values_from = .data$time.sec )
 
       cmwt.omd <- runtime %>% # make this correspond to CombinedMachineWorkTime.OtherMachineData in mom files
-        dplyr::filter( .data$v316t3 %in% c(3)) %>%
+        dplyr::filter( .data$v316t3 %in% c(3)) %>% # only worktime observations
         dplyr::select( fuel.consumption = .data$v316t8,
                        driven.distance.km = .data$v316t9, .data$operatornr) %>%
         dplyr::group_by( .data$operatornr) %>%
         dplyr::summarise( fuel.consumption = sum(.data$fuel.consumption),
                          driven.distance.km = sum(.data$driven.distance.km))
 
-      cmwt <- dplyr::left_join(cmwt.mrt, cmwt.omd)
+      cmwt <- dplyr::full_join(cmwt.mrt, cmwt.omd, by = c("operatornr" = "operatornr"))
     } else {
       cmwt <- NULL
     }
@@ -229,9 +240,9 @@ read_drf_file <- function(filename){
     selected <- drfdf %>%
       dplyr::select( tidyselect::all_of(selector))
     expdd <- expand_stcvs(selected) %>%
-      dplyr::mutate( operatornr = rep(1:length(n_pr_opr), each = n_pr_opr) )
+      dplyr::mutate( operatornr = rep(1:length(n_pr_opr), times = n_pr_opr) )
     irtime <- expdd %>%
-      dplyr::group_by( .data$operatornr, .data$v317t4) %>%
+      dplyr::group_by( .data$operatornr, .data$v317t4) %>% #v317t4 is description of work time
       dplyr::summarise(time.sec = sum(.data$v317t5)) %>%
       tidyr::pivot_wider( names_from = .data$v317t4,
                          values_from = .data$time.sec)
@@ -248,7 +259,7 @@ read_drf_file <- function(filename){
         dplyr::select( tidyselect::all_of(selector))
       expdd <- expand_stcvs(selected) %>%
         dplyr::mutate(
-          operatornr = rep(1:length(n_pr_opr), each = n_pr_opr),
+          operatornr = rep(1:length(n_pr_opr), times = n_pr_opr),
           v318t4 = lubridate::ymd_hms(.data$v318t4))
       worktime <- expdd
 
@@ -267,8 +278,98 @@ read_drf_file <- function(filename){
     } else { owt <- NULL }
 
 
-    cmwt <- cmwt %>% dplyr::left_join( irtime) %>% dplyr::left_join( owt)
+    cmwt <- dplyr::left_join(cmwt, irtime,  by = c("operatornr" = "operatornr"))
 
+    ## Shiftdata --------------
+
+    # Shifts per operator. Shiftwise
+    n_pr_opr <- as.numeric(unlist(stringr::str_split(drfdf$v329t1, " ")))
+   selector <- c("v329t2", "v329t3", "v329t4", "v329t5", "v329t6")
+    selector <- selector[which(selector %in% names(drfdf))] # Ensure to not select vars not present
+    print(paste("v329t2 til t6:", selector))
+    if(length(selector)){
+      selected <- drfdf %>%
+        dplyr::select( tidyselect::all_of(selector))
+      expdd <- expand_stcvs(selected) %>%
+        dplyr::mutate(
+          operatornr = rep(1:length(n_pr_opr), times = n_pr_opr),
+          v329t2 = lubridate::ymd_hms(.data$v329t2),
+          v329t3 = lubridate::ymd_hms(.data$v329t3))
+      shiftdata <- expdd
+      shiftdata <- shiftdata %>%
+        dplyr::rename( shift_start = .data$v329t2,
+                       shift_end = .data$v329t3,
+                       shift_type_txt = .data$v329t5,
+                       n_subshifts = .data$v329t6)
+    }
+
+      # Subshiftwise  -------------
+      n_pr_shift <- as.numeric(unlist(stringr::str_split(drfdf$v329t6, " ")))
+      selector <- c("v329t7", "v329t8", "v329t9", "v329t10", "v329t16", "v329t17" )
+      selector <- selector[which(selector %in% names(drfdf))] # Ensure to not select vars not present
+
+      #if(length(selector)){
+        selected <- drfdf %>%
+          dplyr::select( tidyselect::all_of(selector))
+
+        expdd <- expand_stcvs(selected)
+
+        subshifts <- expdd %>%
+          dplyr::rename(sshift_starttime = .data$v329t7,
+                      sshift_endtime = .data$v329t8,
+
+                      sshift_fuelcons = .data$v329t16,
+
+                      sshift_drivedist = .data$v329t17)
+
+      # per species and subshift
+      selector <-  c("v329t11")
+      selector <- selector[which(selector %in% names(drfdf))] # Ensure to not select vars not present
+
+      if(length(selector)){
+      selected <- drfdf %>%
+        dplyr::select( tidyselect::all_of(selector))
+      expdd <- expand_stcvs(selected)
+
+      subshift_pr_species <- expdd
+
+      } else {  subshift_pr_species <- NULL }
+
+      # Volumes per assortment and subshift
+      selector <-  c("v329t12", "v329t13", "v329t14", "v329t15")
+      selector <- selector[which(selector %in% names(drfdf))] # Ensure to not select vars not present
+
+      if(length(selector)){
+      selected <- drfdf %>%
+        dplyr::select( tidyselect::all_of(selector))
+      expdd <- expand_stcvs(selected)
+      subshift_pr_assortment <- expdd
+      } else { subshift_pr_assortment = NULL }
+
+      # The ponsse mysterious variables.
+      # Shiftwise variables
+      selector <-  c("v329t26","v329t27", "v329t31")
+      selector <- selector[which(selector %in% names(drfdf))] # Ensure to not select vars not present
+      if(length(selector)){
+        selected <- drfdf %>%
+          dplyr::select( tidyselect::all_of(selector))
+        expdd <- expand_stcvs(selected )
+
+        ponssebonus_pr_shift <- expdd
+      } else { ponssebonus_pr_shift <- NULL }
+
+      # The even longer ponsse mysterious variable
+      selector <-  c("v329t30")
+      selector <- selector[which(selector %in% names(drfdf))] # Ensure to not select vars not present
+      if(length(selector)){
+        selected <- drfdf %>%
+          dplyr::select( tidyselect::all_of(selector))
+        expdd <- expand_stcvs(selected)
+
+        ponssebonus_pr_unknown <- expdd
+      } else { ponssebonus_pr_unknown <- NULL }
+
+   imwt <- subshifts
 
 
   Ret <- list(report_header = drf_report_header,
@@ -277,11 +378,11 @@ read_drf_file <- function(filename){
               product_definition = drf_product_definition,
               monitoring_settings = monitoring_settings,
               combined_machine_work_time = cmwt,
-              operator_work_time = owt
+              operator_work_time = owt,
               # TO BE COMPLETED
-              # imwt = imwt
+              imwt = imwt
               # cmwt = cmwt
-  )
+              )
   return(Ret)
 
 }
