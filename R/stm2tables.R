@@ -11,11 +11,11 @@
 #' @examples
 #'  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = TRUE)
 #'  stmfiles <- files[stringr::str_detect(files, ".stm")]
-#'  stemdata <- read_stm_file(stmfiles[1])
-#'  dplyr::glimpse
+#'  stemdata <- read_stm_file(stmfiles[2])
+
 
 read_stm_file <- function(filename, verbose = FALSE){
- # filename <- stmfiles[1]
+ # filename <- stmfiles[2]
   strng <- file2strng(filename)
 
     strng_to_v110_1 <- stringr::str_sub(string =  strng,
@@ -93,7 +93,8 @@ read_stm_file <- function(filename, verbose = FALSE){
                                "#",
                                get0("v120t3", ifnotfound = ""),
                                "#", stringr::str_replace( df1$v2t1, "\n", "")),
-                      tmp_species_nr = as.integer(dfx$v120t3))
+                     tmp_species_nr = 1:nrow(dfx))
+
     species_group_definition <-
       species_group_definition %>%
       dplyr::mutate(
@@ -112,7 +113,7 @@ read_stm_file <- function(filename, verbose = FALSE){
       tibble::tibble(product_grp_code,
                      product_grp_species_nr,
                      product_group_name =
-                       expand_stcvs(df1 %>% dplyr::select(v127t1)) %>% pull()
+                       expand_stcvs(df1 %>% dplyr::select(.data$v127t1)) %>% dplyr::pull()
       )
 
     # Product definitions
@@ -281,9 +282,9 @@ read_stm_file <- function(filename, verbose = FALSE){
              product_name = get0("v296t2"),
              assortment_code = get0("v296t3"),
              price_category_code = get0("v296t4"),
-             m3price = get0("v299t1"),
-             m3sub = get0("v299t2"),
-             m3sob = get0("v299t3"),
+             m3price = get0("v299t1") / 10000,
+             m3sub = get0("v299t2") / 10000,
+             m3sob = get0("v299t3") / 10000,
              dia_top_ob = dplyr::coalesce(get0("v291t5", ifnotfound = NA_integer_),
                                           get0("v291t1", ifnotfound = NA_integer_)),
              dia_top_ub = dplyr::coalesce(get0("v292t5", ifnotfound = NA_integer_),
