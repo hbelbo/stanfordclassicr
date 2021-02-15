@@ -11,9 +11,8 @@
 #' @examples
 #'  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = TRUE)
 #'  stmfiles <- files[stringr::str_detect(files, ".stm")]
+#'  stemdata <- read_stm_file(stmfiles[1])
 #'  stemdata <- read_stm_file(stmfiles[2])
-
-
 read_stm_file <- function(filename, verbose = FALSE){
  # filename <- stmfiles[2]
   strng <- file2strng(filename)
@@ -223,10 +222,11 @@ read_stm_file <- function(filename, verbose = FALSE){
                       longitude = dplyr::case_when(
                         coordinate_reference_system == "WGS84" ~ longitude / 100000,
                         TRUE ~ longitude)
+
         )
     }
-    if ("v523t6" %in% stemvars){
-      stemdat$coordinate_time = as.numeric(stringr::str_remove(stemdat$v523t6, pattern = "\n"))
+    if ("v523t6" %in% names(stemdat)){
+      stemdat$coordinate_time = as.character(stringr::str_remove(stemdat$v523t6, pattern = "\n"))
     }
 
     if ("v273t1" %in% stemvars) {

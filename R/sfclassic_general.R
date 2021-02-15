@@ -2,7 +2,7 @@
 
 # sfvardefs = readRDS(
 # file = list.files(system.file("extdata", package = "stanfordclassicr"),
-# full.names = T, pattern = "sfvardefs.Rds"))
+# full.names = TRUE, pattern = "sfvardefs.Rds"))
 
 
 #' Split stanford classic text string to dataframe

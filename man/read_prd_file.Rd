@@ -23,4 +23,6 @@ Read StanForD Classic prd-files (machine reports from forest machines)
  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = TRUE)
  prdfiles <- files[stringr::str_detect(files, ".prd")]
  prddata <- read_prd_file(prdfiles[1])
+ prddata <- read_prd_file(prdfiles[2])
+ prddata <- read_prd_file(prdfiles[3])
 }

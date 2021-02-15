@@ -18,17 +18,16 @@
 #' is provided in the supplementary directory, please have a look
 #'
 #' @examples
-#' files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = T)
-#' files # to see all files and where they are on your computer
-#' read_ktr_file(files[str_detect(files, ".ktr")][1])
-#' read_stm_file(files[str_detect(files, ".stm")][1])
-#' read_pri_file(files[str_detect(files, ".pri")][1])
+#' files = list.files(system.file("extdata", package = "stanfordclassicr"), full.names = TRUE)
+#' read_ktr_file(files[stringr::str_detect(files, ".ktr")][1])
+#' read_stm_file(files[stringr::str_detect(files, ".stm")][1])
+#' read_pri_file(files[stringr::str_detect(files, ".pri")][1])
 #'
 #' @section Further development:
 #' The ambitions is to first improve the mapping from tags and codes to
 #' reasonable variable names in current functions
 #'
-#' Then expand to include .drt, .apt, .prl and .prd files.
+#' Then expand to include .drf, .apt, .prl and .prd files.
 #'
 #' "Stanford homepage": https://www.skogforsk.se/english/projects/stanford/
 #' @docType package

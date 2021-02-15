@@ -19,6 +19,7 @@ Read StanForD Classic drf-files (machine reports from forest machines)
 \examples{
  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = TRUE)
  drffiles <- files[stringr::str_detect(files, ".drf")]
- filename <- drffiles[1]
- drf_report <- read_drf_file(filename)
+ drf_report <- read_drf_file(drffiles[1])
+ drf_report <- read_drf_file(drffiles[2])
+ drf_report <- read_drf_file(drffiles[3])
 }

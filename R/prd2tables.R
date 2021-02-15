@@ -13,6 +13,8 @@
 #'  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = TRUE)
 #'  prdfiles <- files[stringr::str_detect(files, ".prd")]
 #'  prddata <- read_prd_file(prdfiles[1])
+#'  prddata <- read_prd_file(prdfiles[2])
+#'  prddata <- read_prd_file(prdfiles[3])
 read_prd_file <- function(filename){
   #  filename <- prdfiles[1]
   strng <- file2strng(filename)

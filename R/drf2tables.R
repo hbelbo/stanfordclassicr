@@ -10,10 +10,11 @@
 #' @examples
 #'  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = TRUE)
 #'  drffiles <- files[stringr::str_detect(files, ".drf")]
-#'  filename <- drffiles[1]
-#'  drf_report <- read_drf_file(filename)
+#'  drf_report <- read_drf_file(drffiles[1])
+#'  drf_report <- read_drf_file(drffiles[2])
+#'  drf_report <- read_drf_file(drffiles[3])
 read_drf_file <- function(filename){
-
+  # filename <- drffiles[1]
   strng <- file2strng(filename)
 
   drfspecial <-
@@ -286,41 +287,56 @@ read_drf_file <- function(filename){
     n_pr_opr <- as.numeric(unlist(stringr::str_split(drfdf$v329t1, " ")))
    selector <- c("v329t2", "v329t3", "v329t4", "v329t5", "v329t6")
     selector <- selector[which(selector %in% names(drfdf))] # Ensure to not select vars not present
-    print(paste("v329t2 til t6:", selector))
+    print(paste("v329t2 til t6:", paste0(selector, collapse = ", ")))
     if(length(selector)){
       selected <- drfdf %>%
-        dplyr::select( tidyselect::all_of(selector))
+        dplyr::select( tidyselect::any_of(selector))
       expdd <- expand_stcvs(selected) %>%
         dplyr::mutate(
           operatornr = rep(1:length(n_pr_opr), times = n_pr_opr),
           v329t2 = lubridate::ymd_hms(.data$v329t2),
           v329t3 = lubridate::ymd_hms(.data$v329t3))
       shiftdata <- expdd
-      shiftdata <- shiftdata %>%
-        dplyr::rename( shift_start = .data$v329t2,
-                       shift_end = .data$v329t3,
-                       shift_type_txt = .data$v329t5,
-                       n_subshifts = .data$v329t6)
+      print("Names shiftdata: ")
+      print(paste0(names(shiftdata), collapse = ", "))
+      shiftdata <- dplyr::rename_all(shiftdata, dplyr::recode,  v329t2 = "shift_start",
+                              v329t3 = "shift_end",
+                              v329t5 = "shift_type_txt",
+                              v329t6 = "n_subshifts",
+                              operatornr = "operatornr")
+      print("Names renamed shiftdata: ")
+      print(paste0(names(shiftdata), collapse = ", "))
+
     }
 
       # Subshiftwise  -------------
       n_pr_shift <- as.numeric(unlist(stringr::str_split(drfdf$v329t6, " ")))
       selector <- c("v329t7", "v329t8", "v329t9", "v329t10", "v329t16", "v329t17" )
       selector <- selector[which(selector %in% names(drfdf))] # Ensure to not select vars not present
-
-      #if(length(selector)){
+      print(paste("v329t7 til t17:", paste0(selector, collapse = ", ")))
+      if(length(selector)){
         selected <- drfdf %>%
-          dplyr::select( tidyselect::all_of(selector))
+          dplyr::select( tidyselect::any_of(selector))
 
         expdd <- expand_stcvs(selected)
 
-        subshifts <- expdd %>%
-          dplyr::rename(sshift_starttime = .data$v329t7,
-                      sshift_endtime = .data$v329t8,
+        subshifts <- expdd
+        #   dplyr::rename(sshift_starttime = .data$v329t7,
+        #               sshift_endtime = .data$v329t8,
+        #               sshift_fuelcons = .data$v329t16,
+        #               sshift_drivedist = .data$v329t17)
+        print("Names subshiftdata: ")
+        print(paste0(names(subshifts), collapse = ", "))
 
-                      sshift_fuelcons = .data$v329t16,
-
-                      sshift_drivedist = .data$v329t17)
+        subshifts <- dplyr::rename_all(subshifts, dplyr::recode,  v329t7 = "sshift_starttime",
+                                       v329t8 = "sshift_endtime",
+                                       v329t16 = "shift_type_txt",
+                          v329t6 = "sshift_fuelcons",
+                          v329t17 = "sshift_drivedist")
+        print("Names renamed subshifts: ")
+        print(paste0(names(subshifts), collapse = ", "))
+        print(paste0("nrow subshifts", nrow(subshifts)))
+      } else { subshifts <- NULL }
 
       # per species and subshift
       selector <-  c("v329t11")
@@ -328,7 +344,7 @@ read_drf_file <- function(filename){
 
       if(length(selector)){
       selected <- drfdf %>%
-        dplyr::select( tidyselect::all_of(selector))
+        dplyr::select( tidyselect::any_of(selector))
       expdd <- expand_stcvs(selected)
 
       subshift_pr_species <- expdd
@@ -341,7 +357,7 @@ read_drf_file <- function(filename){
 
       if(length(selector)){
       selected <- drfdf %>%
-        dplyr::select( tidyselect::all_of(selector))
+        dplyr::select( tidyselect::any_of(selector))
       expdd <- expand_stcvs(selected)
       subshift_pr_assortment <- expdd
       } else { subshift_pr_assortment = NULL }
@@ -352,7 +368,7 @@ read_drf_file <- function(filename){
       selector <- selector[which(selector %in% names(drfdf))] # Ensure to not select vars not present
       if(length(selector)){
         selected <- drfdf %>%
-          dplyr::select( tidyselect::all_of(selector))
+          dplyr::select( tidyselect::any_of(selector))
         expdd <- expand_stcvs(selected )
 
         ponssebonus_pr_shift <- expdd
