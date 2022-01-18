@@ -192,9 +192,9 @@ read_stm_file <- function(filename, verbose = FALSE){
              species_nr = get0("v110t1"),
              measurement_date_machine = get0("v18t4"),
              DBHmm = dplyr::case_when(
-               "v281t1" %in% names(stemdat) ~ get0("v281t1", ifnotfound = NA_character_),
-               "v281t2" %in% names(stemdat) ~ get0("v281t2", ifnotfound = NA_character_),
-               TRUE ~ NA_character_)
+               "v281t1" %in% names(stemdat) ~ get0("v281t1", ifnotfound = NA_integer_),
+               "v281t2" %in% names(stemdat) ~ get0("v281t2", ifnotfound = NA_integer_),
+               TRUE ~ NA_integer_)
       )
 
     if("v521t1" %in% names(stemdat)){
