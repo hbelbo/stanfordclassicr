@@ -19,19 +19,19 @@ lapply(c("magrittr","stringr","dplyr","tibble","lubridate", "stanfordclassicr"),
 ```r
 stanford_examples_path <- system.file("extdata", package = "stanfordclassicr")
 
-drffiles <- list.files(path = stanford_examples_path, pattern = ".drf", full.names = T)
+drffiles <- list.files(path = stanford_examples_path, pattern = ".drf", full.names = T, ignore.case = TRUE)
 drffiles[1:2]
 
-ktrfiles <- list.files(path = stanford_examples_path, pattern = ".ktr", full.names = T)
+ktrfiles <- list.files(path = stanford_examples_path, pattern = ".ktr", full.names = T, ignore.case = TRUE)
 ktrfiles[1:2]
 
-prifiles <- list.files(path = stanford_examples_path, pattern = ".pri", full.names = T)
+prifiles <- list.files(path = stanford_examples_path, pattern = ".pri", full.names = T, ignore.case = TRUE)
 prifiles[1:2]
 
-stmfiles <- list.files(path = stanford_examples_path, pattern = ".stm", full.names = T)
+stmfiles <- list.files(path = stanford_examples_path, pattern = ".stm", full.names = T, ignore.case = TRUE)
 stmfiles[1]
 
-prdfiles <- list.files(path = stanford_examples_path, pattern = ".prd", full.names = T)
+prdfiles <- list.files(path = stanford_examples_path, pattern = ".prd", full.names = T, ignore.case = TRUE)
 prdfiles[1:2]
 ```
 
