@@ -191,20 +191,24 @@ expand_stcvs <- function(tibbl){
   for (i in seq_along(names(tibbl))){
     nami = names(tibbl)[i]
     vari = dplyr::pull(tibbl[,i])
+
     # Clue1: text variables starts with new line (\n or \cr \r\n)
 
     typei <- ifelse(stringr::str_starts(string = vari[1], pattern = "[\n\r]{1,2}"), "txt", "num")
     n_obsi = length(vari)
+
 
     # Clue2: if text, each data entry is split by newline. If numeric, each data entry split by space.
     if(typei == "txt") {
       lexp =
         unlist(stringr::str_split(stringr::str_remove(vari, "[\n\r]{1,2}"), "[\n\r]{1,2}" ))
     } else {
+      vari = stringr::str_remove(vari, "^[ ]+")
       lexp =
-        as.double(unlist(stringr::str_split(vari, " ")))
+        as.double(unlist(stringr::str_split(vari, "[ ]+")))
 
     }
+    n <- length(lexp)
     retdf = dplyr::mutate(retdf, !!nami := lexp)
   }
   return(retdf)
