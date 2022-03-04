@@ -103,6 +103,7 @@ read_stm_file <- function(filename, verbose = FALSE){
 
 
     # Help-table of product groups
+    if(!is.null(vls$v125t1)){
     product_grp_species_nr <- rep(1:length(vls$v125t1), vls$v125t1)
     product_grp_code <- integer()
     for (i in 1:vls$v111t1) {
@@ -114,6 +115,8 @@ read_stm_file <- function(filename, verbose = FALSE){
                      product_group_name =
                        expand_stcvs(df1 %>% dplyr::select(.data$v127t1)) %>% dplyr::pull()
       )
+    } else {
+      product_grp_table <- tibble::tibble()}
 
     # Product definitions
     selector <- c( "v121t1", "v121t2", "v126t1", "v121t6", "v126t1")
@@ -126,7 +129,7 @@ read_stm_file <- function(filename, verbose = FALSE){
       dfx %>%
       dplyr::mutate( product_name = .data$v121t1,
              product_info = .data$v121t2,
-             v126t1 = .data$v126t1,
+
              tmp_species_nr = rep(1:as.integer(df1$v111t1), prods_per_species),
              tmp_product_nr = as.integer(1:length(.data$v121t1)),
              species_group_name =
@@ -135,10 +138,15 @@ read_stm_file <- function(filename, verbose = FALSE){
                    prods_per_species),
              product_key = as.numeric(paste0(start_epoch, .data$tmp_product_nr)),
              species_group_key =
-               as.numeric(paste0(start_epoch, .data$tmp_species_nr))) %>%
-      dplyr::left_join( product_grp_table,
+               as.numeric(paste0(start_epoch, .data$tmp_species_nr)))
+
+      if(nrow(product_grp_table)>0) {
+        product_definition <-  dplyr::left_join(product_definition, product_grp_table,
                        by = c("tmp_species_nr" = "product_grp_species_nr",
-                              "v126t1" = "product_grp_code")) %>%
+                              "v126t1" = "product_grp_code"))
+      }
+
+    product_definition <-  product_definition %>%
       dplyr::select( -tidyselect::matches("tmp|v\\d", perl =T),
                      tidyselect::matches("tmp|v\\d", perl =T))
 
