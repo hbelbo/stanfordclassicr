@@ -176,8 +176,11 @@ read_pri_file <- function(filename, verbose = FALSE){
 
 
   # .. Logs
+  # LogData <- matrix(data =
+  #                     as.integer(unlist(stringr::str_split(df1$v257t1, " "))),
+  #                   ncol = as.integer(df1$v255t1), byrow=T)
   LogData <- matrix(data =
-                      as.integer(unlist(stringr::str_split(df1$v257t1, " "))),
+                     (unlist(stringr::str_split(df1$v257t1, " "))),
                     ncol = as.integer(df1$v255t1), byrow=T)
 
   # Regarding Log_CodeCodes and names: IN SF2010 code 20 would be the same as Product Key, while code 1 would not have any direct equivalent as it is not a true unique key.
@@ -200,6 +203,10 @@ read_pri_file <- function(filename, verbose = FALSE){
   LogData <- as.data.frame(LogData, stringsAsFactors = F)
   names(LogData) <- Log_Code_Name_pairs_present$CodeN
 
+  LogData <- LogData %>%
+    dplyr::mutate( dplyr::across(.cols = dplyr::ends_with("dec"), ~ stringr::str_pad(string = .x, width=3, side = "left", pad = "0")))
+
+
   if ("price_matrix_uid" %in% names(LogData)){
     LogData$tmp_pk = LogData$price_matrix_uid
   } else {LogData$tmp_pk = LogData$price_matrix_nr}
@@ -219,6 +226,8 @@ read_pri_file <- function(filename, verbose = FALSE){
       dplyr::ungroup()
 
   }
+
+  LogData <- LogData %>% dplyr::mutate_if(is.character, as.numeric)
 
   logs = LogData %>%
     dplyr::mutate(
