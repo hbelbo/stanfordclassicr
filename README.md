@@ -8,7 +8,7 @@ Currently the package provide functions to read .pri, .stm and .ktr files. The f
 ## Get started
 **_Install from github:_**
 ```r
-devtools::install_github("helmerbelbo/stanfordclassicr")
+devtools::install_github("hbelbo/stanfordclassicr")
 
 ```
 **_Then load stanfordclassicr and necessary pkgs_**
