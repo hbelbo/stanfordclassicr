@@ -119,12 +119,10 @@ read_pri_file <- function(filename, verbose = FALSE){
   selected <- df1 %>% dplyr::select( tidyselect::all_of(selector))
   prods_per_species <- as.integer(unlist(stringr::str_split(df1$v116t1, " ")))
   dfx <- expand_stcvs(selected)
-
+  lookup <- c(product_name = "v121t1", product_info = "v121t2")
   product_definition <-
     dfx %>%
-    dplyr::mutate( product_name = .data$v121t1,
-           product_info = .data$v121t2,
-           v126t1 = .data$v126t1,
+    dplyr::mutate(
            tmp_species_nr = rep(1:as.integer(df1$v111t1), prods_per_species),
            tmp_product_nr = as.integer(1:length(.data$v121t1)),
            species_group_name =
@@ -139,7 +137,8 @@ read_pri_file <- function(filename, verbose = FALSE){
                      by = c("tmp_species_nr" = "product_grp_species_nr",
                             "v126t1" = "product_grp_code")) %>%
     dplyr::select( -tidyselect::matches("tmp|v\\d", perl =T),
-                   tidyselect::matches("tmp|v\\d", perl =T))
+                   tidyselect::matches("tmp|v\\d", perl =T)) %>%
+    dplyr::rename(dplyr::any_of(lookup))
 
 
 
