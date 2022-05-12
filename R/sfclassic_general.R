@@ -209,6 +209,9 @@ expand_stcvs <- function(tibbl){
 
     }
     n <- length(lexp)
+    if( length(lexp)== nrow(retdf)){
+      retdf = dplyr::mutate(retdf, !!nami := lexp)
+    }
     retdf = dplyr::mutate(retdf, !!nami := lexp)
   }
   return(retdf)
