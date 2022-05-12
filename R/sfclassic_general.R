@@ -212,7 +212,7 @@ expand_stcvs <- function(tibbl){
     if( length(lexp)== nrow(retdf)){
       retdf = dplyr::mutate(retdf, !!nami := lexp)
     }
-    retdf = dplyr::mutate(retdf, !!nami := lexp)
+
   }
   return(retdf)
 }
