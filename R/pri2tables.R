@@ -97,7 +97,9 @@ read_pri_file <- function(filename, verbose = FALSE){
     product_grp_species_nr <- rep(1:length(replicator), replicator)
   product_grp_code <- integer()
   for (i in 1:as.integer(df1$v111t1)) {
-    product_grp_code <- c(product_grp_code, 1:replicator[i])
+    if(replicator[i]!=0) {
+      product_grp_code <- c(product_grp_code, 1:replicator[i])
+    }
   }
   product_grp_table <-
     tibble::tibble(
