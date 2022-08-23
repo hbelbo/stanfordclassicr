@@ -93,6 +93,7 @@ read_pri_file <- function(filename, verbose = FALSE){
 
 
   # Help-table of product groups
+  if("v125t1" %in% names(df1)){
   replicator <- as.integer(unlist(stringr::str_split(df1$v125t1, " ")))
     product_grp_species_nr <- rep(1:length(replicator), replicator)
   product_grp_code <- integer()
@@ -111,6 +112,8 @@ read_pri_file <- function(filename, verbose = FALSE){
            dplyr::pull())
 
     )
+  } else {product_grp_table <- tibble::tibble()}
+
 
 
 
@@ -134,10 +137,14 @@ read_pri_file <- function(filename, verbose = FALSE){
                    df1 %>% dplyr::select(.data$v120t1))),
                prods_per_species),
            product_key = as.numeric(paste0(start_epoch, .data$tmp_product_nr)),
-           species_group_key = as.numeric(paste0(start_epoch, .data$tmp_species_nr))) %>%
+           species_group_key = as.numeric(paste0(start_epoch, .data$tmp_species_nr)))
+  if(nrow(product_grp_table)>0){
+    product_definition <- product_definition %>%
     dplyr::left_join( product_grp_table,
                      by = c("tmp_species_nr" = "product_grp_species_nr",
-                            "v126t1" = "product_grp_code")) %>%
+                            "v126t1" = "product_grp_code"))
+  }
+  product_definition <- product_definition %>%
     dplyr::select( -tidyselect::matches("tmp|v\\d", perl =T),
                    tidyselect::matches("tmp|v\\d", perl =T)) %>%
     dplyr::rename(dplyr::any_of(lookup))
