@@ -227,8 +227,8 @@ varvals2one <- function(stanford.tibbl, vars2use){
   # selected <- dplyr::select_if(selected, ~nchar(.data)>0) this doesnt work
 
   if(ncol(selected)>0){
-    collapsed2one <- selected %>%
-      stringr::str_c(.data, sep = ", ", collapse = ", ")
+    collapsed2one <-
+      stringr::str_c(as.character(selected[1,]), sep = ", ", collapse = ", ")
   } else {
     collapsed2one <- character()
   }
