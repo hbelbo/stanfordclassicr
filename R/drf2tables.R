@@ -12,9 +12,9 @@
 #'  drffiles <- files[stringr::str_detect(files, ".drf")]
 #'  drf_report <- read_drf_file(drffiles[1])
 #'  drf_report <- read_drf_file(drffiles[2])
-#'  drf_report <- read_drf_file(drffiles[3])
+#'  drf_report <- read_drf_file(drffiles[5])
 read_drf_file <- function(filename){
-  # filename <- drffiles[1]
+  # filename <- drffiles[2]
   strng <- file2strng(filename)
 
   drfspecial <-
@@ -27,12 +27,12 @@ read_drf_file <- function(filename){
 
 
   drfdf <- sfclassic2df_v2(strng, sfvardefs = sfvardefs)
-  print(names(drfdf))
+  #print(names(drfdf))
 
   selector <- c("v16t4") #list of sfclassic vars we want
   selector <- selector[which(selector %in% names(drfdf))] # Ensure to not select vars not present
   if(length(selector)) {
-    start_epoch <- as.double(lubridate::ymd_hms(stringr::str_replace(drfdf$v16t4, "\n", "")))
+    start_epoch <- as.numeric(lubridate::ymd_hms(stringr::str_replace(drfdf$v16t4, "\n", "")))
   } else {
     start_epoch <- NA_real_
     print("No v16t4 in the drf file")
@@ -81,24 +81,25 @@ read_drf_file <- function(filename){
     dplyr::mutate( object_name = get0("v21t1", ifnotfound = NA_character_),
                   object_user_id = get0("v21t1", ifnotfound = NA_character_),
                   object_start_date = lubridate::ymd_hms(get0("v16t4", ifnotfound = NA_character_)),
-                  object_key = get0("start_epoch", ifnotfound = NA_integer_),
+                  object_key = as.numeric(get0("start_epoch", ifnotfound = NA_real_)),
                   sub_object_name = get0("v21t2", ifnotfound = NA_character_),
                   sub_object_user_id = paste0(get0("v21t2", ifnotfound = ""),
                                               get0("v21t3", ifnotfound = ""),
-                                              get0("v21t4", ifnotfound = "")),
-                  sub_object_key = dplyr::if_else( !is.na(.data$object_key), 0L, NA_integer_),
-                  logging_org = paste0(get0("v31t1", ifnotfound = ""),
+                                              get0("v21t4", ifnotfound = "")))  %>% # dplyr::glimpse()
+     dplyr::mutate(sub_object_key = dplyr::if_else( !is.na(.data$object_key), 0, NA_real_),
+                  logging_org = paste0(unique(c(get0("v31t1", ifnotfound = ""),
                                        get0("v31t2", ifnotfound = ""),
                                        get0("v31t3", ifnotfound = ""),
                                        get0("v31t4", ifnotfound = ""),
-                                       get0("v31t5", ifnotfound = "")),
-                  contractor = paste0(get0("v34t2", ifnotfound = ""),
+                                       get0("v31t5", ifnotfound = ""))), collapse = " "),
+                  contractor = paste0(unique(c(get0("v34t2", ifnotfound = ""),
                                       get0("v34t3", ifnotfound = ""),
                                       get0("v34t4", ifnotfound = ""),
-                                      get0("v34t5", ifnotfound = "")),
-                  contract_nr = paste0(get0("v35t1", ifnotfound = ""), get0("v35t2", ifnotfound = ""))
-                  ) %>%
-    dplyr::select( -tidyselect::matches("v\\d", perl =T))
+                                      get0("v34t5", ifnotfound = ""))), collapse = " "),
+                  contract_nr = paste(get0("v35t1", ifnotfound = ""), get0("v35t2", ifnotfound = ""), sep = " ")
+                  ) %>% #dplyr::glimpse()
+     dplyr::select( -tidyselect::matches("v\\d"))
+
 
 
   ## Species and Product definitions
@@ -108,7 +109,7 @@ read_drf_file <- function(filename){
   if(length(selector)) {
     selected <- drfdf %>% dplyr::select( tidyselect::all_of(selector))
     dfx <- expand_stcvs(selected)
-    dfx$tmp_species_nr = 1:nrow(dfx)
+    dfx$tmp_species_nr = as.integer(1:nrow(dfx))
     dfx$start_epoch =  start_epoch #if_else( is.na(start_epoch), 0L ,start_epoch)
 
     drf_species_group_definition <-
@@ -125,7 +126,8 @@ read_drf_file <- function(filename){
                         paste0(dplyr::if_else(
                           is.na(start_epoch), 0 , start_epoch) , .data$tmp_species_nr))
                       )  %>%
-      dplyr::select( -tidyselect::matches("v\\d", perl =T))
+      # dplyr::select( -tidyselect::matches("v\\d", perl =T))
+      dplyr::select( -tidyselect::matches("v\\d"))
   } else {
     drf_species_group_definition <-  NULL
     }
@@ -161,17 +163,24 @@ read_drf_file <- function(filename){
       dfx %>%
       dplyr::mutate( product_name = .data$v121t1,
            product_info = .data$v121t2,
-           v126t1 = .data$v126t1,
+
            tmp_species_nr = rep(1:as.integer(drfdf$v111t1), prods_per_species),
            tmp_product_nr = as.integer(1:length(.data$v121t1)),
            species_group_name = rep(dplyr::pull(expand_stcvs(drfdf %>% dplyr::select(.data$v120t1))), prods_per_species),
            product_key = as.numeric(paste0(start_epoch, .data$tmp_product_nr)),
-           species_group_key = as.numeric(paste0(start_epoch, .data$tmp_species_nr))) %>%
-      dplyr::left_join(.data,
+           species_group_key = as.numeric(paste0(start_epoch, .data$tmp_species_nr)))
+
+    if( !(is.null(product_grp_table)) & ("v126t1" %in% names(drf_product_definition))) {
+      drf_product_definition =
+        dplyr::left_join(drf_product_definition,
                      product_grp_table,
                      by = c("tmp_species_nr" = "product_grp_species_nr",
-                            "v126t1" = "product_grp_code")) %>%
-      dplyr::select( -tidyselect::matches("tmp|v\\d", perl =T), tidyselect::matches("tmp|v\\d", perl =T))
+                            "v126t1" = "product_grp_code"))
+      }
+    drf_product_definition = drf_product_definition %>%
+      #dplyr::select( -tidyselect::matches("tmp|v\\d", perl =T), tidyselect::matches("tmp|v\\d", perl =T))
+      dplyr::select( -tidyselect::matches("tmp|v\\d"), tidyselect::matches("tmp|v\\d"))
+
   } else {
     drf_product_definition <- NULL
   }
@@ -182,10 +191,10 @@ read_drf_file <- function(filename){
   if(length(selector)){
     selected <- drfdf %>% dplyr::select( tidyselect::all_of(selector))
     monitoring_settings <- expand_stcvs(selected) %>%
-      dplyr::rename( MonitoringFilterDown = .data$v315t1,
-             MonitoringFilterTimeRun = .data$v315t2,
-             MonitoringFilterTimeMinimum = .data$v315t3,
-             MonitoringOrientation = .data$v315t4)
+      dplyr::rename( MonitoringFilterDown = "v315t1",
+             MonitoringFilterTimeRun = "v315t2",
+             MonitoringFilterTimeMinimum = "v315t3",
+             MonitoringOrientation = "v315t4")
   } else {monitoring_settings <- NULL}
 
   # OperatorDefinition
@@ -198,7 +207,7 @@ read_drf_file <- function(filename){
     operatordefinition$OperatorKey <- 1:n_opr
     operatordefinition <- operatordefinition %>%
       dplyr::mutate( OperatorUserId =  .data$v212t1) %>%
-      dplyr::select( .data$OperatorKey, .data$OperatorUserId)
+      dplyr::select( "OperatorKey", "OperatorUserId")
   } else {operatordefinition <- NULL}
 
   #Combined Machine work time
@@ -270,7 +279,7 @@ read_drf_file <- function(filename){
           dplyr::select(.data$operatornr, .data$MonitoringStartTime),
         worktime %>% dplyr::filter(.data$v318t3 == 2) %>%
           dplyr::rename( MonitoringEndTime = .data$v318t4)%>%
-          dplyr::select( .data$MonitoringEndTime)
+          dplyr::select(.data$MonitoringEndTime)
         ) %>%
         dplyr::mutate(
                MonitoringTimeLength =
@@ -321,10 +330,10 @@ read_drf_file <- function(filename){
         expdd <- expand_stcvs(selected)
 
         subshifts <- expdd
-        #   dplyr::rename(sshift_starttime = .data$v329t7,
-        #               sshift_endtime = .data$v329t8,
-        #               sshift_fuelcons = .data$v329t16,
-        #               sshift_drivedist = .data$v329t17)
+        #   dplyr::rename(sshift_starttime = v329t7,
+        #               sshift_endtime = v329t8,
+        #               sshift_fuelcons = v329t16,
+        #               sshift_drivedist = v329t17)
         print("Names subshiftdata: ")
         print(paste0(names(subshifts), collapse = ", "))
 
