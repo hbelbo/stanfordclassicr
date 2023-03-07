@@ -104,17 +104,17 @@ read_stm_file <- function(filename, verbose = FALSE){
 
     # Help-table of product groups
     if(!is.null(vls$v125t1)){
-    product_grp_species_nr <- rep(1:length(vls$v125t1), vls$v125t1)
-    product_grp_code <- integer()
-    for (i in 1:vls$v111t1) {
-      product_grp_code = c(product_grp_code, 1:vls$v125t1[i])
-    }
-    product_grp_table <-
-      tibble::tibble(product_grp_code,
-                     product_grp_species_nr,
-                     product_group_name =
-                       expand_stcvs(df1 %>% dplyr::select(.data$v127t1)) %>% dplyr::pull()
-      )
+      product_grp_species_nr <- rep(1:length(vls$v125t1), vls$v125t1)
+      product_grp_code <- integer()
+      for (i in 1:vls$v111t1) {
+        product_grp_code = c(product_grp_code, 1:vls$v125t1[i])
+      }
+      product_grp_table <-
+        tibble::tibble(product_grp_code,
+                       product_grp_species_nr,
+                       product_group_name =
+                         expand_stcvs(df1 %>% dplyr::select(.data$v127t1)) %>% dplyr::pull()
+        )
     } else {
       product_grp_table <- tibble::tibble()}
 
