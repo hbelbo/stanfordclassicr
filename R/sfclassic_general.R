@@ -129,6 +129,12 @@ file2strng <- function(filename){
   strng <- readr::read_file(filename)
   if ( is.na(enc) & stringr::str_detect(string = strng, pattern = "~1 3 \nISO 8859-1")){ enc = "latin1"}
   Encoding(strng) <- enc
+
+  ## The current encoding bugfix approach could be replaced with the follwing:
+  # writeLines(iconv(readLines(filename), from = "", to = "UTF8"),
+  #           file(filename, encoding="UTF-8"))
+
+
   if(stringr::str_detect(stringr::str_sub(strng, start = 1, end = 4), pattern = '\"')){
     strng <- stringr::str_replace(string = strng, pattern = '\"','') #Removing the funny tag at the very start of the string
   }
