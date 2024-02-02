@@ -21,5 +21,6 @@ Read StanForD Classic PRI-files (mahcine reports from forest machines)
 \examples{
  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = TRUE)
  prifiles <- files[stringr::str_detect(files, ".pri")]
- pridat <- read_pri_file(prifiles[1], verbose = TRUE)
+ pridat1 <- read_pri_file(prifiles[1], verbose = TRUE)
+ pridat2 <- read_pri_file(prifiles[2])
 }
