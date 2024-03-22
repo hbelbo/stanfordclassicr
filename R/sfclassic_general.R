@@ -61,10 +61,11 @@ sfclassic2df <- function(strng){
 #' "1 2 \nSTM~120 1 \nFURU \nGRAN~16 4 \n20160208064316~116 1 7 7 2 2"
 #' sfclassic2df_v2(stanford_classic_string)
 sfclassic2df_v2 <- function(strng, sfvardefs = stanfordclassicr::sfvardefs ){
+  # strng <- strng_to_v110_1
   varsvals <- unlist(stringr::str_split(strng, "~"))
   varsvals <- varsvals[stringr::str_length(varsvals)>1] # to drop empty returns
-  varnames <- stringr::str_extract(varsvals, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}")
-  varvals <-  stringr::str_replace(string = varsvals, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}[ ]", replacement = "")
+  varnames <- stringr::str_extract(varsvals, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,3}")
+  varvals <-  stringr::str_replace(string = varsvals, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,3}[ ]", replacement = "")
   varvals <- varvals[which(!is.na(varnames))]
   varnames <- varnames[which(!is.na(varnames))]
   varnames <- paste0("v", stringr::str_replace(string = varnames, pattern = "[ ]", replacement = "t") )

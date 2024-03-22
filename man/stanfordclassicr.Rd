@@ -2,6 +2,7 @@
 % Please edit documentation in R/stanfordclassicr.R
 \docType{package}
 \name{stanfordclassicr}
+\alias{stanfordclassicr-package}
 \alias{stanfordclassicr}
 \title{Reading forest machine files using stanford classic standard}
 \description{
@@ -39,5 +40,9 @@ files = list.files(system.file("extdata", package = "stanfordclassicr"), full.na
 read_ktr_file(files[stringr::str_detect(files, ".ktr")][1])
 read_stm_file(files[stringr::str_detect(files, ".stm")][1])
 read_pri_file(files[stringr::str_detect(files, ".pri")][1])
+
+}
+\author{
+\strong{Maintainer}: Helmer Belbo \email{helmer.belbo@nibio.no} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
 
 }

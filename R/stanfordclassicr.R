@@ -30,6 +30,6 @@
 #' Then expand to include .drf, .apt, .prl and .prd files.
 #'
 #' "Stanford homepage": https://www.skogforsk.se/english/projects/stanford/
-#' @docType package
 #' @name stanfordclassicr
+"_PACKAGE"
 NULL

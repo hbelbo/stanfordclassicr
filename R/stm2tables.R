@@ -14,7 +14,7 @@
 #'  stemdata <- read_stm_file(stmfiles[1])
 #'  stemdata <- read_stm_file(stmfiles[2])
 read_stm_file <- function(filename, verbose = FALSE){
- # filename <- stmfiles[2]
+ # filename <- stmfiles[1]
   strng <- file2strng(filename)
 
     strng_to_v110_1 <- stringr::str_sub(string =  strng,

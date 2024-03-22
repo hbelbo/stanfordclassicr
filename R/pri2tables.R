@@ -40,7 +40,7 @@ read_pri_file <- function(filename, verbose = FALSE){
                   filename = stringr::str_extract(filename, pattern = "\\w*.pri")) %>%
     dplyr::select( -tidyselect::all_of(selector))
 
-
+  Ret <- list(report_header = report_header)
 
   ## Object definition
   selector <- c( "v16t4", "v21t1", "v21t2", "v21t3", "v21t4",
@@ -72,6 +72,7 @@ read_pri_file <- function(filename, verbose = FALSE){
                   contract_nr = dplyr::coalesce(get0("v35t2"), get0("v35t1"))) %>%
     dplyr::select( -tidyselect::matches("v\\d", perl =T))
 
+  Ret <- c(Ret, object_definition = list(object_definition))
 
   ## Species and Product definitions
   # Species
@@ -92,6 +93,7 @@ read_pri_file <- function(filename, verbose = FALSE){
                      as.numeric(paste0(start_epoch, dfx$tmp_species_nr)))  %>%
     dplyr::select( -tidyselect::matches("v\\d", perl =T))
 
+   Ret <- c(Ret, object_definition = list(object_definition))
 
   # Help-table of product groups
   if("v125t1" %in% names(df1)){
@@ -109,12 +111,13 @@ read_pri_file <- function(filename, verbose = FALSE){
       product_grp_species_nr,
       product_group_name =
         (stanfordclassicr::expand_stcvs(df1 %>%
-                                          dplyr::select( .data$v127t1)) %>%
+                                          dplyr::select( "v127t1")) %>%
            dplyr::pull())
 
     )
-  } else {product_grp_table <- tibble::tibble()}
 
+  } else {product_grp_table <- tibble::tibble()}
+  Ret <- c(Ret, product_grp_table = list(product_grp_table))
 
 
 
@@ -135,11 +138,11 @@ read_pri_file <- function(filename, verbose = FALSE){
              rep(
                dplyr::pull(
                  stanfordclassicr::expand_stcvs(
-                   df1 %>% dplyr::select(.data$v120t1))),
+                   df1 %>% dplyr::select("v120t1"))),
                prods_per_species),
            product_key = as.numeric(paste0(start_epoch, .data$tmp_product_nr)),
            species_group_key = as.numeric(paste0(start_epoch, .data$tmp_species_nr)))
-  if(nrow(product_grp_table)>0){
+  if(nrow(product_grp_table)>0 & ("v126t1" %in% selector)){
     product_definition <- product_definition %>%
     dplyr::left_join( product_grp_table,
                      by = c("tmp_species_nr" = "product_grp_species_nr",
@@ -150,135 +153,124 @@ read_pri_file <- function(filename, verbose = FALSE){
                    tidyselect::matches("tmp|v\\d", perl =T)) %>%
     dplyr::rename(dplyr::any_of(lookup))
 
+  if(verbose == FALSE) {
+
+    product_definition <-product_definition %>%
+      dplyr::select( -tidyselect::starts_with(c("v1", "tmp")))}
+
+  Ret <- c(Ret, product_definition = list(product_definition))
 
 
   # .. harvested trees
-  CodeCodes <- c( 2,               500,            505,                 723,        724,        740,        741,        750,              760,         761,           762,           763,              764,           2001)
-  CodeNames <- c("species", "stemnumber", "AdaptedForBioExt", "RefDiaForDbh", "RefDiaHeigth", "dbhmm", "StemType", "OperatorNumber", "latitude", "Lat1North2South", "longitude", "Lon2West1East", "altitude","Userdefined1")
-  Code_Name_pairs <- data.frame(Code=CodeCodes, CodeN= CodeNames, stringsAsFactors = F)
-  Matches <- match(as.integer(unlist(stringr::str_split(df1$v266t1, " "))), Code_Name_pairs$Code)
-  Code_Name_pairs_present <- Code_Name_pairs[Matches,]
+  if("v266t1" %in% names(df1)) {
+    CodeCodes <- c( 2,               500,            505,                 723,        724,        740,        741,        750,              760,         761,           762,           763,              764,           2001)
+    CodeNames <- c("species", "stemnumber", "AdaptedForBioExt", "RefDiaForDbh", "RefDiaHeigth", "dbhmm", "StemType", "OperatorNumber", "latitude", "Lat1North2South", "longitude", "Lon2West1East", "altitude","Userdefined1")
+    Code_Name_pairs <- data.frame(Code=CodeCodes, CodeN= CodeNames, stringsAsFactors = F)
+    Matches <- match(as.integer(unlist(stringr::str_split(df1$v266t1, " "))), Code_Name_pairs$Code)
+    Code_Name_pairs_present <- Code_Name_pairs[Matches,]
 
-  stems <- matrix(data = as.integer(unlist(stringr::str_split(df1$v267t1, " "))), ncol = as.integer(df1$v265t1), byrow=T)
-  colnames(stems) = Code_Name_pairs_present$CodeN
-  stems <- tibble::as_tibble(stems)
-  #stems <- as.data.frame(stems)
-  #names(stems) <- Code_Name_pairs_present$CodeN
-  stems <-
-    stems %>%
-    dplyr::mutate( stem_key = paste0(start_epoch, .data$stemnumber),
-           species_group_key = paste0(start_epoch, .data$species),
-           object_key = start_epoch
-           ) %>%
-    dplyr::mutate(
-                  latitude_category =
-                    dplyr::case_when(
-                      Lat1North2South == 1 ~ "North",
-                      Lat1North2South == 2 ~ "South",
-                      TRUE ~ NA_character_),
-                  longitude_category =
-                    dplyr::case_when( Lon2West1East == 1 ~"East",
-                                      Lon2West1East == 1 ~"West",
-                                      TRUE ~ NA_character_)
-    )
-
-
+    stems <- matrix(data = as.integer(unlist(stringr::str_split(df1$v267t1, " "))), ncol = as.integer(df1$v265t1), byrow=T)
+    colnames(stems) = Code_Name_pairs_present$CodeN
+    stems <- tibble::as_tibble(stems)
+    #stems <- as.data.frame(stems)
+    #names(stems) <- Code_Name_pairs_present$CodeN
+    stems <-
+      stems %>%
+      dplyr::mutate( stem_key = paste0(start_epoch, .data$stemnumber),
+             species_group_key = paste0(start_epoch, .data$species),
+             object_key = start_epoch
+             ) %>%
+      dplyr::mutate(
+                    latitude_category =
+                      dplyr::case_when(
+                        Lat1North2South == 1 ~ "North",
+                        Lat1North2South == 2 ~ "South",
+                        TRUE ~ NA_character_),
+                    longitude_category =
+                      dplyr::case_when( Lon2West1East == 1 ~"East",
+                                        Lon2West1East == 1 ~"West",
+                                        TRUE ~ NA_character_)
+      )
+  } else {stems = tibble::tibble()}
+  Ret <- c(Ret, stems = list(stems))
   # .. Logs
   # LogData <- matrix(data =
   #                     as.integer(unlist(stringr::str_split(df1$v257t1, " "))),
   #                   ncol = as.integer(df1$v255t1), byrow=T)
-  LogData <- matrix(data =
-                     (unlist(stringr::str_split(df1$v257t1, " "))),
-                    ncol = as.integer(df1$v255t1), byrow=T)
+  if("v257t1" %in% names(df1)) {
+    LogData <- matrix(data =
+                       (unlist(stringr::str_split(df1$v257t1, " "))),
+                      ncol = as.integer(df1$v255t1), byrow=T)
 
-  # Regarding Log_CodeCodes and names: IN SF2010 code 20 would be the same as Product Key, while code 1 would not have any direct equivalent as it is not a true unique key.
+    # Regarding Log_CodeCodes and names: IN SF2010 code 20 would be the same as Product Key, while code 1 would not have any direct equivalent as it is not a true unique key.
 
-  Log_CodeCodes <- c(   1,               2,           20,                  201,       202,        203,          204,         205,         206,           207,              208,            300,        301,    302)
-  Log_CodeNames <- c("price_matrix_nr","species_nr","price_matrix_uid", "diatopob","diatopub","diamidob","diamidub","diabuttob","diabuttub","diahksmidob","diahksmidub","forcecut","length","Lenclass")
+    Log_CodeCodes <- c(   1,               2,           20,                  201,       202,        203,          204,         205,         206,           207,              208,            300,        301,    302)
+    Log_CodeNames <- c("price_matrix_nr","species_nr","price_matrix_uid", "diatopob","diatopub","diamidob","diamidub","diabuttob","diabuttub","diahksmidob","diahksmidub","forcecut","length","Lenclass")
 
-  Log_CodeCodes = c(Log_CodeCodes,  400,     1400,     401,     1401,           402,      1402,          403,        1403,          404,           1404,            405,           1405,          406,         1406,          420,         421,        422,         423,           424,              425,         426,             500,       501,         600,        2000)
-  Log_CodeNames = c(Log_CodeNames, "vol", "voldec", "vol_sob","vol_sob_dec","vol_sub","vol_sub_dec","vol_top_ob","vol_top_ob_dec","vol_top_ub","vol_top_ub_dec","vol_smi_ob","vol_smi_ob_dec","vol_smi_ub","vol_smi_ub_dec","vol_dl", "vol_dl_sob","vol_dl_sub","vol_dl_top_ob","vol_dl_top_ub","vol_dl_smi_ob","vol_dl_smi_ub","stem_nr","log_nr","numoflogs","userdefined")
+    Log_CodeCodes = c(Log_CodeCodes,  400,     1400,     401,     1401,           402,      1402,          403,        1403,          404,           1404,            405,           1405,          406,         1406,          420,         421,        422,         423,           424,              425,         426,             500,       501,         600,        2000)
+    Log_CodeNames = c(Log_CodeNames, "vol", "voldec", "vol_sob","vol_sob_dec","vol_sub","vol_sub_dec","vol_top_ob","vol_top_ob_dec","vol_top_ub","vol_top_ub_dec","vol_smi_ob","vol_smi_ob_dec","vol_smi_ub","vol_smi_ub_dec","vol_dl", "vol_dl_sob","vol_dl_sub","vol_dl_top_ob","vol_dl_top_ub","vol_dl_smi_ob","vol_dl_smi_ub","stem_nr","log_nr","numoflogs","userdefined")
 
-  Log_Code_Name_pairs <- tibble::tibble(Code=Log_CodeCodes, CodeN= Log_CodeNames)
-  Matches <- match(as.integer(unlist(stringr::str_split(df1$v256t1, " "))),
-                   Log_Code_Name_pairs$Code)
-  Log_Code_Name_pairs_present <-Log_Code_Name_pairs[Matches,]
-  Log_Code_Name_pairs_present$Orginal <-
-    as.integer(
-      unlist(
-        stringr::str_split(df1$v256t1, " ")))
+    Log_Code_Name_pairs <- tibble::tibble(Code=Log_CodeCodes, CodeN= Log_CodeNames)
+    Matches <- match(as.integer(unlist(stringr::str_split(df1$v256t1, " "))),
+                     Log_Code_Name_pairs$Code)
+    Log_Code_Name_pairs_present <-Log_Code_Name_pairs[Matches,]
+    Log_Code_Name_pairs_present$Orginal <-
+      as.integer(
+        unlist(
+          stringr::str_split(df1$v256t1, " ")))
 
-  LogData <- as.data.frame(LogData, stringsAsFactors = F)
-  names(LogData) <- Log_Code_Name_pairs_present$CodeN
+    LogData <- as.data.frame(LogData, stringsAsFactors = F)
+    names(LogData) <- Log_Code_Name_pairs_present$CodeN
 
-  LogData <- LogData %>%
-    dplyr::mutate( dplyr::across(.cols = dplyr::ends_with("dec"), ~ stringr::str_pad(string = .x, width=3, side = "left", pad = "0")))
-
-
-  if ("price_matrix_uid" %in% names(LogData)){
-    LogData$tmp_pk = LogData$price_matrix_uid
-  } else {LogData$tmp_pk = LogData$price_matrix_nr}
-
-  if("vol_dl" %in%  names(LogData)){
     LogData <- LogData %>%
-      dplyr::mutate( m3price = as.numeric(.data$vol_dl) / 10000,
-                m3sob = as.numeric(.data$vol_dl_sob) / 10000,
-                m3sub = as.numeric(.data$vol_dl_sub) / 10000
-             )
-  } else if ("vol_sob" %in% names(LogData)) {
-    LogData <- LogData %>%
-      dplyr::rowwise() %>%
-      dplyr::mutate( m3price = as.numeric(paste(.data$vol, .data$voldec, sep = ".")),
-             m3sob = as.numeric(paste(.data$vol_sob, .data$vol_sob_dec, sep = ".")),
-             m3sub = as.numeric(paste(.data$vol_sub, .data$vol_sub_dec, sep = "."))) %>%
-      dplyr::ungroup()
-
-  }
-
-  LogData <- LogData %>% dplyr::mutate_if(is.character, as.numeric)
-
-  logs = LogData %>%
-    dplyr::mutate(
-      product_key =
-        dplyr::case_when(
-          "price_matrix_uid" %in% names(LogData) ~  as.numeric(.data$tmp_pk),
-          TRUE ~ as.numeric(paste0(start_epoch, .data$tmp_pk))),
-      stem_key = as.numeric(paste0(start_epoch, .data$stem_nr)),
-           log_key = .data$log_nr ) %>%
-    dplyr::select( .data$stem_nr, .data$log_nr, .data$diatopub,
-                  .data$length, .data$m3price, .data$m3sob, .data$m3sub,
-                  .data$product_key, .data$price_matrix_nr, .data$stem_key,
-                  .data$log_key   )
+      dplyr::mutate( dplyr::across(.cols = dplyr::ends_with("dec"), ~ stringr::str_pad(string = .x, width=3, side = "left", pad = "0")))
 
 
+    if ("price_matrix_uid" %in% names(LogData)){
+      LogData$tmp_pk = LogData$price_matrix_uid
+    } else {LogData$tmp_pk = LogData$price_matrix_nr}
 
-  if(verbose == FALSE) {
+    if("vol_dl" %in%  names(LogData)){
+      LogData <- LogData %>%
+        dplyr::mutate( m3price = as.numeric(.data$vol_dl) / 10000,
+                  m3sob = as.numeric(.data$vol_dl_sob) / 10000,
+                  m3sub = as.numeric(.data$vol_dl_sub) / 10000
+               )
+    } else if ("vol_sob" %in% names(LogData)) {
+      LogData <- LogData %>%
+        dplyr::rowwise() %>%
+        dplyr::mutate( m3price = as.numeric(paste(.data$vol, .data$voldec, sep = ".")),
+               m3sob = as.numeric(paste(.data$vol_sob, .data$vol_sob_dec, sep = ".")),
+               m3sub = as.numeric(paste(.data$vol_sub, .data$vol_sub_dec, sep = "."))) %>%
+        dplyr::ungroup()
 
- product_definition <-product_definition %>%
-      dplyr::select( -tidyselect::starts_with(c("v1", "tmp")))
+    }
 
-  Ret <- list(report_header = report_header,
-              object_definition = object_definition,
-              species_group_definition = species_group_definition,
-              product_definition = product_definition,
-              stems = stems,
-              logs = logs,
-              product_grp_table = product_grp_table
+    LogData <- LogData %>% dplyr::mutate_if(is.character, as.numeric)
 
-              )
+    logs = LogData %>%
+      dplyr::mutate(
+        product_key =
+          dplyr::case_when(
+            "price_matrix_uid" %in% names(LogData) ~  as.numeric(.data$tmp_pk),
+            TRUE ~ as.numeric(paste0(start_epoch, .data$tmp_pk))),
+        stem_key = as.numeric(paste0(start_epoch, .data$stem_nr)),
+             log_key = .data$log_nr ) %>%
+      dplyr::select( .data$stem_nr, .data$log_nr, .data$diatopub,
+                    .data$length, .data$m3price, .data$m3sob, .data$m3sub,
+                    .data$product_key, .data$price_matrix_nr, .data$stem_key,
+                    .data$log_key   )
 
-  } else if(verbose == TRUE) {
+  } else {LogData <- tibble::tibble()}
+
+  Ret <- c(Ret, LogData = list(LogData))
+
+if(verbose == TRUE) {
 
 
-    Ret <- list(report_header = report_header,
-                object_definition = object_definition,
-                species_group_definition = species_group_definition,
-                product_definition = product_definition,
-                stems = stems,
-                logs = logs,
-                product_grp_table = product_grp_table,
-                present_vars = names(df1),
-                present_dat = df1)
+    Ret <- c( Ret,
+              present_vars = list(present_vars = names(df1)),
+                present_dat = list(df1))
     }
   return(Ret)
 
