@@ -50,3 +50,8 @@ dplyr::glimpse(stemdat[[1]])
 
 ```
 **_Then find the path to your own stanford classic files and start reading the content. Good luck:-)_**
+**_If you have encoding problems with the stanford files, you may use the following trick to turn them to UTF8 encoding._**
+```r
+  writeLines(iconv(readLines(stmfiles[1]), from = "", to = "UTF8"),
+             file(stmfiles[1], encoding="UTF-8"))
+```
