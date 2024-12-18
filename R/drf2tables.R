@@ -11,10 +11,10 @@
 #'  files <- list.files(system.file("extdata", package = "stanfordclassicr"), full.names = TRUE)
 #'  drffiles <- files[stringr::str_detect(files, ".drf")]
 #'  drf_report <- read_drf_file(drffiles[1])
-#'  drf_report <- read_drf_file(drffiles[2])
+#'  drf_report <- read_drf_file(drffiles[4])
 #'  drf_report <- read_drf_file(drffiles[5])
 read_drf_file <- function(filename){
-  # filename <- drffiles[2]
+  # filename <- drffiles[1]
   strng <- file2strng(filename)
 
   drfspecial <-
@@ -242,21 +242,23 @@ read_drf_file <- function(filename){
     }
 
 
-
+    if("v317t2" %in% names(drfdf)){
     n_pr_opr <- as.numeric(unlist(stringr::str_split(drfdf$v317t2, " ")))
     selector <- c("v317t3", "v317t4", "v317t5")
     selector <- selector[which(selector %in% names(drfdf))] # Ensure to not select vars not present
-    if(length(selector)){
+    }
+    if("v317t2" %in% names(drfdf) & length(selector)){
     selected <- drfdf %>%
       dplyr::select( tidyselect::all_of(selector))
     expdd <- expand_stcvs(selected) %>%
       dplyr::mutate( operatornr = rep(1:length(n_pr_opr), times = n_pr_opr) )
     irtime <- expdd %>%
-      dplyr::group_by( .data$operatornr, .data$v317t4) %>% #v317t4 is description of work time
-      dplyr::summarise(time.sec = sum(.data$v317t5)) %>%
-      tidyr::pivot_wider( names_from = .data$v317t4,
-                         values_from = .data$time.sec)
+      dplyr::group_by( operatornr, v317t4) %>% #v317t4 is description of work time
+      dplyr::summarise(time.sec = sum(v317t5)) %>%
+      tidyr::pivot_wider( names_from = v317t4,
+                         values_from = time.sec)
     } else { irtime <- NULL}
+
 
 
 
@@ -270,25 +272,26 @@ read_drf_file <- function(filename){
       expdd <- expand_stcvs(selected) %>%
         dplyr::mutate(
           operatornr = rep(1:length(n_pr_opr), times = n_pr_opr),
-          v318t4 = lubridate::ymd_hms(.data$v318t4))
+          v318t4 = lubridate::ymd_hms(v318t4))
       worktime <- expdd
 
       owt <- dplyr::bind_cols( #OperatorWorkTime
-        worktime %>% dplyr::filter( .data$v318t3 == 1) %>%
-          dplyr::rename(MonitoringStartTime = .data$v318t4) %>%
-          dplyr::select(.data$operatornr, .data$MonitoringStartTime),
-        worktime %>% dplyr::filter(.data$v318t3 == 2) %>%
-          dplyr::rename( MonitoringEndTime = .data$v318t4)%>%
-          dplyr::select(.data$MonitoringEndTime)
+        worktime %>% dplyr::filter( v318t3 == 1) %>%
+          dplyr::rename(MonitoringStartTime = v318t4) %>%
+          dplyr::select("operatornr", "MonitoringStartTime"),
+        worktime %>% dplyr::filter(v318t3 == 2) %>%
+          dplyr::rename( MonitoringEndTime = "v318t4")%>%
+          dplyr::select("MonitoringEndTime")
         ) %>%
         dplyr::mutate(
                MonitoringTimeLength =
-                 difftime(.data$MonitoringEndTime,
-                          .data$MonitoringStartTime, units = "mins"))
+                 difftime(MonitoringEndTime,
+                          MonitoringStartTime, units = "mins"))
     } else { owt <- NULL }
 
-
-    cmwt <- dplyr::left_join(cmwt, irtime,  by = c("operatornr" = "operatornr"))
+    if(!is.null(irtime)){
+      cmwt <- dplyr::left_join(cmwt, irtime,  by = c("operatornr" = "operatornr"))
+    }
 
     ## Shiftdata --------------
 
