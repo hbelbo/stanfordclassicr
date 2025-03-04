@@ -32,7 +32,7 @@ read_drf_file <- function(filename){
   selector <- c("v16t4") #list of sfclassic vars we want
   selector <- selector[which(selector %in% names(drfdf))] # Ensure to not select vars not present
   if(length(selector)) {
-    start_epoch <- as.numeric(lubridate::ymd_hms(stringr::str_replace(drfdf$v16t4, "\n", "")))
+    start_epoch <- as.numeric(lubridate::ymd_hms(stringr::str_replace(drfdf$v16t4, "\r\n|\n|\r", "")))
   } else {
     start_epoch <- NA_real_
     print("No v16t4 in the drf file")
@@ -143,7 +143,7 @@ read_drf_file <- function(filename){
     product_grp_table <-
       tibble::tibble(product_grp_code,
                      product_grp_species_nr,
-                     product_group_name = (expand_stcvs(drfdf %>% dplyr::select(.data$v127t1)) %>%
+                     product_group_name = (expand_stcvs(drfdf %>% dplyr::select("v127t1")) %>%
                                              dplyr::pull(.data))
     )
 
@@ -222,16 +222,16 @@ read_drf_file <- function(filename){
       runtime <- expdd
       cmwt.mrt <- runtime %>%  # make this correspond to CombinedMachineWorkTime.CombinedMachineRunTime in mom files
         dplyr::filter( .data$v316t3 %in% c(10, 11, 12, 13, 14)) %>%
-        dplyr::select( mrt.category = .data$v316t4, time.sec = .data$v316t5,
-                       .data$operatornr) %>%
+        dplyr::select( mrt.category = "v316t4", time.sec = "v316t5",
+                       "operatornr") %>%
         dplyr::group_by( .data$operatornr, .data$mrt.category) %>%
         dplyr::summarise( time.sec = sum(.data$time.sec) ) %>%
         tidyr::pivot_wider(  names_from = .data$mrt.category, values_from = .data$time.sec )
 
       cmwt.omd <- runtime %>% # make this correspond to CombinedMachineWorkTime.OtherMachineData in mom files
         dplyr::filter( .data$v316t3 %in% c(3)) %>% # only worktime observations
-        dplyr::select( fuel.consumption = .data$v316t8,
-                       driven.distance.km = .data$v316t9, .data$operatornr) %>%
+        dplyr::select( fuel.consumption = "v316t8",
+                       driven.distance.km = "v316t9", "operatornr") %>%
         dplyr::group_by( .data$operatornr) %>%
         dplyr::summarise( fuel.consumption = sum(.data$fuel.consumption),
                          driven.distance.km = sum(.data$driven.distance.km))
@@ -253,10 +253,10 @@ read_drf_file <- function(filename){
     expdd <- expand_stcvs(selected) %>%
       dplyr::mutate( operatornr = rep(1:length(n_pr_opr), times = n_pr_opr) )
     irtime <- expdd %>%
-      dplyr::group_by( operatornr, v317t4) %>% #v317t4 is description of work time
-      dplyr::summarise(time.sec = sum(v317t5)) %>%
-      tidyr::pivot_wider( names_from = v317t4,
-                         values_from = time.sec)
+      dplyr::group_by( .data$operatornr, .data$v317t4) %>% #v317t4 is description of work time
+      dplyr::summarise(time.sec = sum(.data$v317t5)) %>%
+      tidyr::pivot_wider( names_from = .data$v317t4,
+                         values_from = .data$time.sec)
     } else { irtime <- NULL}
 
 
@@ -272,21 +272,21 @@ read_drf_file <- function(filename){
       expdd <- expand_stcvs(selected) %>%
         dplyr::mutate(
           operatornr = rep(1:length(n_pr_opr), times = n_pr_opr),
-          v318t4 = lubridate::ymd_hms(v318t4))
+          v318t4 = lubridate::ymd_hms(.data$v318t4))
       worktime <- expdd
 
       owt <- dplyr::bind_cols( #OperatorWorkTime
-        worktime %>% dplyr::filter( v318t3 == 1) %>%
-          dplyr::rename(MonitoringStartTime = v318t4) %>%
+        worktime %>% dplyr::filter( .data$v318t3 == 1) %>%
+          dplyr::rename(MonitoringStartTime = "v318t4") %>%
           dplyr::select("operatornr", "MonitoringStartTime"),
-        worktime %>% dplyr::filter(v318t3 == 2) %>%
+        worktime %>% dplyr::filter(.data$v318t3 == 2) %>%
           dplyr::rename( MonitoringEndTime = "v318t4")%>%
           dplyr::select("MonitoringEndTime")
         ) %>%
         dplyr::mutate(
                MonitoringTimeLength =
-                 difftime(MonitoringEndTime,
-                          MonitoringStartTime, units = "mins"))
+                 difftime(.data$MonitoringEndTime,
+                          .data$MonitoringStartTime, units = "mins"))
     } else { owt <- NULL }
 
     if(!is.null(irtime)){
