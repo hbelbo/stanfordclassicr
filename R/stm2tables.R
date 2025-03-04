@@ -23,7 +23,7 @@ read_stm_file <- function(filename, verbose = FALSE){
     vls <- sfclassic2list(strng_to_v110_1) #Should correspond to vls
     #start_epoch = as.integer(lubridate::ymd_hms(vls$v16t4))
     df1 <- sfclassic2df_v2(strng_to_v110_1)
-    start_epoch = as.integer(lubridate::ymd_hms(stringr::str_replace(df1$v16t4, "\n", "")))
+    start_epoch = as.integer(lubridate::ymd_hms(stringr::str_replace(df1$v16t4, "\n|\r", "")))
 
 
     ## Report header
@@ -91,7 +91,7 @@ read_stm_file <- function(filename, verbose = FALSE){
                                     ifnotfound = ""),
                                "#",
                                get0("v120t3", ifnotfound = ""),
-                               "#", stringr::str_replace( df1$v2t1, "\n", "")),
+                               "#", stringr::str_replace( df1$v2t1, "\n|\r", "")),
                      tmp_species_nr = 1:nrow(dfx))
 
     species_group_definition <-
@@ -134,7 +134,7 @@ read_stm_file <- function(filename, verbose = FALSE){
              tmp_product_nr = as.integer(1:length(.data$v121t1)),
              species_group_name =
                rep(dplyr::pull(expand_stcvs(df1 %>%
-                                              dplyr::select(.data$v120t1))),
+                                              dplyr::select("v120t1"))),
                    prods_per_species),
              product_key = as.numeric(paste0(start_epoch, .data$tmp_product_nr)),
              species_group_key =
@@ -173,12 +173,12 @@ read_stm_file <- function(filename, verbose = FALSE){
     stemdat <- stemdat %>% dplyr::select_if( nanyna)
     stemvars_present <- names(stemdat)
 
-    is_one_text <- function(x){ all (stringr::str_count(x, "\n") == 1)}
-    removeslash <- function(x){ stringr::str_remove(x, "\n")}
+    is_one_text <- function(x){ all (stringr::str_count(x, "\n|\r") == 1)}
+    removeslash <- function(x){ stringr::str_remove(x, "\n|\r")}
     onetextdat = dplyr::select_if(.tbl = stemdat, .predicate = is_one_text) %>%
       dplyr::mutate_if(is.character, removeslash)
 
-    is_one_number <- function(x){ all ((!stringr::str_detect(x,"\n")) & (!stringr::str_detect(x, " ")))}
+    is_one_number <- function(x){ all ((!stringr::str_detect(x,"\n|\r")) & (!stringr::str_detect(x, " ")))}
     onenumdat = dplyr::select_if(.tbl = stemdat, .predicate = is_one_number)  %>%
       dplyr::mutate_if(is.character, as.integer)
 
@@ -234,7 +234,7 @@ read_stm_file <- function(filename, verbose = FALSE){
         )
     }
     if ("v523t6" %in% names(stemdat)){
-      stemdat$coordinate_time = as.character(stringr::str_remove(stemdat$v523t6, pattern = "\n"))
+      stemdat$coordinate_time = as.character(stringr::str_remove(stemdat$v523t6, pattern = "\n|\r"))
     }
 
     if ("v273t1" %in% stemvars) {

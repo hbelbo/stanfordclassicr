@@ -81,13 +81,14 @@ sfclassic2df_v2 <- function(strng, sfvardefs = stanfordclassicr::sfvardefs ){
 }
 
 sfclassic2list <- function(strng){
+  # strng = strng_to_v110_1
   VarStrings <- unlist(stringr::str_split( strng, pattern = "~")) # Split to individual variables and values at ~
   VarStrings <- VarStrings[stringr::str_length(VarStrings)>1] # to drop empty returns
   VarVals <- stringr::str_replace(string = VarStrings, pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}[ ]", replacement = "")
   VarNames <- stringr::str_extract(string = VarStrings,  pattern = "[[:digit:]]{1,4}[ ]{1}[[:digit:]]{1,2}" )
   Vars <- paste0("v", stringr::str_replace(string = VarNames, pattern = "[ ]", replacement = "t") )
 
-  VarDataType <- dplyr::case_when(stringr::str_starts(string = VarVals, pattern = "\\n") ~ "txt", TRUE ~"Numeric")
+  VarDataType <- dplyr::case_when(stringr::str_starts(string = VarVals, pattern = "\\n|\\r") ~ "txt", TRUE ~"Numeric")
 
   txtvars <- Vars[VarDataType=="txt"]
   txtvarvals <- VarVals[VarDataType=="txt"]
